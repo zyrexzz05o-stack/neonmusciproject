@@ -1,0 +1,182 @@
+<!-- Genre Page - Single Page for All Genres -->
+<div class="genre-page" id="genrePage">
+    <!-- Header -->
+    <div class="genre-header">
+        <button class="genre-back-btn" onclick="backToHotFrequencies()">← Back</button>
+        <div class="genre-header-content">
+            <div class="genre-icon-large" id="genreIconLarge">🎸</div>
+            <div class="genre-header-info">
+                <h1 class="genre-title" id="genreTitle">Rock</h1>
+                <div class="genre-meta">
+                    <span class="genre-status-badge" id="genreStatusBadge">🔥 On Fire</span>
+                    <span class="genre-track-count" id="genreTrackCount">2,450 tracks</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Time Filter -->
+    <div class="genre-filters">
+        <div class="filter-label">Time Range:</div>
+        <div class="filter-buttons">
+            <button class="filter-btn active" data-filter="today">Today</button>
+            <button class="filter-btn" data-filter="week">This Week</button>
+            <button class="filter-btn" data-filter="month">This Month</button>
+        </div>
+        <div class="sort-indicator" id="sortIndicator">
+            <span class="sort-icon">📊</span>
+            <span class="sort-text">Sorted by: Trending</span>
+        </div>
+    </div>
+
+    <!-- Top Active Tracks -->
+    <section class="genre-section">
+        <h2 class="genre-section-title">Top Active Tracks</h2>
+        <p class="genre-section-desc">Lagu paling sering diputar</p>
+        
+        <div class="genre-tracks-list" id="genreTracksList">
+            <!-- Tracks will be inserted here dynamically -->
+            <div class="genre-track-item">
+                <div class="track-rank">#1</div>
+                <div class="track-cover-small">
+                    <img src="images/coldplay.jpeg" alt="Fix You">
+                    <button class="track-play-mini">▶</button>
+                </div>
+                <div class="track-details">
+                    <div class="track-name">Fix You</div>
+                    <div class="track-artist-small">Coldplay</div>
+                </div>
+                <div class="track-stats">
+                    <span class="track-plays">1.6K plays</span>
+                    <span class="track-trend up">↑ 12%</span>
+                </div>
+            </div>
+            
+            <div class="genre-track-item">
+                <div class="track-rank">#2</div>
+                <div class="track-cover-small">
+                    <img src="images/onedirection.jpeg" alt="Night Changes">
+                    <button class="track-play-mini">▶</button>
+                </div>
+                <div class="track-details">
+                    <div class="track-name">Night Changes</div>
+                    <div class="track-artist-small">One Direction</div>
+                </div>
+                <div class="track-stats">
+                    <span class="track-plays">1.5K plays</span>
+                    <span class="track-trend up">↑ 8%</span>
+                </div>
+            </div>
+            
+            <div class="genre-track-item">
+                <div class="track-rank">#3</div>
+                <div class="track-cover-small">
+                    <img src="images/lordhuron.jpeg" alt="The Night We Met">
+                    <button class="track-play-mini">▶</button>
+                </div>
+                <div class="track-details">
+                    <div class="track-name">The Night We Met</div>
+                    <div class="track-artist-small">Lord Huron</div>
+                </div>
+                <div class="track-stats">
+                    <span class="track-plays">1.3K plays</span>
+                    <span class="track-trend up">↑ 15%</span>
+                </div>
+            </div>
+            
+            <div class="genre-track-item">
+                <div class="track-rank">#4</div>
+                <div class="track-cover-small">
+                    <img src="images/jamesarthur.jpeg" alt="Say You Won't Let Go">
+                    <button class="track-play-mini">▶</button>
+                </div>
+                <div class="track-details">
+                    <div class="track-name">Say You Won't Let Go</div>
+                    <div class="track-artist-small">James Arthur</div>
+                </div>
+                <div class="track-stats">
+                    <span class="track-plays">1.2K plays</span>
+                    <span class="track-trend stable">→ 0%</span>
+                </div>
+            </div>
+            
+            <div class="genre-track-item">
+                <div class="track-rank">#5</div>
+                <div class="track-cover-small">
+                    <img src="images/neckdeep.jpg" alt="Wish You Were Here">
+                    <button class="track-play-mini">▶</button>
+                </div>
+                <div class="track-details">
+                    <div class="track-name">Wish You Were Here</div>
+                    <div class="track-artist-small">Neck Deep</div>
+                </div>
+                <div class="track-stats">
+                    <span class="track-plays">980 plays</span>
+                    <span class="track-trend up">↑ 5%</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Rising Artists -->
+    <section class="genre-section">
+        <h2 class="genre-section-title">Rising Artists</h2>
+        <p class="genre-section-desc">Artis yang sedang naik di genre ini</p>
+        
+        <div class="genre-artists-grid" id="genreArtistsGrid">
+            <div class="genre-artist-card">
+                <div class="artist-avatar-genre">
+                    <img src="images/coldplay.jpeg" alt="Coldplay">
+                </div>
+                <div class="artist-name-genre">Coldplay</div>
+                <div class="artist-trend-badge">↑ +32%</div>
+            </div>
+            
+            <div class="genre-artist-card">
+                <div class="artist-avatar-genre">
+                    <img src="images/onedirection.jpeg" alt="One Direction">
+                </div>
+                <div class="artist-name-genre">One Direction</div>
+                <div class="artist-trend-badge">↑ +28%</div>
+            </div>
+            
+            <div class="genre-artist-card">
+                <div class="artist-avatar-genre">
+                    <img src="images/lordhuron.jpeg" alt="Lord Huron">
+                </div>
+                <div class="artist-name-genre">Lord Huron</div>
+                <div class="artist-trend-badge">↑ +25%</div>
+            </div>
+            
+            <div class="genre-artist-card">
+                <div class="artist-avatar-genre">
+                    <img src="images/jamesarthur.jpeg" alt="James Arthur">
+                </div>
+                <div class="artist-name-genre">James Arthur</div>
+                <div class="artist-trend-badge">↑ +22%</div>
+            </div>
+            
+            <div class="genre-artist-card">
+                <div class="artist-avatar-genre">
+                    <img src="images/neckdeep.jpg" alt="Neck Deep">
+                </div>
+                <div class="artist-name-genre">Neck Deep</div>
+                <div class="artist-trend-badge">↑ +18%</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Related Sub-Genres -->
+    <section class="genre-section">
+        <h2 class="genre-section-title">Related Sub-Genres</h2>
+        <p class="genre-section-desc">Eksplorasi genre terkait</p>
+        
+        <div class="subgenre-chips" id="subgenreChips">
+            <button class="subgenre-chip" onclick="openGenrePage('alternative', 'default')">Alternative Rock</button>
+            <button class="subgenre-chip" onclick="openGenrePage('indie-rock', 'default')">Indie Rock</button>
+            <button class="subgenre-chip" onclick="openGenrePage('punk', 'default')">Punk Rock</button>
+            <button class="subgenre-chip" onclick="openGenrePage('classic-rock', 'default')">Classic Rock</button>
+            <button class="subgenre-chip" onclick="openGenrePage('hard-rock', 'default')">Hard Rock</button>
+        </div>
+    </section>
+</div>

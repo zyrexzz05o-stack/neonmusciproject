@@ -1,0 +1,792 @@
+/* ========================================
+   LIBRARY PAGE - EXPANDABLE SECTIONS
+   ======================================== */
+
+.library-expandable {
+    width: 100%;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 50px 40px;
+}
+
+/* ========================================
+   SIMPLE HEADER
+   ======================================== */
+
+.library-header {
+    margin-bottom: 40px;
+}
+
+.library-title {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 56px;
+    font-weight: 600;
+    color: #ffffff;
+    margin: 0 0 10px 0;
+    letter-spacing: -1.5px;
+}
+
+.library-subtitle {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.5);
+    margin: 0;
+}
+
+/* ========================================
+   EXPANDABLE SECTIONS
+   ======================================== */
+
+.expandable-sections {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+/* ========================================
+   EXPAND CARD - GLASSMORPHISM
+   ======================================== */
+
+.expand-card {
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 16px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.expand-card:hover {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(255, 255, 255, 0.12);
+}
+
+.expand-card.open {
+    background: rgba(255, 255, 255, 0.06);
+    border-color: rgba(255, 255, 255, 0.15);
+}
+
+/* ========================================
+   EXPAND HEADER - CLICKABLE
+   ======================================== */
+
+.expand-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 24px 28px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.expand-header:hover {
+    background: rgba(255, 255, 255, 0.02);
+}
+
+/* Different cursor for navigation sections */
+.expand-card[data-section="playlists"] .expand-header,
+.expand-card[data-section="artists"] .expand-header,
+.expand-card[data-section="albums"] .expand-header {
+    cursor: pointer;
+}
+
+.expand-card[data-section="playlists"] .expand-header::after,
+.expand-card[data-section="artists"] .expand-header::after,
+.expand-card[data-section="albums"] .expand-header::after {
+    content: 'Klik untuk melihat';
+    position: absolute;
+    right: 70px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    color: rgba(255, 255, 255, 0.3);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.expand-card[data-section="playlists"] .expand-header:hover::after,
+.expand-card[data-section="artists"] .expand-header:hover::after,
+.expand-card[data-section="albums"] .expand-header:hover::after {
+    opacity: 1;
+}
+
+.expand-left {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    flex: 1;
+}
+
+.expand-icon {
+    width: 56px;
+    height: 56px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 12px;
+    color: rgba(255, 255, 255, 0.8);
+    transition: all 0.3s ease;
+}
+
+.expand-card:hover .expand-icon {
+    background: rgba(255, 255, 255, 0.12);
+    color: #ffffff;
+}
+
+.expand-info {
+    flex: 1;
+}
+
+.expand-title {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 20px;
+    font-weight: 600;
+    color: #ffffff;
+    margin: 0 0 4px 0;
+}
+
+.expand-count {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.5);
+    margin: 0;
+}
+
+.expand-chevron {
+    flex-shrink: 0;
+    color: rgba(255, 255, 255, 0.4);
+    transition: transform 0.3s ease;
+}
+
+.expand-card.open .expand-chevron {
+    transform: rotate(180deg);
+}
+
+/* Different chevron for navigation sections */
+.expand-card[data-section="playlists"] .expand-chevron svg,
+.expand-card[data-section="artists"] .expand-chevron svg,
+.expand-card[data-section="albums"] .expand-chevron svg {
+    transform: rotate(-90deg);
+}
+
+.expand-card[data-section="playlists"]:hover .expand-chevron,
+.expand-card[data-section="artists"]:hover .expand-chevron,
+.expand-card[data-section="albums"]:hover .expand-chevron {
+    color: rgba(255, 255, 255, 0.8);
+    transform: translateX(4px);
+}
+
+/* ========================================
+   EXPAND CONTENT - COLLAPSIBLE
+   ======================================== */
+
+.expand-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease, opacity 0.3s ease;
+    opacity: 0;
+}
+
+.expand-card.open .expand-content {
+    opacity: 1;
+}
+
+/* ========================================
+   CONTENT LIST - FOR SONGS
+   ======================================== */
+
+.content-list {
+    padding: 0 28px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.list-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 16px;
+    background: rgba(255, 255, 255, 0.02);
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.list-item:hover {
+    background: rgba(255, 255, 255, 0.05);
+    transform: translateX(4px);
+}
+
+.item-title {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    color: #ffffff;
+}
+
+.item-artist {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.5);
+}
+
+/* ========================================
+   RECENTLY PLAYED - WITH THUMBNAILS
+   ======================================== */
+
+.list-item-recent {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 16px;
+    background: rgba(255, 255, 255, 0.02);
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    position: relative;
+}
+
+.list-item-recent::before {
+    content: '▶';
+    position: absolute;
+    left: -20px;
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.6);
+    opacity: 0;
+    transition: all 0.2s ease;
+}
+
+.list-item-recent:hover {
+    background: rgba(255, 255, 255, 0.05);
+    transform: translateX(4px);
+    padding-left: 20px;
+}
+
+.list-item-recent:hover::before {
+    opacity: 1;
+    left: 8px;
+}
+
+.recent-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex: 1;
+}
+
+.recent-thumb {
+    width: 44px;
+    height: 44px;
+    border-radius: 6px;
+    object-fit: cover;
+    flex-shrink: 0;
+    transition: all 0.2s ease;
+}
+
+.list-item-recent:hover .recent-thumb {
+    box-shadow: 0 4px 12px rgba(255, 255, 255, 0.1);
+}
+
+.recent-info {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.recent-time {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px;
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.4);
+    flex-shrink: 0;
+}
+
+/* ========================================
+   CONTENT GRID - FOR PLAYLISTS
+   ======================================== */
+
+.content-grid {
+    padding: 0 28px 20px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 12px;
+}
+
+.grid-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 16px;
+    background: rgba(255, 255, 255, 0.02);
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    position: relative;
+}
+
+.grid-item::after {
+    content: '→';
+    position: absolute;
+    right: 16px;
+    font-size: 16px;
+    color: rgba(255, 255, 255, 0.4);
+    opacity: 0;
+    transition: all 0.2s ease;
+}
+
+.grid-item:hover {
+    background: rgba(255, 255, 255, 0.05);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.grid-item:hover::after {
+    opacity: 1;
+    right: 12px;
+}
+
+.grid-icon {
+    width: 44px;
+    height: 44px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 8px;
+}
+
+.grid-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.grid-title {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    color: #ffffff;
+    margin: 0 0 4px 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.grid-meta {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px;
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.5);
+    margin: 0;
+}
+
+/* ========================================
+   ALBUMS GRID - WITH COVERS
+   ======================================== */
+
+.albums-grid {
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+}
+
+.album-item {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 12px;
+    background: rgba(255, 255, 255, 0.02);
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    position: relative;
+}
+
+.album-item::after {
+    content: '▶';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 24px;
+    color: #ffffff;
+    opacity: 0;
+    transition: all 0.2s ease;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8);
+}
+
+.album-item:hover {
+    background: rgba(255, 255, 255, 0.05);
+    transform: translateY(-4px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+}
+
+.album-item:hover::after {
+    opacity: 1;
+}
+
+.album-item:hover .album-cover {
+    filter: brightness(0.6);
+}
+
+.album-cover {
+    width: 100%;
+    aspect-ratio: 1;
+    object-fit: cover;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    transition: all 0.2s ease;
+}
+
+.album-info {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.album-title {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    color: #ffffff;
+    margin: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.album-artist {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px;
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.5);
+    margin: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* ========================================
+   ARTISTS GRID - WITH AVATARS
+   ======================================== */
+
+.artists-grid {
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+}
+
+.artist-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px;
+    background: rgba(255, 255, 255, 0.02);
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    position: relative;
+}
+
+.artist-item::after {
+    content: '→';
+    position: absolute;
+    right: 12px;
+    font-size: 16px;
+    color: rgba(255, 255, 255, 0.4);
+    opacity: 0;
+    transition: all 0.2s ease;
+}
+
+.artist-item:hover {
+    background: rgba(255, 255, 255, 0.05);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.artist-item:hover::after {
+    opacity: 1;
+    right: 8px;
+}
+
+.artist-avatar {
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    object-fit: cover;
+    flex-shrink: 0;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.artist-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.artist-name {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    color: #ffffff;
+    margin: 0 0 4px 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.artist-meta {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px;
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.5);
+    margin: 0;
+}
+
+/* ========================================
+   EMPTY STATE
+   ======================================== */
+
+.empty-state {
+    padding: 40px 28px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 12px;
+}
+
+.empty-state svg {
+    color: rgba(255, 255, 255, 0.2);
+    margin-bottom: 8px;
+}
+
+.empty-title {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.7);
+    margin: 0;
+}
+
+.empty-text {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.4);
+    margin: 0;
+    max-width: 300px;
+}
+
+/* ========================================
+   HISTORY TIMELINE
+   ======================================== */
+
+.history-timeline {
+    padding: 0 28px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.timeline-item {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.timeline-date {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.6);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.timeline-songs {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.timeline-song {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 10px 16px;
+    background: rgba(255, 255, 255, 0.02);
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    position: relative;
+}
+
+.timeline-song::before {
+    content: '▶';
+    position: absolute;
+    left: -20px;
+    font-size: 10px;
+    color: rgba(255, 255, 255, 0.6);
+    opacity: 0;
+    transition: all 0.2s ease;
+}
+
+.timeline-song:hover {
+    background: rgba(255, 255, 255, 0.05);
+    transform: translateX(4px);
+    padding-left: 20px;
+}
+
+.timeline-song:hover::before {
+    opacity: 1;
+    left: 8px;
+}
+
+.timeline-time {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.5);
+    min-width: 50px;
+}
+
+.timeline-title {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+/* ========================================
+   VIEW ALL BUTTON
+   ======================================== */
+
+.view-all-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: calc(100% - 56px);
+    margin: 0 28px 20px;
+    padding: 12px 20px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    color: rgba(255, 255, 255, 0.8);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.view-all-btn:hover {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(255, 255, 255, 0.2);
+    color: #ffffff;
+    transform: translateY(-2px);
+}
+
+.view-all-btn svg {
+    transition: transform 0.3s ease;
+}
+
+.view-all-btn:hover svg {
+    transform: translateX(4px);
+}
+
+/* ========================================
+   ANIMATIONS
+   ======================================== */
+
+.expand-card {
+    animation: fadeInUp 0.4s ease forwards;
+    opacity: 0;
+}
+
+.expand-card:nth-child(1) { animation-delay: 0.1s; }
+.expand-card:nth-child(2) { animation-delay: 0.15s; }
+.expand-card:nth-child(3) { animation-delay: 0.2s; }
+.expand-card:nth-child(4) { animation-delay: 0.25s; }
+.expand-card:nth-child(5) { animation-delay: 0.3s; }
+.expand-card:nth-child(6) { animation-delay: 0.35s; }
+.expand-card:nth-child(7) { animation-delay: 0.4s; }
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ========================================
+   RESPONSIVE
+   ======================================== */
+
+@media (max-width: 768px) {
+    .library-expandable {
+        padding: 40px 20px;
+    }
+    
+    .library-title {
+        font-size: 42px;
+    }
+    
+    .expand-header {
+        padding: 20px;
+    }
+    
+    .expand-icon {
+        width: 48px;
+        height: 48px;
+    }
+    
+    .expand-icon svg {
+        width: 28px;
+        height: 28px;
+    }
+    
+    .content-list,
+    .content-grid {
+        padding: 0 20px 16px;
+    }
+    
+    .content-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .albums-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .view-all-btn {
+        width: calc(100% - 40px);
+        margin: 0 20px 16px;
+    }
+}
+
+@media (max-width: 480px) {
+    .library-title {
+        font-size: 32px;
+    }
+    
+    .expand-title {
+        font-size: 18px;
+    }
+    
+    .expand-left {
+        gap: 14px;
+    }
+    
+    .albums-grid {
+        grid-template-columns: 1fr;
+    }
+}

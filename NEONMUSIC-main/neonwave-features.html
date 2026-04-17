@@ -1,0 +1,122 @@
+<!-- ========================================
+     NEONWAVE UNIQUE FEATURES COMPONENTS
+     Copy & paste ke index.html sebelum </body>
+     ======================================== -->
+
+<!-- 1. LYRICS FOCUS MODE -->
+<div class="lyrics-focus-mode" id="lyricsFocusMode">
+    <div class="lyrics-focus-container">
+        <!-- Song Info -->
+        <div class="lyrics-focus-info">
+            <div class="lyrics-focus-title" id="lyricsFocusTitle">Song Title</div>
+            <div class="lyrics-focus-artist" id="lyricsFocusArtist">Artist Name</div>
+        </div>
+        
+        <!-- Lyrics Display -->
+        <div class="lyrics-focus-display" id="lyricsFocusDisplay">
+            <div class="lyrics-line passed" data-time="0">Previous line fades away</div>
+            <div class="lyrics-line active" data-time="5">Current line is bright and large</div>
+            <div class="lyrics-line" data-time="10">Next lines are dimmed</div>
+            <div class="lyrics-line" data-time="15">Waiting to be highlighted</div>
+            <div class="lyrics-line" data-time="20">Click any line to jump</div>
+        </div>
+        
+        <!-- Exit Button -->
+        <button class="lyrics-focus-exit" id="lyricsFocusExit">×</button>
+    </div>
+</div>
+
+<!-- 2. WAVE PROGRESS VISUAL -->
+<div class="wave-progress-container" id="waveProgressContainer">
+    <div class="wave-progress-bg"></div>
+    <div class="wave-time-labels">
+        <span id="waveCurrentTime">0:00</span>
+        <span id="waveDuration">0:00</span>
+    </div>
+</div>
+
+<!-- 3. MOOD SELECTOR -->
+<div class="mood-selector">
+    <button class="mood-btn" data-mood="focus">
+        <span class="mood-icon">🎯</span>
+        <span class="mood-label">Focus</span>
+    </button>
+    <button class="mood-btn active" data-mood="chill">
+        <span class="mood-icon">🌊</span>
+        <span class="mood-label">Chill</span>
+    </button>
+    <button class="mood-btn" data-mood="night">
+        <span class="mood-icon">🌙</span>
+        <span class="mood-label">Night</span>
+    </button>
+</div>
+
+<!-- 4. MINIMAL DISTRACTION MODE -->
+<div class="minimal-mode" id="minimalMode">
+    <div class="minimal-container">
+        <!-- Album Art -->
+        <div class="minimal-album">
+            <img src="images/TIMELESS.jpeg" alt="Album" class="minimal-album-img" id="minimalAlbumImg">
+        </div>
+        
+        <!-- Song Info -->
+        <div class="minimal-info">
+            <div class="minimal-title" id="minimalTitle">Select a song to play</div>
+            <div class="minimal-artist" id="minimalArtist">Choose from the artists below</div>
+        </div>
+        
+        <!-- Controls -->
+        <div class="minimal-controls">
+            <button class="minimal-control-btn" id="minimalPrevBtn">⏮</button>
+            <button class="minimal-control-btn play" id="minimalPlayBtn">▶</button>
+            <button class="minimal-control-btn" id="minimalNextBtn">⏭</button>
+        </div>
+        
+        <!-- Progress -->
+        <div class="minimal-progress">
+            <div class="minimal-progress-bar" id="minimalProgressBar">
+                <div class="minimal-progress-fill" id="minimalProgressFill"></div>
+            </div>
+            <div class="minimal-time">
+                <span id="minimalCurrentTime">0:00</span>
+                <span id="minimalDuration">0:00</span>
+            </div>
+        </div>
+        
+        <!-- Exit Button -->
+        <button class="minimal-exit" id="minimalExit">×</button>
+    </div>
+</div>
+
+<!-- 5. FOCUS TIMER -->
+<div class="focus-timer" id="focusTimer">
+    <div class="focus-timer-display" id="focusTimerDisplay">25:00</div>
+    <div class="focus-timer-label">Focus Session</div>
+    <div class="focus-timer-controls">
+        <button class="focus-timer-btn" id="focusStartBtn">Start</button>
+        <button class="focus-timer-btn" id="focusResetBtn">Reset</button>
+    </div>
+</div>
+
+<!-- 6. BREATHING CIRCLE (Ambient) -->
+<div class="breathing-circle"></div>
+
+<!-- 7. QUICK ACTIONS MENU -->
+<div class="quick-actions">
+    <button class="quick-action-btn" data-action="lyrics" data-tooltip="Lyrics Focus (L)" id="lyricsFocusBtn">
+        📝
+    </button>
+    <button class="quick-action-btn" data-action="minimal" data-tooltip="Minimal Mode (M)" id="minimalModeBtn">
+        ◻️
+    </button>
+    <button class="quick-action-btn" data-action="timer" data-tooltip="Focus Timer" id="focusTimerBtn">
+        ⏱️
+    </button>
+    <button class="quick-action-btn" data-action="shuffle" data-tooltip="Shuffle">
+        🔀
+    </button>
+</div>
+
+<!-- Include CSS & JS -->
+<link rel="stylesheet" href="neonwave-features.css">
+<script src="neonwave-features.js"></script>

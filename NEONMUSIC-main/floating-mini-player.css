@@ -1,0 +1,390 @@
+/* ========================================
+   FLOATING MINI MUSIC PLAYER
+   Dark Glassmorphism - Always Visible
+   ======================================== */
+
+/* Mini Player Container - Floating */
+.floating-mini-player {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    width: 320px;
+    z-index: 999999;
+    opacity: 0;
+    transform: translateY(20px) scale(0.95);
+    transition: all 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+    pointer-events: none;
+    user-select: none;
+}
+
+.floating-mini-player.show {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    pointer-events: auto;
+}
+
+.floating-mini-player.dragging {
+    transition: none;
+    cursor: grabbing;
+}
+
+/* Mini Player Card - Glassmorphism */
+.mini-player-card {
+    background: rgba(15, 15, 15, 0.92);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border-radius: 24px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 20px;
+    box-shadow: 
+        0 12px 48px rgba(0, 0, 0, 0.6),
+        0 0 0 1px rgba(255, 255, 255, 0.05) inset,
+        0 24px 80px rgba(138, 43, 226, 0.2);
+    position: relative;
+    overflow: hidden;
+    cursor: grab;
+}
+
+.mini-player-card:active {
+    cursor: grabbing;
+}
+
+/* Glass Highlight */
+.mini-player-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 40%;
+    background: linear-gradient(
+        180deg,
+        rgba(255, 255, 255, 0.08) 0%,
+        transparent 100%
+    );
+    border-radius: 24px 24px 0 0;
+    pointer-events: none;
+}
+
+/* Glow Effect */
+.mini-player-card::after {
+    content: '';
+    position: absolute;
+    inset: -2px;
+    background: linear-gradient(
+        135deg,
+        rgba(138, 43, 226, 0.4) 0%,
+        rgba(0, 255, 255, 0.3) 100%
+    );
+    border-radius: 24px;
+    opacity: 0.4;
+    filter: blur(16px);
+    z-index: -1;
+    animation: glowPulse 4s ease-in-out infinite;
+}
+
+@keyframes glowPulse {
+    0%, 100% { opacity: 0.4; }
+    50% { opacity: 0.6; }
+}
+
+/* Header - Drag Handle */
+.mini-player-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 16px;
+    position: relative;
+    z-index: 1;
+}
+
+.mini-player-drag-handle {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 11px;
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    cursor: grab;
+}
+
+.mini-player-drag-handle:active {
+    cursor: grabbing;
+}
+
+.drag-icon {
+    width: 20px;
+    height: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+
+.drag-icon span {
+    width: 100%;
+    height: 2px;
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 1px;
+}
+
+/* Close Button */
+.mini-player-close {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.mini-player-close:hover {
+    background: rgba(255, 255, 255, 0.12);
+    border-color: rgba(255, 255, 255, 0.2);
+    transform: scale(1.1);
+}
+
+.mini-player-close::before,
+.mini-player-close::after {
+    content: '';
+    position: absolute;
+    width: 12px;
+    height: 2px;
+    background: rgba(255, 255, 255, 0.7);
+    border-radius: 1px;
+}
+
+.mini-player-close::before {
+    transform: rotate(45deg);
+}
+
+.mini-player-close::after {
+    transform: rotate(-45deg);
+}
+
+/* Content */
+.mini-player-content {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    position: relative;
+    z-index: 1;
+}
+
+/* Cover + Info */
+.mini-player-info {
+    display: flex;
+    gap: 14px;
+    align-items: center;
+}
+
+.mini-player-cover {
+    width: 64px;
+    height: 64px;
+    border-radius: 12px;
+    overflow: hidden;
+    flex-shrink: 0;
+    box-shadow: 
+        0 4px 16px rgba(0, 0, 0, 0.4),
+        0 0 0 1px rgba(255, 255, 255, 0.1) inset;
+    position: relative;
+}
+
+.mini-player-cover::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        135deg,
+        rgba(255, 255, 255, 0.15) 0%,
+        transparent 50%
+    );
+}
+
+.mini-player-cover img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.mini-player-text {
+    flex: 1;
+    min-width: 0;
+}
+
+.mini-player-title {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.95);
+    margin-bottom: 4px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.mini-player-artist {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.6);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* Controls */
+.mini-player-controls {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.mini-control-btn {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+    position: relative;
+}
+
+.mini-control-btn::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        135deg,
+        rgba(138, 43, 226, 0.3) 0%,
+        rgba(0, 255, 255, 0.3) 100%
+    );
+    border-radius: 50%;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.mini-control-btn:hover {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: rgba(255, 255, 255, 0.25);
+    transform: scale(1.1);
+}
+
+.mini-control-btn:hover::before {
+    opacity: 1;
+}
+
+.mini-control-btn:active {
+    transform: scale(0.95);
+}
+
+/* Play Button - Larger */
+.mini-control-btn.play {
+    width: 44px;
+    height: 44px;
+    background: rgba(255, 255, 255, 0.12);
+}
+
+.mini-control-btn.play:hover {
+    background: rgba(255, 255, 255, 0.2);
+    box-shadow: 0 0 20px rgba(138, 43, 226, 0.5);
+}
+
+.mini-control-btn svg {
+    width: 16px;
+    height: 16px;
+    fill: rgba(255, 255, 255, 0.9);
+    position: relative;
+    z-index: 1;
+}
+
+.mini-control-btn.play svg {
+    width: 18px;
+    height: 18px;
+}
+
+/* Progress Bar */
+.mini-player-progress {
+    height: 3px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 2px;
+    overflow: hidden;
+    position: relative;
+}
+
+.mini-player-progress-fill {
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        rgba(138, 43, 226, 0.8) 0%,
+        rgba(0, 255, 255, 0.8) 100%
+    );
+    width: 0%;
+    transition: width 0.1s linear;
+    box-shadow: 0 0 8px rgba(138, 43, 226, 0.6);
+}
+
+/* PiP Button */
+.mini-pip-btn {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    z-index: 2;
+}
+
+.mini-pip-btn:hover {
+    background: rgba(0, 0, 0, 0.8);
+    border-color: rgba(138, 43, 226, 0.5);
+    transform: scale(1.05);
+}
+
+.mini-pip-btn svg {
+    width: 16px;
+    height: 16px;
+    fill: rgba(255, 255, 255, 0.8);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .floating-mini-player {
+        width: 280px;
+        bottom: 16px;
+        right: 16px;
+    }
+    
+    .mini-player-card {
+        padding: 16px;
+    }
+    
+    .mini-player-cover {
+        width: 56px;
+        height: 56px;
+    }
+}
+
+/* Hide when main player is in fullscreen */
+body.fullscreen .floating-mini-player {
+    opacity: 0;
+    pointer-events: none;
+}

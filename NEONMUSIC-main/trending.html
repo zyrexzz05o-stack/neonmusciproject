@@ -1,0 +1,189 @@
+<!-- Trending Page Content -->
+<header class="header">
+    <div class="search-bar">
+        <span class="search-icon">🔍</span>
+        <input type="text" placeholder="Search Music">
+    </div>
+    
+    <div class="header-right">
+        <div class="mood-selector-bar" id="moodSelector">
+            <button class="mood-btn active" data-mood="chill" title="Chill Mode">
+                <span class="mood-icon">🌊</span>
+            </button>
+            <button class="mood-btn" data-mood="focus" title="Focus Mode">
+                <span class="mood-icon">🎯</span>
+            </button>
+            <button class="mood-btn" data-mood="night" title="Night Mode">
+                <span class="mood-icon">🌙</span>
+            </button>
+        </div>
+        
+        <button class="profile-btn">
+            <img src="images/anime-avatar..jpeg" alt="Profile" class="profile-img">
+        </button>
+    </div>
+</header>
+
+<section class="album-highlight" id="albumHighlight">
+    <div class="now-playing-content" id="nowPlayingContent">
+        <div class="now-playing-text empty">
+            <div class="now-playing-header">
+                <p class="now-playing-label">NOW PLAYING</p>
+                <div class="mini-visualizer" id="miniVisualizer" style="display: none;">
+                    <div class="mini-bar"></div>
+                    <div class="mini-bar"></div>
+                    <div class="mini-bar"></div>
+                    <div class="mini-bar"></div>
+                </div>
+            </div>
+            <h2 id="nowPlayingTitle">Select a song to play</h2>
+            <p id="nowPlayingArtist">Choose from the artists below</p>
+        </div>
+        <div class="now-playing-media">
+            <div class="lyrics-box" id="lyricsBox" style="display: none;">
+                <div class="lyrics-box-content" id="lyricsBoxContent"></div>
+            </div>
+            
+            <div class="video-container" id="videoContainer" style="display: none;">
+                <video id="videoPlayer" loop playsinline>
+                    <source id="videoSource" src="" type="video/mp4">
+                </video>
+                <button class="video-fullscreen-btn" id="videoFullscreenBtn" title="Fullscreen">⛶</button>
+                
+                <div class="lyrics-overlay" id="lyricsOverlay" style="display: none;">
+                    <div class="lyrics-content" id="lyricsContent">
+                        <h2 id="lyricsTitle">Song Title</h2>
+                        <p id="lyricsText">Lyrics will appear here...</p>
+                    </div>
+                </div>
+            </div>
+            <div class="now-playing-image" id="nowPlayingImage" style="display: none;">
+                <img id="nowPlayingImg" src="" alt="Album Cover">
+                <div class="audio-visualizer" id="audioVisualizer" style="display: none;">
+                    <div class="visualizer-bar"></div>
+                    <div class="visualizer-bar"></div>
+                    <div class="visualizer-bar"></div>
+                    <div class="visualizer-bar"></div>
+                    <div class="visualizer-bar"></div>
+                    <div class="visualizer-bar"></div>
+                    <div class="visualizer-bar"></div>
+                    <div class="visualizer-bar"></div>
+                    <div class="visualizer-bar"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="section">
+    <div class="section-header">
+        <h3>Trending Now</h3>
+        <a href="#" class="view-all">View All ›</a>
+    </div>
+    <div class="trending-grid">
+        <div class="trending-item">
+            <div class="trending-circle">
+                <img src="images/TIMELESS.jpeg" alt="The Weeknd" class="trending-img">
+                <button class="trending-play-btn" onclick="playTrack('The Weeknd', 'Timeless', 'images/TIMELESS.jpeg', 'videos/Timeless.mp4')">▶</button>
+            </div>
+            <span class="trending-name">The Weeknd</span>
+        </div>
+        <div class="trending-item">
+            <div class="trending-circle">
+                <img src="images/jamesarthur.jpeg" alt="James Arthur" class="trending-img">
+                <button class="trending-play-btn" onclick="playTrack('James Arthur', 'Say You Won\'t Let Go', 'images/jamesarthur.jpeg', 'videos/Jamesarthur.mp4')">▶</button>
+            </div>
+            <span class="trending-name">James Arthur</span>
+        </div>
+        <div class="trending-item">
+            <div class="trending-circle">
+                <img src="images/hindiaappmusic.jpeg" alt="Hindia" class="trending-img">
+                <button class="trending-play-btn" onclick="playTrack('Hindia', 'Evaluasi', 'images/hindiaappmusic.jpeg', 'videos/Hindia.mp4')">▶</button>
+            </div>
+            <span class="trending-name">Hindia</span>
+        </div>
+        <div class="trending-item">
+            <div class="trending-circle">
+                <img src="images/justin bieber.jpeg" alt="Justin Bieber" class="trending-img">
+                <button class="trending-play-btn" onclick="playTrack('Justin Bieber', 'Love Yourself', 'images/justin bieber.jpeg', 'videos/Justinbieber.mp4')">▶</button>
+            </div>
+            <span class="trending-name">Justin Bieber</span>
+        </div>
+        <div class="trending-item">
+            <div class="trending-circle">
+                <img src="images/onedirection.jpeg" alt="One Direction" class="trending-img">
+                <button class="trending-play-btn" onclick="playTrack('One Direction', 'Night Changes', 'images/onedirection.jpeg', 'videos/One Direction - Night Changes.mp4')">▶</button>
+            </div>
+            <span class="trending-name">One Direction</span>
+        </div>
+        <div class="trending-item">
+            <div class="trending-circle">
+                <img src="images/coldplay.jpeg" alt="Coldplay" class="trending-img">
+                <button class="trending-play-btn" onclick="playTrack('Coldplay', 'Fix You', 'images/coldplay.jpeg', 'videos/Coldplay - Fix You (Official Video).mp4')">▶</button>
+            </div>
+            <span class="trending-name">Coldplay</span>
+        </div>
+        <div class="trending-item">
+            <div class="trending-circle">
+                <img src="images/lordhuron.jpeg" alt="Lord Huron" class="trending-img">
+                <button class="trending-play-btn" onclick="playTrack('Lord Huron', 'The Night We Met', 'images/lordhuron.jpeg', 'videos/Lord Huron - The Night We Met (Official Audio).mp4')">▶</button>
+            </div>
+            <span class="trending-name">Lord Huron</span>
+        </div>
+        <div class="trending-item">
+            <div class="trending-circle">
+                <img src="images/dewa19.jpeg" alt="Dewa 19" class="trending-img">
+                <button class="trending-play-btn" onclick="playTrack('Dewa 19', 'Aku Milikmu', 'images/dewa19.jpeg', 'videos/Dewa 19 Aku Milikmu (HQ).mp4')">▶</button>
+            </div>
+            <span class="trending-name">Dewa 19</span>
+        </div>
+        <div class="trending-item">
+            <div class="trending-circle">
+                <img src="images/neckdeep.jpg" alt="Neck Deep" class="trending-img">
+                <button class="trending-play-btn" onclick="playTrack('Neck Deep', 'Wish You Were Here', 'images/neckdeep.jpg', 'videos/Wish You Were Here.mp4')">▶</button>
+            </div>
+            <span class="trending-name">Neck Deep</span>
+        </div>
+        <div class="trending-item">
+            <div class="trending-circle">
+                <img src="images/nadhifbasamalah.jpeg" alt="Nadhif Basalamah" class="trending-img">
+                <button class="trending-play-btn" onclick="playTrack('Nadhif Basalamah', 'Penjaga Hati', 'images/nadhifbasamalah.jpeg', 'videos/nadhif basalamah - penjaga hati (Official Music Video).mp4')">▶</button>
+            </div>
+            <span class="trending-name">Nadhif Basalamah</span>
+        </div>
+    </div>
+</section>
+
+<section class="section">
+    <div class="section-header">
+        <h3>Recommended For You</h3>
+        <a href="#" class="view-all">View All ›</a>
+    </div>
+    <div class="recommended-content">
+        <div class="recommended-list">
+            <div class="song-item">
+                <span>Song 1</span>
+            </div>
+            <div class="song-item">
+                <span>Song 2</span>
+            </div>
+            <div class="song-item">
+                <span>Song 3</span>
+            </div>
+        </div>
+        <div class="album-grid">
+            <div class="album-card">
+                <img src="images/niki.jpeg" alt="NIKI" class="album-img">
+                <button class="album-play-btn">▶</button>
+            </div>
+            <div class="album-card">
+                <img src="images/sheilaon7.jpeg" alt="Sheila On 7" class="album-img">
+                <button class="album-play-btn">▶</button>
+            </div>
+            <div class="album-card">
+                <img src="images/batassenja.jpeg" alt="Batas Senja" class="album-img">
+                <button class="album-play-btn">▶</button>
+            </div>
+        </div>
+    </div>
+</section>

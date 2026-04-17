@@ -1,0 +1,780 @@
+/* ========================================
+   FLOATING CONTROL PANEL SIDEBAR
+   Monochrome • Futuristic • Minimal
+   ======================================== */
+
+/* Hide original sidebar */
+.sidebar {
+    display: none !important;
+}
+
+/* Logo EchoVibe Wrapper - Container untuk logo + teks */
+.logo-echovibe-wrapper {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    z-index: 1000;
+}
+
+/* Logo EchoVibe Header - HANYA LOGO dengan kotak hitam */
+.logo-echovibe-header {
+    width: 64px;
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 18px;
+    padding: 12px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    box-shadow: 
+        0 10px 40px rgba(0, 0, 0, 0.8),
+        inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    overflow: hidden;
+    position: relative;
+}
+
+/* Gradasi layer yang tersembunyi */
+.logo-echovibe-header::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, #000000, #404040, #808080, #ffffff, #808080, #404040, #000000);
+    background-size: 400% 400%;
+    animation: gradient-shift 8s ease infinite;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    border-radius: 18px;
+    z-index: 0;
+}
+
+/* Gradasi muncul saat hover */
+.logo-echovibe-header:hover::before {
+    opacity: 1;
+}
+
+.logo-echovibe-header:hover {
+    border-color: rgba(255, 255, 255, 0.2);
+    transform: scale(1.05);
+    box-shadow: 
+        0 15px 50px rgba(0, 0, 0, 0.9),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.logo-echovibe-header svg {
+    width: 100%;
+    height: 100%;
+    filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.5));
+    position: relative;
+    z-index: 1;
+    transition: filter 0.5s ease;
+}
+
+/* Gradasi pada SVG saat hover - menggunakan filter */
+.logo-echovibe-wrapper:hover .logo-echovibe-header svg {
+    filter: drop-shadow(0 0 12px rgba(255, 255, 255, 0.8)) 
+            drop-shadow(0 0 20px rgba(160, 160, 160, 0.6))
+            drop-shadow(0 0 30px rgba(64, 64, 64, 0.4));
+    animation: svg-glow-pulse 3s ease infinite;
+}
+
+@keyframes svg-glow-pulse {
+    0%, 100% {
+        filter: drop-shadow(0 0 12px rgba(255, 255, 255, 0.8)) 
+                drop-shadow(0 0 20px rgba(160, 160, 160, 0.6));
+    }
+    50% {
+        filter: drop-shadow(0 0 20px rgba(255, 255, 255, 1)) 
+                drop-shadow(0 0 30px rgba(160, 160, 160, 0.8))
+                drop-shadow(0 0 40px rgba(64, 64, 64, 0.6));
+    }
+}
+
+/* Animasi opacity pada echo waves untuk efek gradasi */
+.logo-echovibe-wrapper:hover .echo-wave-1 {
+    animation: echo-expand-1 4s ease-in-out infinite, 
+               wave-opacity-shift 3s ease infinite;
+}
+
+.logo-echovibe-wrapper:hover .echo-wave-2 {
+    animation: echo-expand-2 5s ease-in-out infinite,
+               wave-opacity-shift 3s ease infinite 0.5s;
+}
+
+.logo-echovibe-wrapper:hover .echo-wave-3 {
+    animation: echo-expand-3 6s ease-in-out infinite,
+               wave-opacity-shift 3s ease infinite 1s;
+}
+
+@keyframes wave-opacity-shift {
+    0%, 100% {
+        opacity: 0.6;
+    }
+    50% {
+        opacity: 0.2;
+    }
+}
+
+.logo-echovibe-header .echo-core {
+    fill: white;
+    animation: core-pulse 3s ease-in-out infinite;
+    transform-origin: center;
+}
+
+.logo-echovibe-header .echo-wave {
+    stroke: white;
+}
+
+.logo-echovibe-header .echo-wave-1 {
+    animation: echo-expand-1 4s ease-in-out infinite;
+    transform-origin: center;
+}
+
+.logo-echovibe-header .echo-wave-2 {
+    animation: echo-expand-2 5s ease-in-out infinite;
+    animation-delay: 0.5s;
+    transform-origin: center;
+}
+
+.logo-echovibe-header .echo-wave-3 {
+    animation: echo-expand-3 6s ease-in-out infinite;
+    animation-delay: 1s;
+    transform-origin: center;
+}
+
+.logo-echovibe-header:hover .echo-core {
+    animation: core-pulse-fast 1.5s ease-in-out infinite;
+}
+
+.logo-echovibe-header:hover .echo-wave-1,
+.logo-echovibe-header:hover .echo-wave-2,
+.logo-echovibe-header:hover .echo-wave-3 {
+    animation-duration: 2s;
+}
+
+/* Floating Sidebar Container */
+.sidebar-floating {
+    position: fixed;
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 1000;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Text EchoVibe - DI LUAR kotak, tidak terbungkus */
+.logo-text {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    line-height: 1;
+}
+
+.logo-text-top,
+.logo-text-bottom {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700;
+    font-size: 16px;
+    letter-spacing: 0.5px;
+    color: white;
+    text-transform: uppercase;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+    transition: all 0.5s ease;
+    background: linear-gradient(135deg, #ffffff, #ffffff);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: white;
+}
+
+.logo-text-top {
+    margin-bottom: 2px;
+}
+
+.logo-text-bottom {
+    margin-top: 2px;
+}
+
+/* Gradasi pada teks saat hover wrapper */
+.logo-echovibe-wrapper:hover .logo-text-top,
+.logo-echovibe-wrapper:hover .logo-text-bottom {
+    background: linear-gradient(135deg, #ffffff, #a0a0a0, #404040, #ffffff, #a0a0a0);
+    background-size: 200% 200%;
+    animation: text-gradient-shift 3s ease infinite;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+@keyframes text-gradient-shift {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+/* Control Panel */
+.control-panel {
+    background: rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 30px;
+    padding: 20px 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    box-shadow: 
+        0 10px 40px rgba(0, 0, 0, 0.8),
+        inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    transition: all 0.3s ease;
+}
+
+.control-panel:hover {
+    background: rgba(0, 0, 0, 0.95);
+    border-color: rgba(255, 255, 255, 0.2);
+    box-shadow: 
+        0 15px 50px rgba(0, 0, 0, 0.9),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+/* Logo Minimal */
+.logo-minimal {
+    margin-bottom: 15px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.logo-icon {
+    width: 40px;
+    height: 40px;
+    background: transparent;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.logo-icon:hover {
+    transform: scale(1.05);
+}
+
+/* EchoVibe Logo Animations */
+.echovibe-logo {
+    position: relative;
+}
+
+/* Core Circle - Gentle Pulse */
+.echo-core {
+    animation: core-pulse 3s ease-in-out infinite;
+    transform-origin: center;
+}
+
+@keyframes core-pulse {
+    0%, 100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+    50% {
+        opacity: 0.8;
+        transform: scale(1.05);
+    }
+}
+
+/* Echo Wave 1 - Slow Expansion */
+.echo-wave-1 {
+    animation: echo-expand-1 4s ease-in-out infinite;
+    transform-origin: center;
+}
+
+@keyframes echo-expand-1 {
+    0%, 100% {
+        opacity: 0.6;
+        transform: scale(1);
+    }
+    50% {
+        opacity: 0.3;
+        transform: scale(1.1);
+    }
+}
+
+/* Echo Wave 2 - Medium Expansion */
+.echo-wave-2 {
+    animation: echo-expand-2 5s ease-in-out infinite;
+    animation-delay: 0.5s;
+    transform-origin: center;
+}
+
+@keyframes echo-expand-2 {
+    0%, 100% {
+        opacity: 0.4;
+        transform: scale(1);
+    }
+    50% {
+        opacity: 0.2;
+        transform: scale(1.15);
+    }
+}
+
+/* Echo Wave 3 - Outer Expansion */
+.echo-wave-3 {
+    animation: echo-expand-3 6s ease-in-out infinite;
+    animation-delay: 1s;
+    transform-origin: center;
+}
+
+@keyframes echo-expand-3 {
+    0%, 100% {
+        opacity: 0.3;
+        transform: scale(1);
+    }
+    50% {
+        opacity: 0.1;
+        transform: scale(1.2);
+    }
+}
+
+/* Hover Effect - Faster Pulse */
+.echovibe-logo:hover .echo-core {
+    animation: core-pulse-fast 1.5s ease-in-out infinite;
+}
+
+.echovibe-logo:hover .echo-wave-1,
+.echovibe-logo:hover .echo-wave-2,
+.echovibe-logo:hover .echo-wave-3 {
+    animation-duration: 2s;
+}
+
+@keyframes core-pulse-fast {
+    0%, 100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+    50% {
+        opacity: 0.7;
+        transform: scale(1.1);
+    }
+}
+
+/* Navigation Icons Container */
+.nav-icons {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    width: 100%;
+}
+
+/* Individual Nav Icon */
+.nav-icon {
+    position: relative;
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgba(255, 255, 255, 0.4);
+    border-radius: 16px;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    cursor: pointer;
+    text-decoration: none;
+    background: transparent;
+}
+
+.nav-icon svg {
+    width: 24px;
+    height: 24px;
+    stroke-width: 2;
+    transition: all 0.2s ease;
+}
+
+/* Hover State */
+.nav-icon:hover {
+    color: rgba(255, 255, 255, 0.9);
+    background: rgba(255, 255, 255, 0.05);
+    transform: translateX(3px);
+}
+
+.nav-icon:hover svg {
+    stroke-width: 2.5;
+}
+
+/* Active State */
+.nav-icon.active {
+    color: #ffffff;
+    background: rgba(255, 255, 255, 0.1);
+    box-shadow: 
+        inset 0 0 0 1px rgba(255, 255, 255, 0.2),
+        0 0 20px rgba(255, 255, 255, 0.1);
+}
+
+.nav-icon.active::before {
+    content: '';
+    position: absolute;
+    left: -12px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 3px;
+    height: 24px;
+    background: #ffffff;
+    border-radius: 2px;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+}
+
+/* Label Tooltip */
+.nav-label {
+    position: absolute;
+    left: 70px;
+    background: rgba(0, 0, 0, 0.95);
+    color: #ffffff;
+    padding: 8px 16px;
+    border-radius: 12px;
+    font-size: 13px;
+    font-weight: 500;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transform: translateX(-10px);
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.8);
+    z-index: 10;
+}
+
+.nav-label::before {
+    content: '';
+    position: absolute;
+    left: -6px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 6px 6px 6px 0;
+    border-color: transparent rgba(0, 0, 0, 0.95) transparent transparent;
+}
+
+.nav-icon:hover .nav-label {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+/* Divider */
+.nav-divider {
+    width: 32px;
+    height: 1px;
+    background: rgba(255, 255, 255, 0.1);
+    margin: 8px 0;
+}
+
+/* Bottom Section */
+.nav-bottom {
+    margin-top: 15px;
+    padding-top: 15px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+/* Active Indicator Animation */
+@keyframes pulse-indicator {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+}
+
+.nav-icon.active::before {
+    animation: pulse-indicator 2s ease-in-out infinite;
+}
+
+/* Hover Glow Effect */
+@keyframes hover-glow {
+    0%, 100% { box-shadow: 0 0 10px rgba(255, 255, 255, 0.1); }
+    50% { box-shadow: 0 0 20px rgba(255, 255, 255, 0.2); }
+}
+
+.nav-icon:hover {
+    animation: hover-glow 1.5s ease-in-out infinite;
+}
+
+/* Responsive - Hide on Mobile */
+@media (max-width: 768px) {
+    .sidebar-floating {
+        left: 10px;
+        transform: translateY(-50%) scale(0.9);
+    }
+    
+    .control-panel {
+        padding: 15px 10px;
+        border-radius: 25px;
+    }
+    
+    .nav-icon {
+        width: 44px;
+        height: 44px;
+    }
+    
+    .logo-icon {
+        width: 36px;
+        height: 36px;
+        font-size: 12px;
+    }
+    
+    .nav-label {
+        display: none;
+    }
+}
+
+/* Adjust main content to not overlap */
+.main-content {
+    margin-left: 100px !important;
+}
+
+@media (max-width: 768px) {
+    .main-content {
+        margin-left: 0 !important;
+        padding-left: 80px !important;
+    }
+}
+
+/* Profile Section Styling - OVERRIDE - FROM LEFT */
+#profileSection.profile-section {
+    position: fixed !important;
+    left: 0 !important;
+    right: auto !important;
+    top: 0 !important;
+    bottom: 0 !important;
+    width: 400px !important;
+    height: 100vh !important;
+    max-height: 100vh !important;
+    background: rgba(10, 10, 20, 0.15) !important;
+    backdrop-filter: blur(60px) !important;
+    -webkit-backdrop-filter: blur(60px) !important;
+    border-right: 1px solid rgba(255, 255, 255, 0.15) !important;
+    border-left: none !important;
+    border-top: none !important;
+    border-bottom: none !important;
+    padding: 40px 30px !important;
+    margin: 0 !important;
+    transform: translateX(-100%) !important;
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    z-index: 9999 !important;
+    box-shadow: 10px 0 40px rgba(0, 0, 0, 0.3) !important;
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+}
+
+#profileSection.profile-section.active {
+    transform: translateX(0) !important;
+}
+
+/* Profile Overlay Backdrop */
+#profileOverlay.profile-overlay {
+    position: fixed !important;
+    inset: 0 !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    width: 100vw !important;
+    height: 100vh !important;
+    background: rgba(0, 0, 0, 0.7) !important;
+    backdrop-filter: blur(5px) !important;
+    z-index: 9998 !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+    transition: opacity 0.4s ease !important;
+    display: none !important;
+}
+
+#profileOverlay.profile-overlay.active {
+    opacity: 1 !important;
+    pointer-events: all !important;
+    display: block !important;
+}
+
+/* Close button for profile - LEFT SIDE */
+.profile-close {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    width: 40px;
+    height: 40px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: #fff;
+    font-size: 24px;
+    transition: all 0.3s ease;
+    z-index: 10;
+}
+
+.profile-close:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: rotate(90deg);
+}
+
+/* Micro-interaction: Click Effect */
+.nav-icon:active {
+    transform: translateX(3px) scale(0.95);
+}
+
+/* Smooth Transitions */
+* {
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Focus State for Accessibility */
+.nav-icon:focus {
+    outline: 2px solid rgba(255, 255, 255, 0.3);
+    outline-offset: 4px;
+}
+
+/* Loading State Animation */
+@keyframes loading-pulse {
+    0%, 100% { opacity: 0.4; }
+    50% { opacity: 1; }
+}
+
+.nav-icon.loading {
+    animation: loading-pulse 1.5s ease-in-out infinite;
+}
+
+
+/* ========================================
+   PROFILE PANEL CONTENT STYLING
+   ======================================== */
+
+#profileSection .profile-header {
+    text-align: center !important;
+    margin-bottom: 30px !important;
+    padding: 0 !important;
+}
+
+#profileSection .profile-avatar {
+    width: 120px !important;
+    height: 120px !important;
+    margin: 0 auto 15px !important;
+    position: relative !important;
+    border-radius: 50% !important;
+    overflow: hidden !important;
+}
+
+#profileSection .profile-avatar-img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    border-radius: 50% !important;
+}
+
+#profileSection .profile-info {
+    text-align: center !important;
+}
+
+#profileSection .profile-name {
+    color: #fff !important;
+    font-size: 24px !important;
+    font-weight: 700 !important;
+    margin-bottom: 5px !important;
+}
+
+#profileSection .profile-bio {
+    color: rgba(255, 255, 255, 0.6) !important;
+    font-size: 14px !important;
+}
+
+#profileSection .profile-stats {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 15px !important;
+    margin: 30px 0 !important;
+    padding: 0 !important;
+}
+
+#profileSection .stat-item {
+    display: flex !important;
+    align-items: center !important;
+    gap: 15px !important;
+    padding: 15px !important;
+    background: rgba(255, 255, 255, 0.05) !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    border-radius: 12px !important;
+}
+
+#profileSection .stat-icon {
+    font-size: 24px !important;
+}
+
+#profileSection .stat-info {
+    flex: 1 !important;
+}
+
+#profileSection .stat-number {
+    display: block !important;
+    color: #fff !important;
+    font-size: 20px !important;
+    font-weight: 700 !important;
+}
+
+#profileSection .stat-label {
+    display: block !important;
+    color: rgba(255, 255, 255, 0.6) !important;
+    font-size: 13px !important;
+}
+
+#profileSection .profile-menu {
+    margin-top: 30px !important;
+}
+
+#profileSection .profile-menu-item {
+    display: flex !important;
+    align-items: center !important;
+    gap: 15px !important;
+    padding: 15px !important;
+    color: #fff !important;
+    text-decoration: none !important;
+    border-radius: 12px !important;
+    transition: background 0.3s ease !important;
+    margin-bottom: 10px !important;
+}
+
+#profileSection .profile-menu-item:hover {
+    background: rgba(255, 255, 255, 0.05) !important;
+}
+
+#profileSection .menu-icon {
+    font-size: 20px !important;
+}
+
+#profileSection .menu-arrow {
+    margin-left: auto !important;
+    font-size: 20px !important;
+    color: rgba(255, 255, 255, 0.4) !important;
+}
+
+/* Force profile section to stay on left side */
+#profileSection {
+    transform-origin: left center !important;
+}
+
+/* Prevent any centering */
+#profileSection * {
+    box-sizing: border-box !important;
+}

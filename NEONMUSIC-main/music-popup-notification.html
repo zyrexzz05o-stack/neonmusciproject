@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Music Popup Notification - Component Demo</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Popup Notification CSS -->
+    <link rel="stylesheet" href="music-popup-notification.css">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: #000;
+            color: #fff;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px;
+        }
+        
+        .demo-container {
+            max-width: 600px;
+            text-align: center;
+        }
+        
+        h1 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 32px;
+            margin-bottom: 16px;
+            background: linear-gradient(135deg, #8a2be2, #00ffff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        p {
+            color: rgba(255, 255, 255, 0.6);
+            margin-bottom: 40px;
+            line-height: 1.6;
+        }
+        
+        .demo-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            margin-bottom: 40px;
+        }
+        
+        .demo-btn {
+            padding: 16px 32px;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 12px;
+            color: #fff;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+        
+        .demo-btn:hover {
+            background: rgba(255, 255, 255, 0.12);
+            border-color: rgba(138, 43, 226, 0.5);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(138, 43, 226, 0.3);
+        }
+        
+        .code-block {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 24px;
+            text-align: left;
+            margin-top: 40px;
+        }
+        
+        .code-block h3 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 16px;
+            margin-bottom: 16px;
+            color: rgba(255, 255, 255, 0.9);
+        }
+        
+        pre {
+            background: rgba(0, 0, 0, 0.5);
+            padding: 16px;
+            border-radius: 8px;
+            overflow-x: auto;
+            font-size: 13px;
+            line-height: 1.6;
+        }
+        
+        code {
+            color: #00ffff;
+            font-family: 'Courier New', monospace;
+        }
+    </style>
+</head>
+<body>
+    <div class="demo-container">
+        <h1>🎵 Music Popup Notification</h1>
+        <p>Premium dark futuristic glassmorphism popup component for music apps. Click buttons below to test.</p>
+        
+        <div class="demo-buttons">
+            <button class="demo-btn" onclick="testPopup1()">
+                ▶ Show Popup - The Weeknd
+            </button>
+            <button class="demo-btn" onclick="testPopup2()">
+                ▶ Show Popup - James Arthur
+            </button>
+            <button class="demo-btn" onclick="testPopup3()">
+                ▶ Show Popup - Coldplay
+            </button>
+            <button class="demo-btn" onclick="testQuickChange()">
+                ⚡ Test Quick Song Change
+            </button>
+            <button class="demo-btn" onclick="requestNotificationPermission()">
+                🔔 Request Browser Notification Permission
+            </button>
+        </div>
+        
+        <div class="code-block">
+            <h3>📝 Usage Example:</h3>
+            <pre><code>// Simple usage
+showMusicPopup(
+    'Timeless',           // title
+    'The Weeknd',         // artist
+    'images/cover.jpg',   // cover URL
+    4000                  // duration (optional, default 4000ms)
+);
+
+// Or use the class directly
+window.musicPopup.show('Song', 'Artist', 'cover.jpg', 5000);
+
+// Smart notification (popup + browser notification if tab inactive)
+window.musicPopup.smartNotify('Song', 'Artist', 'cover.jpg');</code></pre>
+        </div>
+        
+        <div class="code-block">
+            <h3>🎨 Features:</h3>
+            <pre><code>✅ Dark glassmorphism design
+✅ Multi-layer neon glow
+✅ Smooth animations (cubic-bezier)
+✅ Auto-hide after 4 seconds
+✅ Smart replace (no spam)
+✅ Mini progress bar
+✅ Hover effects
+✅ Responsive design
+✅ Browser notification support
+✅ No external dependencies</code></pre>
+        </div>
+    </div>
+    
+    <!-- Popup Notification JS -->
+    <script src="music-popup-notification.js"></script>
+    
+    <script>
+        // Demo functions
+        function testPopup1() {
+            showMusicPopup(
+                'Timeless',
+                'The Weeknd ft. Playboi Carti',
+                'images/TIMELESS.jpeg',
+                4000
+            );
+        }
+        
+        function testPopup2() {
+            showMusicPopup(
+                'Say You Won\'t Let Go',
+                'James Arthur',
+                'images/jamesarthur.jpeg',
+                4000
+            );
+        }
+        
+        function testPopup3() {
+            showMusicPopup(
+                'Fix You',
+                'Coldplay',
+                'images/coldplay.jpeg',
+                4000
+            );
+        }
+        
+        function testQuickChange() {
+            showMusicPopup('Song 1', 'Artist 1', 'images/TIMELESS.jpeg', 2000);
+            
+            setTimeout(() => {
+                showMusicPopup('Song 2', 'Artist 2', 'images/jamesarthur.jpeg', 2000);
+            }, 1000);
+            
+            setTimeout(() => {
+                showMusicPopup('Song 3', 'Artist 3', 'images/coldplay.jpeg', 2000);
+            }, 2000);
+        }
+        
+        async function requestNotificationPermission() {
+            const granted = await window.musicPopup.requestPermission();
+            if (granted) {
+                alert('✅ Notification permission granted!');
+                // Test browser notification
+                window.musicPopup.showBrowserNotification(
+                    'Test Song',
+                    'Test Artist',
+                    'images/TIMELESS.jpeg'
+                );
+            } else {
+                alert('❌ Notification permission denied');
+            }
+        }
+        
+        // Mock functions for control buttons (for demo purposes)
+        window.playPreviousTrack = function() {
+            console.log('⏮ Previous track called');
+            alert('Previous track function called!\n(In real app, this will play previous song)');
+        };
+        
+        window.playNextTrack = function() {
+            console.log('⏭ Next track called');
+            alert('Next track function called!\n(In real app, this will play next song)');
+        };
+    </script>
+</body>
+</html>

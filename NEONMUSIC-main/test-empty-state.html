@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Empty State - Black Box Fix</title>
+    <style>
+        body {
+            background: #000;
+            color: #fff;
+            font-family: 'DM Sans', sans-serif;
+            padding: 40px;
+        }
+        
+        .test-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        h1 {
+            font-family: 'Space Grotesk', sans-serif;
+            margin-bottom: 30px;
+        }
+        
+        .test-section {
+            margin-bottom: 50px;
+        }
+        
+        .test-label {
+            font-size: 14px;
+            color: rgba(255,255,255,0.6);
+            margin-bottom: 10px;
+        }
+        
+        /* Copy of album-highlight styles */
+        .album-highlight {
+            position: relative;
+            background: rgba(30,30,30,.95);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+            border: 1px solid rgba(255,255,255,.1);
+            border-radius: 22px;
+            box-shadow: 0 25px 80px rgba(0,0,0,.5);
+            padding: 0;
+            margin-bottom: 30px;
+            transition: all 0.5s ease;
+            overflow: hidden;
+            min-height: 350px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        /* Hide black box when no song is playing */
+        .album-highlight:has(.now-playing-text.empty) {
+            background: transparent;
+            backdrop-filter: none;
+            -webkit-backdrop-filter: none;
+            border: none;
+            box-shadow: none;
+            min-height: auto;
+        }
+        
+        .album-highlight:has(.now-playing-text.empty)::before,
+        .album-highlight:has(.now-playing-text.empty)::after {
+            display: none;
+        }
+        
+        /* Fallback for browsers without :has() support */
+        .album-highlight.empty-state {
+            background: transparent;
+            backdrop-filter: none;
+            -webkit-backdrop-filter: none;
+            border: none;
+            box-shadow: none;
+            min-height: auto;
+        }
+        
+        .album-highlight.empty-state::before,
+        .album-highlight.empty-state::after {
+            display: none;
+        }
+        
+        .album-highlight::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image: none;
+            background-size: cover;
+            background-position: center;
+            filter: blur(40px);
+            opacity: 0.2;
+            z-index: -2;
+            transition: all 0.5s ease;
+        }
+        
+        .album-highlight::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(20,20,20,.8) 0%, rgba(30,30,30,.7) 50%, rgba(40,40,40,.8) 100%);
+            z-index: -1;
+        }
+        
+        .now-playing-content {
+            position: relative;
+            z-index: 1;
+            padding: 40px 50px;
+            width: 100%;
+        }
+        
+        .now-playing-text {
+            text-align: center;
+        }
+        
+        .now-playing-text h2 {
+            font-size: 24px;
+            margin: 10px 0;
+        }
+        
+        .now-playing-text p {
+            color: rgba(255,255,255,0.6);
+        }
+        
+        button {
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.2);
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            margin: 10px;
+            transition: all 0.3s ease;
+        }
+        
+        button:hover {
+            background: rgba(255,255,255,0.2);
+        }
+        
+        .status {
+            display: inline-block;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            margin-left: 10px;
+        }
+        
+        .status.empty {
+            background: rgba(255,0,0,0.2);
+            color: #ff6b6b;
+        }
+        
+        .status.playing {
+            background: rgba(0,255,0,0.2);
+            color: #51cf66;
+        }
+    </style>
+</head>
+<body>
+    <div class="test-container">
+        <h1>🧪 Test Empty State - Black Box Fix</h1>
+        
+        <div class="test-section">
+            <div class="test-label">
+                Current State: <span class="status empty" id="statusBadge">EMPTY (No Song)</span>
+            </div>
+            <button onclick="toggleState()">Toggle State</button>
+            <button onclick="location.reload()">Reload Page</button>
+        </div>
+        
+        <div class="test-section">
+            <p style="color: rgba(255,255,255,0.7); margin-bottom: 20px;">
+                ✅ EXPECTED: When "EMPTY", the black box should be completely transparent/invisible.<br>
+                ✅ EXPECTED: When "PLAYING", the black box should appear with dark background.
+            </p>
+        </div>
+        
+        <!-- Test Album Highlight -->
+        <section class="album-highlight empty-state" id="albumHighlight">
+            <div class="now-playing-content">
+                <div class="now-playing-text empty" id="nowPlayingText">
+                    <h2 id="nowPlayingTitle">Select a song to play</h2>
+                    <p id="nowPlayingArtist">Choose from the artists below</p>
+                </div>
+            </div>
+        </section>
+        
+        <div class="test-section">
+            <h3>Browser Support Check:</h3>
+            <p id="hasSupport"></p>
+        </div>
+    </div>
+    
+    <script>
+        // Check :has() support
+        const hasSupport = CSS.supports('selector(:has(*))');
+        document.getElementById('hasSupport').innerHTML = hasSupport 
+            ? '✅ Your browser supports :has() selector (modern approach will work)'
+            : '⚠️ Your browser does NOT support :has() selector (fallback .empty-state class will be used)';
+        
+        let isEmpty = true;
+        
+        function toggleState() {
+            const albumHighlight = document.getElementById('albumHighlight');
+            const nowPlayingText = document.getElementById('nowPlayingText');
+            const statusBadge = document.getElementById('statusBadge');
+            const title = document.getElementById('nowPlayingTitle');
+            const artist = document.getElementById('nowPlayingArtist');
+            
+            isEmpty = !isEmpty;
+            
+            if (isEmpty) {
+                // Empty state
+                nowPlayingText.classList.add('empty');
+                albumHighlight.classList.add('empty-state');
+                title.textContent = 'Select a song to play';
+                artist.textContent = 'Choose from the artists below';
+                statusBadge.textContent = 'EMPTY (No Song)';
+                statusBadge.className = 'status empty';
+            } else {
+                // Playing state
+                nowPlayingText.classList.remove('empty');
+                albumHighlight.classList.remove('empty-state');
+                title.textContent = 'WISH YOU WERE HERE';
+                artist.textContent = 'Neck Deep';
+                statusBadge.textContent = 'PLAYING';
+                statusBadge.className = 'status playing';
+            }
+        }
+    </script>
+</body>
+</html>

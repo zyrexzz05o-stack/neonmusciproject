@@ -1,0 +1,517 @@
+/* ========================================
+   NEONWAVE MUSIC - SYNTHWAVE CYBERPUNK THEME
+   Futuristic • Immersive • Night Vibes
+   ======================================== */
+
+:root {
+    /* Neon Colors */
+    --neon-purple: #b026ff;
+    --neon-pink: #ff006e;
+    --neon-cyan: #00f5ff;
+    --neon-blue: #3d5afe;
+    --neon-orange: #ff3d00;
+    
+    /* Dark Backgrounds */
+    --dark-bg: #0a0014;
+    --darker-bg: #050008;
+    --card-bg: rgba(20, 10, 40, 0.6);
+    
+    /* Glow Effects */
+    --glow-purple: rgba(176, 38, 255, 0.8);
+    --glow-pink: rgba(255, 0, 110, 0.8);
+    --glow-cyan: rgba(0, 245, 255, 0.8);
+    
+    /* Shadows */
+    --shadow-neon: 0 0 20px var(--glow-purple), 0 0 40px var(--glow-pink);
+    --shadow-deep: 0 10px 50px rgba(0, 0, 0, 0.8);
+}
+
+/* ========================================
+   SYNTHWAVE GRID BACKGROUND
+   ======================================== */
+
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+        linear-gradient(0deg, transparent 24%, rgba(176, 38, 255, 0.08) 25%, rgba(176, 38, 255, 0.08) 26%, transparent 27%, transparent 74%, rgba(176, 38, 255, 0.08) 75%, rgba(176, 38, 255, 0.08) 76%, transparent 77%, transparent),
+        linear-gradient(90deg, transparent 24%, rgba(176, 38, 255, 0.08) 25%, rgba(176, 38, 255, 0.08) 26%, transparent 27%, transparent 74%, rgba(176, 38, 255, 0.08) 75%, rgba(176, 38, 255, 0.08) 76%, transparent 77%, transparent);
+    background-size: 60px 60px;
+    opacity: 0.4;
+    z-index: -1;
+    animation: grid-move 30s linear infinite;
+    transform: perspective(800px) rotateX(60deg);
+    transform-origin: center bottom;
+}
+
+@keyframes grid-move {
+    0% { background-position: 0 0; }
+    100% { background-position: 60px 60px; }
+}
+
+/* ========================================
+   NEON GLOW ORBS
+   ======================================== */
+
+.bg-glow {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 1400px;
+    height: 1400px;
+    background: 
+        radial-gradient(circle at 30% 40%, var(--glow-purple) 0%, transparent 40%),
+        radial-gradient(circle at 70% 60%, var(--glow-pink) 0%, transparent 40%),
+        radial-gradient(circle at 50% 80%, var(--glow-cyan) 0%, transparent 50%);
+    pointer-events: none;
+    z-index: -1;
+    animation: neon-pulse 8s ease-in-out infinite, glow-rotate 25s linear infinite;
+    filter: blur(100px);
+}
+
+@keyframes neon-pulse {
+    0%, 100% { opacity: 0.5; transform: translate(-50%, -50%) scale(1); }
+    50% { opacity: 0.8; transform: translate(-50%, -50%) scale(1.15); }
+}
+
+@keyframes glow-rotate {
+    0% { filter: blur(100px) hue-rotate(0deg); }
+    100% { filter: blur(100px) hue-rotate(360deg); }
+}
+
+/* ========================================
+   NEON BORDERS & CARDS
+   ======================================== */
+
+.sidebar {
+    background: rgba(10, 0, 20, 0.85) !important;
+    backdrop-filter: blur(30px) !important;
+    border-right: 2px solid transparent !important;
+    border-image: linear-gradient(180deg, var(--neon-purple), var(--neon-pink), var(--neon-cyan)) 1 !important;
+    box-shadow: 
+        inset 0 0 30px rgba(176, 38, 255, 0.1),
+        0 0 50px rgba(176, 38, 255, 0.3) !important;
+    position: relative;
+}
+
+.sidebar::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 2px;
+    height: 100%;
+    background: linear-gradient(180deg, var(--neon-purple), var(--neon-pink), var(--neon-cyan));
+    animation: border-glow 3s ease-in-out infinite;
+    box-shadow: 0 0 20px var(--glow-purple);
+}
+
+@keyframes border-glow {
+    0%, 100% { opacity: 0.5; }
+    50% { opacity: 1; box-shadow: 0 0 30px var(--glow-purple), 0 0 60px var(--glow-pink); }
+}
+
+/* ========================================
+   LOGO - ANIMATED NEON TEXT
+   ======================================== */
+
+.logo h1 {
+    font-size: 24px !important;
+    font-weight: 900 !important;
+    letter-spacing: 2px !important;
+    text-transform: uppercase !important;
+    position: relative !important;
+}
+
+.logo .neon {
+    background: linear-gradient(90deg, 
+        var(--neon-cyan), 
+        var(--neon-purple), 
+        var(--neon-pink), 
+        var(--neon-cyan)
+    ) !important;
+    background-size: 300% 100% !important;
+    -webkit-background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+    background-clip: text !important;
+    animation: neon-text-flow 4s ease-in-out infinite, text-glow 2s ease-in-out infinite !important;
+    filter: drop-shadow(0 0 10px var(--glow-cyan)) 
+            drop-shadow(0 0 20px var(--glow-purple)) !important;
+}
+
+@keyframes neon-text-flow {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+}
+
+@keyframes text-glow {
+    0%, 100% { 
+        filter: drop-shadow(0 0 10px var(--glow-cyan)) 
+                drop-shadow(0 0 20px var(--glow-purple));
+    }
+    50% { 
+        filter: drop-shadow(0 0 20px var(--glow-cyan)) 
+                drop-shadow(0 0 40px var(--glow-purple))
+                drop-shadow(0 0 60px var(--glow-pink));
+    }
+}
+
+/* ========================================
+   NAVIGATION - CYBERPUNK STYLE
+   ======================================== */
+
+.nav-item {
+    position: relative !important;
+    overflow: hidden !important;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+.nav-item::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 3px;
+    height: 100%;
+    background: linear-gradient(180deg, var(--neon-cyan), var(--neon-purple));
+    transform: scaleY(0);
+    transition: transform 0.3s ease;
+}
+
+.nav-item:hover::before {
+    transform: scaleY(1);
+    box-shadow: 0 0 20px var(--glow-cyan);
+}
+
+.nav-item.active {
+    background: linear-gradient(90deg, 
+        rgba(176, 38, 255, 0.2), 
+        rgba(255, 0, 110, 0.1), 
+        transparent
+    ) !important;
+    border-left: 3px solid var(--neon-purple) !important;
+    box-shadow: 
+        inset 0 0 20px rgba(176, 38, 255, 0.3),
+        0 0 30px rgba(176, 38, 255, 0.4) !important;
+}
+
+.nav-item.active::before {
+    transform: scaleY(1);
+}
+
+/* ========================================
+   SEARCH BAR - NEON GLOW
+   ======================================== */
+
+.search-bar {
+    background: rgba(20, 10, 40, 0.6) !important;
+    border: 2px solid var(--neon-purple) !important;
+    box-shadow: 
+        0 0 20px rgba(176, 38, 255, 0.4),
+        inset 0 0 20px rgba(176, 38, 255, 0.1) !important;
+    transition: all 0.3s ease !important;
+}
+
+.search-bar:focus-within {
+    border-color: var(--neon-cyan) !important;
+    box-shadow: 
+        0 0 30px var(--glow-cyan),
+        0 0 60px var(--glow-purple),
+        inset 0 0 30px rgba(0, 245, 255, 0.1) !important;
+    transform: translateY(-2px) !important;
+}
+
+.search-bar input {
+    color: #fff !important;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.5) !important;
+}
+
+.search-bar input::placeholder {
+    color: rgba(255, 255, 255, 0.4) !important;
+}
+
+/* ========================================
+   NOW PLAYING - HOLOGRAPHIC CARD
+   ======================================== */
+
+.now-playing {
+    background: linear-gradient(135deg, 
+        rgba(176, 38, 255, 0.15), 
+        rgba(255, 0, 110, 0.15), 
+        rgba(0, 245, 255, 0.15)
+    ) !important;
+    backdrop-filter: blur(40px) !important;
+    border: 2px solid transparent !important;
+    border-image: linear-gradient(135deg, var(--neon-purple), var(--neon-pink), var(--neon-cyan)) 1 !important;
+    box-shadow: 
+        0 20px 60px rgba(0, 0, 0, 0.8),
+        0 0 40px rgba(176, 38, 255, 0.4),
+        inset 0 0 40px rgba(176, 38, 255, 0.1) !important;
+    position: relative !important;
+    overflow: hidden !important;
+}
+
+.now-playing::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(
+        45deg,
+        transparent,
+        rgba(176, 38, 255, 0.1),
+        transparent
+    );
+    animation: hologram-scan 6s linear infinite;
+}
+
+@keyframes hologram-scan {
+    0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+    100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+}
+
+/* ========================================
+   ALBUM ART - NEON FRAME
+   ======================================== */
+
+.now-playing-image {
+    position: relative !important;
+}
+
+.now-playing-image::before {
+    content: '';
+    position: absolute;
+    inset: -10px;
+    background: linear-gradient(45deg, var(--neon-purple), var(--neon-pink), var(--neon-cyan), var(--neon-purple));
+    background-size: 300% 300%;
+    border-radius: 50%;
+    z-index: -1;
+    animation: neon-frame-rotate 4s linear infinite;
+    filter: blur(15px);
+}
+
+@keyframes neon-frame-rotate {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+.now-playing-image img {
+    box-shadow: 
+        0 0 40px rgba(176, 38, 255, 0.6),
+        0 0 80px rgba(255, 0, 110, 0.4),
+        inset 0 0 20px rgba(0, 0, 0, 0.5) !important;
+}
+
+/* ========================================
+   BUTTONS - CYBERPUNK STYLE
+   ======================================== */
+
+.control-btn, .action-btn {
+    background: rgba(20, 10, 40, 0.6) !important;
+    border: 2px solid var(--neon-purple) !important;
+    box-shadow: 
+        0 0 20px rgba(176, 38, 255, 0.3),
+        inset 0 0 10px rgba(176, 38, 255, 0.1) !important;
+    transition: all 0.3s ease !important;
+    position: relative !important;
+    overflow: hidden !important;
+}
+
+.control-btn::before, .action-btn::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: radial-gradient(circle, var(--glow-cyan), transparent);
+    transform: translate(-50%, -50%);
+    transition: width 0.3s ease, height 0.3s ease;
+    border-radius: 50%;
+}
+
+.control-btn:hover, .action-btn:hover {
+    border-color: var(--neon-cyan) !important;
+    box-shadow: 
+        0 0 30px var(--glow-cyan),
+        0 0 60px var(--glow-purple),
+        inset 0 0 20px rgba(0, 245, 255, 0.2) !important;
+    transform: translateY(-3px) scale(1.05) !important;
+}
+
+.control-btn:hover::before, .action-btn:hover::before {
+    width: 100%;
+    height: 100%;
+}
+
+.control-btn:active, .action-btn:active {
+    transform: translateY(-1px) scale(0.98) !important;
+}
+
+/* ========================================
+   PROGRESS BAR - NEON TRACK
+   ======================================== */
+
+.progress-bar {
+    background: rgba(20, 10, 40, 0.8) !important;
+    border: 1px solid var(--neon-purple) !important;
+    box-shadow: 
+        0 0 15px rgba(176, 38, 255, 0.3),
+        inset 0 0 10px rgba(0, 0, 0, 0.5) !important;
+}
+
+.progress-bar::-webkit-slider-thumb {
+    background: linear-gradient(135deg, var(--neon-cyan), var(--neon-purple)) !important;
+    box-shadow: 
+        0 0 20px var(--glow-cyan),
+        0 0 40px var(--glow-purple) !important;
+    border: 2px solid #fff !important;
+}
+
+.progress-bar:hover::-webkit-slider-thumb {
+    box-shadow: 
+        0 0 30px var(--glow-cyan),
+        0 0 60px var(--glow-purple),
+        0 0 90px var(--glow-pink) !important;
+}
+
+/* ========================================
+   VISUALIZER - ENHANCED NEON
+   ======================================== */
+
+.visualizer-bar, .mini-bar {
+    background: linear-gradient(to top, var(--neon-purple), var(--neon-pink), var(--neon-cyan)) !important;
+    box-shadow: 
+        0 0 20px var(--glow-purple),
+        0 0 40px var(--glow-pink) !important;
+    filter: brightness(1.2) !important;
+}
+
+#audioVisualizer {
+    filter: drop-shadow(0 0 20px var(--glow-purple)) 
+            drop-shadow(0 0 40px var(--glow-pink)) !important;
+}
+
+/* ========================================
+   TRENDING CARDS - HOLOGRAPHIC
+   ======================================== */
+
+.trending-circle {
+    background: rgba(20, 10, 40, 0.6) !important;
+    border: 2px solid var(--neon-purple) !important;
+    box-shadow: 
+        0 10px 40px rgba(0, 0, 0, 0.8),
+        0 0 30px rgba(176, 38, 255, 0.4),
+        inset 0 0 30px rgba(176, 38, 255, 0.1) !important;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    position: relative !important;
+    overflow: hidden !important;
+}
+
+.trending-circle::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(
+        45deg,
+        transparent,
+        rgba(0, 245, 255, 0.2),
+        transparent
+    );
+    transform: rotate(45deg);
+    animation: card-shine 3s linear infinite;
+}
+
+@keyframes card-shine {
+    0% { transform: translateX(-100%) rotate(45deg); }
+    100% { transform: translateX(100%) rotate(45deg); }
+}
+
+.trending-circle:hover {
+    border-color: var(--neon-cyan) !important;
+    box-shadow: 
+        0 20px 60px rgba(0, 0, 0, 0.9),
+        0 0 50px var(--glow-cyan),
+        0 0 100px var(--glow-purple),
+        inset 0 0 40px rgba(0, 245, 255, 0.2) !important;
+    transform: translateY(-10px) !important;
+}
+
+/* ========================================
+   GLITCH EFFECT ON HOVER
+   ======================================== */
+
+@keyframes glitch {
+    0% { transform: translate(0); }
+    20% { transform: translate(-2px, 2px); }
+    40% { transform: translate(-2px, -2px); }
+    60% { transform: translate(2px, 2px); }
+    80% { transform: translate(2px, -2px); }
+    100% { transform: translate(0); }
+}
+
+.trending-circle:hover img {
+    animation: glitch 0.3s ease-in-out;
+}
+
+/* ========================================
+   PARTICLE EFFECTS
+   ======================================== */
+
+@keyframes float-particle {
+    0%, 100% { transform: translateY(0) translateX(0); opacity: 0; }
+    10% { opacity: 1; }
+    90% { opacity: 1; }
+    100% { transform: translateY(-100vh) translateX(50px); opacity: 0; }
+}
+
+/* ========================================
+   SCROLLBAR - NEON STYLE
+   ======================================== */
+
+::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: rgba(10, 0, 20, 0.8);
+    border-left: 1px solid var(--neon-purple);
+}
+
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, var(--neon-purple), var(--neon-pink));
+    border-radius: 10px;
+    box-shadow: 0 0 10px var(--glow-purple);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(180deg, var(--neon-cyan), var(--neon-purple));
+    box-shadow: 0 0 20px var(--glow-cyan);
+}
+
+/* ========================================
+   RESPONSIVE ADJUSTMENTS
+   ======================================== */
+
+@media (max-width: 768px) {
+    body::before {
+        background-size: 40px 40px;
+    }
+    
+    .bg-glow {
+        width: 800px;
+        height: 800px;
+    }
+}

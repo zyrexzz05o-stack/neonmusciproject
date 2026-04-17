@@ -1,0 +1,589 @@
+================================================================================
+                    BACKUP 4 - STYLING (8 FILES)
+================================================================================
+
+File ini berisi 8 CSS modules untuk styling komponen spesifik:
+1. song-actions.css - Style menu aksi lagu
+2. liked-songs.css - Style halaman liked songs
+3. floating-sidebar.css - Style sidebar navigasi
+4. library.css - Style halaman library
+5. settings.css - Style halaman settings
+6. hot-frequencies.css - Style halaman hot frequencies
+7. music-popup-notification.css - Style popup notifikasi musik
+8. popup-notifications.css - Style popup notifications
+
+================================================================================
+                    FILE 1: song-actions.css
+================================================================================
+
+LOKASI: /song-actions.css
+DESKRIPSI: Styling untuk menu aksi lagu premium
+
+KOMPONEN:
+1. Action Button (•••)
+   - Position: absolute, top-right cover
+   - Size: 32px × 32px
+   - Background: rgba(255,255,255,0.1)
+   - Backdrop-filter: blur(10px)
+   - Border-radius: 50%
+   - Hover: scale(1.1)
+
+2. Action Menu
+   - Position: fixed
+   - Background: rgba(0,0,0,0.85)
+   - Backdrop-filter: blur(40px)
+   - Border-radius: 12px
+   - Padding: 8px
+   - Min-width: 220px
+   - Max-width: 280px
+   - Z-index: 99999
+   - Box-shadow: 0 8px 32px rgba(0,0,0,0.4)
+
+3. Menu Items
+   - Padding: 12px 16px
+   - Font-size: 14px
+   - Color: #fff
+   - White-space: normal
+   - Word-break: break-word
+   - Hover: background rgba(255,255,255,0.1)
+   - Transition: 0.2s ease
+
+4. Animations
+   - @keyframes fadeInScale
+   - From: opacity 0, scale(0.95)
+   - To: opacity 1, scale(1)
+   - Duration: 250ms
+   - Easing: cubic-bezier(0.16, 1, 0.3, 1)
+
+DESIGN SYSTEM:
+- Glass effect: backdrop-filter blur
+- Dark theme: rgba(0,0,0,0.85)
+- Border: 1px solid rgba(255,255,255,0.1)
+- Text: white, 14px
+- Icons: emoji (▶ ❤️ 📋 ⏭️ ➕ 💿 🎤 ℹ️ 🔗)
+
+DEPENDENCIES:
+- song-actions.js
+
+CARA RESTORE:
+Copy file ini ke root folder sebagai "song-actions.css"
+
+================================================================================
+                    FILE 2: liked-songs.css
+================================================================================
+
+LOKASI: /liked-songs.css
+DESKRIPSI: Styling untuk halaman Lagu yang Disukai
+
+KOMPONEN:
+1. Page Header
+   - Padding: 40px 0
+   - Title: 32px, bold
+   - Subtitle: 14px, opacity 0.7
+
+2. Page Controls
+   - Display: flex
+   - Gap: 16px
+   - Margin-bottom: 32px
+   - Play All button: primary style
+   - Search input: glass effect
+   - Sort select: glass effect
+
+3. Songs List Modern
+   - Display: grid
+   - Grid-template-columns: repeat(auto-fill, minmax(200px, 1fr))
+   - Gap: 20px
+   - Padding: 20px 0
+
+4. Song Card
+   - Background: rgba(255,255,255,0.05)
+   - Border-radius: 12px
+   - Padding: 16px
+   - Hover: transform translateY(-4px)
+   - Transition: 0.3s ease
+
+5. Song Cover
+   - Width: 100%
+   - Aspect-ratio: 1/1
+   - Border-radius: 8px
+   - Object-fit: cover
+
+6. Song Info
+   - Padding-top: 12px
+   - Title: 16px, bold
+   - Artist: 14px, opacity 0.7
+
+7. Song Actions
+   - Display: flex
+   - Gap: 8px
+   - Margin-top: 12px
+   - Play button: 32px circle
+   - Unlike button: 32px circle
+
+DESIGN SYSTEM:
+- Background: rgba(255,255,255,0.05)
+- Border-radius: 8px - 12px
+- Transitions: 0.3s ease
+- Hover effects: translateY, scale
+
+DEPENDENCIES:
+- liked-songs-manager.js
+- liked-songs.html
+
+CARA RESTORE:
+Copy file ini ke root folder sebagai "liked-songs.css"
+
+================================================================================
+                FILE 3: floating-sidebar.css
+================================================================================
+
+LOKASI: /floating-sidebar.css
+DESKRIPSI: Styling untuk sidebar navigasi floating
+
+KOMPONEN:
+1. Sidebar Container
+   - Position: fixed
+   - Left: 20px
+   - Top: 50%
+   - Transform: translateY(-50%)
+   - Width: 80px
+   - Background: rgba(0,0,0,0.6)
+   - Backdrop-filter: blur(20px)
+   - Border-radius: 24px
+   - Padding: 20px 0
+   - Z-index: 1000
+
+2. Menu Items
+   - Display: flex
+   - Flex-direction: column
+   - Gap: 24px
+   - Align-items: center
+
+3. Menu Item
+   - Width: 48px
+   - Height: 48px
+   - Border-radius: 12px
+   - Display: flex
+   - Align-items: center
+   - Justify-content: center
+   - Cursor: pointer
+   - Transition: 0.3s ease
+
+4. Menu Item Active
+   - Background: rgba(255,255,255,0.15)
+   - Transform: scale(1.1)
+
+5. Menu Item Hover
+   - Background: rgba(255,255,255,0.1)
+   - Transform: scale(1.05)
+
+6. Menu Icon
+   - Font-size: 24px
+   - Color: #fff
+
+DESIGN SYSTEM:
+- Glass effect: backdrop-filter blur(20px)
+- Dark background: rgba(0,0,0,0.6)
+- Border-radius: 24px (container), 12px (items)
+- Transitions: 0.3s ease
+- Active state: scale + background
+
+DEPENDENCIES:
+- floating-sidebar.js
+
+CARA RESTORE:
+Copy file ini ke root folder sebagai "floating-sidebar.css"
+
+================================================================================
+                    FILE 4: library.css
+================================================================================
+
+LOKASI: /library.css
+DESKRIPSI: Styling untuk halaman Library/Vault
+
+KOMPONEN:
+1. Library Header
+   - Padding: 40px 0
+   - Title: 32px, bold
+
+2. Library Tabs
+   - Display: flex
+   - Gap: 16px
+   - Margin-top: 24px
+   - Border-bottom: 1px solid rgba(255,255,255,0.1)
+
+3. Tab Button
+   - Padding: 12px 24px
+   - Background: transparent
+   - Border: none
+   - Color: rgba(255,255,255,0.6)
+   - Font-size: 16px
+   - Cursor: pointer
+   - Transition: 0.3s ease
+
+4. Tab Button Active
+   - Color: #fff
+   - Border-bottom: 2px solid #fff
+
+5. Library Content
+   - Padding: 40px 0
+
+6. Tab Content
+   - Display: none
+
+7. Tab Content Active
+   - Display: block
+
+8. Grid Layouts
+   - Playlists Grid: repeat(auto-fill, minmax(200px, 1fr))
+   - Artists Grid: repeat(auto-fill, minmax(180px, 1fr))
+   - Albums Grid: repeat(auto-fill, minmax(200px, 1fr))
+   - Gap: 24px
+
+9. Card Styles
+   - Background: rgba(255,255,255,0.05)
+   - Border-radius: 12px
+   - Padding: 16px
+   - Hover: transform translateY(-4px)
+   - Transition: 0.3s ease
+
+DESIGN SYSTEM:
+- Tab navigation: border-bottom indicator
+- Grid layouts: responsive auto-fill
+- Card hover: translateY(-4px)
+- Glass effect backgrounds
+
+DEPENDENCIES:
+- library-init.js
+- library.html
+
+CARA RESTORE:
+Copy file ini ke root folder sebagai "library.css"
+
+================================================================================
+                    FILE 5: settings.css
+================================================================================
+
+LOKASI: /settings.css
+DESKRIPSI: Styling untuk halaman Settings
+
+KOMPONEN:
+1. Settings Header
+   - Padding: 40px 0
+   - Title: 32px, bold
+
+2. Settings Content
+   - Max-width: 800px
+   - Margin: 0 auto
+   - Padding: 20px
+
+3. Settings Section
+   - Margin-bottom: 40px
+   - Padding-bottom: 40px
+   - Border-bottom: 1px solid rgba(255,255,255,0.1)
+
+4. Section Title
+   - Font-size: 20px
+   - Font-weight: 600
+   - Margin-bottom: 24px
+
+5. Setting Item
+   - Display: flex
+   - Justify-content: space-between
+   - Align-items: center
+   - Padding: 16px 0
+
+6. Setting Label
+   - Font-size: 16px
+   - Color: #fff
+
+7. Setting Control
+   - Select: glass effect, padding 8px 16px
+   - Checkbox: custom styled
+   - Slider: custom styled
+
+8. Form Controls
+   - Select:
+     - Background: rgba(255,255,255,0.1)
+     - Border: 1px solid rgba(255,255,255,0.2)
+     - Border-radius: 8px
+     - Padding: 8px 16px
+     - Color: #fff
+   - Checkbox:
+     - Width: 48px
+     - Height: 24px
+     - Border-radius: 12px
+     - Background: rgba(255,255,255,0.2)
+   - Slider:
+     - Width: 200px
+     - Height: 4px
+     - Background: rgba(255,255,255,0.2)
+
+DESIGN SYSTEM:
+- Max-width: 800px (centered)
+- Section dividers: border-bottom
+- Form controls: glass effect
+- Spacing: 16px - 40px
+
+DEPENDENCIES:
+- settings.js
+- settings.html
+
+CARA RESTORE:
+Copy file ini ke root folder sebagai "settings.css"
+
+================================================================================
+                FILE 6: hot-frequencies.css
+================================================================================
+
+LOKASI: /hot-frequencies.css
+DESKRIPSI: Styling untuk halaman Hot Frequencies (Trending)
+
+KOMPONEN:
+1. Page Header
+   - Padding: 40px 0
+   - Title: 32px, bold
+   - Subtitle: 16px, opacity 0.7
+
+2. Trending Charts
+   - Display: flex
+   - Flex-direction: column
+   - Gap: 48px
+
+3. Chart Section
+   - Background: rgba(255,255,255,0.03)
+   - Border-radius: 16px
+   - Padding: 32px
+
+4. Chart List
+   - Display: flex
+   - Flex-direction: column
+   - Gap: 16px
+
+5. Chart Item
+   - Display: flex
+   - Align-items: center
+   - Gap: 16px
+   - Padding: 16px
+   - Background: rgba(255,255,255,0.05)
+   - Border-radius: 12px
+   - Hover: background rgba(255,255,255,0.08)
+   - Transition: 0.3s ease
+
+6. Rank Number
+   - Width: 32px
+   - Font-size: 20px
+   - Font-weight: bold
+   - Color: #fff
+
+7. Chart Cover
+   - Width: 64px
+   - Height: 64px
+   - Border-radius: 8px
+   - Object-fit: cover
+
+8. Chart Info
+   - Flex: 1
+   - Title: 16px, bold
+   - Artist: 14px, opacity 0.7
+
+9. Play Button
+   - Width: 40px
+   - Height: 40px
+   - Border-radius: 50%
+   - Background: rgba(255,255,255,0.1)
+   - Hover: scale(1.1)
+
+10. Releases Grid
+    - Display: grid
+    - Grid-template-columns: repeat(auto-fill, minmax(200px, 1fr))
+    - Gap: 24px
+    - Margin-top: 24px
+
+DESIGN SYSTEM:
+- Chart layout: flex column
+- Rank numbers: bold, large
+- Hover effects: background change
+- Grid for releases: responsive
+
+DEPENDENCIES:
+- hot-frequencies.html
+
+CARA RESTORE:
+Copy file ini ke root folder sebagai "hot-frequencies.css"
+
+================================================================================
+            FILE 7: music-popup-notification.css
+================================================================================
+
+LOKASI: /music-popup-notification.css
+DESKRIPSI: Styling untuk popup notifikasi musik
+
+KOMPONEN:
+1. Notification Container
+   - Position: fixed
+   - Top: 20px
+   - Right: 20px
+   - Z-index: 10000
+   - Max-width: 320px
+
+2. Notification Card
+   - Background: rgba(0,0,0,0.9)
+   - Backdrop-filter: blur(20px)
+   - Border-radius: 12px
+   - Padding: 16px
+   - Box-shadow: 0 8px 32px rgba(0,0,0,0.4)
+   - Animation: slideInRight 0.3s ease
+
+3. Notification Content
+   - Display: flex
+   - Gap: 12px
+   - Align-items: center
+
+4. Notification Icon
+   - Width: 48px
+   - Height: 48px
+   - Border-radius: 8px
+   - Object-fit: cover
+
+5. Notification Text
+   - Flex: 1
+   - Title: 14px, bold
+   - Message: 12px, opacity 0.8
+
+6. Close Button
+   - Position: absolute
+   - Top: 8px
+   - Right: 8px
+   - Width: 24px
+   - Height: 24px
+   - Border-radius: 50%
+   - Background: rgba(255,255,255,0.1)
+   - Hover: background rgba(255,255,255,0.2)
+
+7. Animations
+   - @keyframes slideInRight
+   - From: transform translateX(100%)
+   - To: transform translateX(0)
+   - Duration: 0.3s
+
+DESIGN SYSTEM:
+- Dark background: rgba(0,0,0,0.9)
+- Glass effect: backdrop-filter blur
+- Slide animation: from right
+- Auto-dismiss: 3 seconds
+
+DEPENDENCIES:
+- music-popup-notification.js
+
+CARA RESTORE:
+Copy file ini ke root folder sebagai "music-popup-notification.css"
+
+================================================================================
+                FILE 8: popup-notifications.css
+================================================================================
+
+LOKASI: /popup-notifications.css
+DESKRIPSI: Styling untuk popup notifications umum
+
+KOMPONEN:
+1. Toast Container
+   - Position: fixed
+   - Bottom: 80px (above player)
+   - Left: 50%
+   - Transform: translateX(-50%)
+   - Z-index: 9999
+
+2. Toast Message
+   - Background: rgba(0,0,0,0.9)
+   - Backdrop-filter: blur(20px)
+   - Border-radius: 24px
+   - Padding: 12px 24px
+   - Color: #fff
+   - Font-size: 14px
+   - Box-shadow: 0 4px 16px rgba(0,0,0,0.3)
+   - Animation: fadeInUp 0.3s ease
+
+3. Toast Types
+   - Success: border-left 4px solid #4caf50
+   - Error: border-left 4px solid #f44336
+   - Info: border-left 4px solid #2196f3
+   - Warning: border-left 4px solid #ff9800
+
+4. Animations
+   - @keyframes fadeInUp
+   - From: opacity 0, transform translateY(20px)
+   - To: opacity 1, transform translateY(0)
+   - Duration: 0.3s
+   
+   - @keyframes fadeOutDown
+   - From: opacity 1, transform translateY(0)
+   - To: opacity 0, transform translateY(20px)
+   - Duration: 0.3s
+
+DESIGN SYSTEM:
+- Position: bottom center (above player)
+- Dark background: rgba(0,0,0,0.9)
+- Border-left: colored indicator
+- Animations: fade + slide vertical
+- Auto-dismiss: 2-3 seconds
+
+DEPENDENCIES:
+- popup-notifications.js
+
+CARA RESTORE:
+Copy file ini ke root folder sebagai "popup-notifications.css"
+
+================================================================================
+                            CARA MENGGUNAKAN
+================================================================================
+
+RESTORE SEMUA 8 FILE:
+1. Copy semua file ke root folder
+2. Load di index.html dengan <link rel="stylesheet" href="...">
+
+URUTAN LOADING (RECOMMENDED):
+1. styles.css (MAIN - harus pertama)
+2. floating-sidebar.css
+3. settings.css
+4. music-popup-notification.css
+5. liked-songs.css
+6. library.css
+7. hot-frequencies.css
+8. song-actions.css
+9. popup-notifications.css
+
+DEPENDENCIES:
+File STYLING ini membutuhkan:
+- BACKUP_1_CORE.txt (styles.css sebagai base)
+- BACKUP_3_FEATURE_MODULES.txt (untuk JavaScript logic)
+
+OPTIMIZATION (PRODUCTION):
+Untuk production, bisa digabung semua CSS jadi 1 file:
+1. Gabungkan semua CSS
+2. Minify dengan tool seperti cssnano
+3. Remove unused CSS dengan PurgeCSS
+4. Compress dengan gzip
+
+================================================================================
+                                CATATAN
+================================================================================
+
+File ini adalah RINGKASAN struktur styling.
+Untuk FULL CODE, buka file asli dan copy seluruh isi.
+
+DESIGN SYSTEM KONSISTEN:
+- Glass effect: backdrop-filter blur
+- Dark theme: rgba(0,0,0,0.6-0.9)
+- Border-radius: 8px - 24px
+- Transitions: 0.3s ease
+- Hover effects: scale, translateY, background
+- Z-index hierarchy:
+  - Sidebar: 1000
+  - Modals: 5000
+  - Notifications: 9999-10000
+  - Action menu: 99999
+
+================================================================================
+                                  END
+================================================================================

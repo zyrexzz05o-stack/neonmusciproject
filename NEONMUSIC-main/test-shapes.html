@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Shapes Settings</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            background: #000;
+            color: #fff;
+            padding: 40px;
+            font-family: Arial, sans-serif;
+        }
+        
+        .test-controls {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(0, 0, 0, 0.8);
+            padding: 20px;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            z-index: 9999;
+            max-width: 300px;
+        }
+        
+        .test-btn {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            margin: 8px 0;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #fff;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        
+        .test-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+        
+        .info {
+            margin-top: 20px;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            font-size: 13px;
+        }
+        
+        h3 {
+            margin-top: 0;
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Background Shapes -->
+    <div class="bg-shapes">
+        <div class="circle circle-1"></div>
+        <div class="circle circle-2"></div>
+        <div class="triangle triangle-1"></div>
+        <div class="square square-1"></div>
+        <div class="hexagon hexagon-1"></div>
+        <div class="star star-1"></div>
+        <div class="diamond diamond-1"></div>
+        <div class="pentagon pentagon-1"></div>
+        <div class="octagon octagon-1"></div>
+        <div class="plus plus-1"></div>
+        <div class="ring ring-1"></div>
+    </div>
+    
+    <div class="test-controls">
+        <h3>🔷 Shapes Test</h3>
+        
+        <button class="test-btn" onclick="testHideAll()">Hide All Shapes</button>
+        <button class="test-btn" onclick="testShowAll()">Show All Shapes</button>
+        <button class="test-btn" onclick="testOpacity50()">Set Opacity 50%</button>
+        <button class="test-btn" onclick="testSpeed2x()">Set Speed 2x</button>
+        <button class="test-btn" onclick="testOnlyCircles()">Only Circles</button>
+        <button class="test-btn" onclick="testOnlyStars()">Only Stars</button>
+        <button class="test-btn" onclick="testReset()">Reset to Defaults</button>
+        
+        <div class="info">
+            <strong>Instructions:</strong><br>
+            Click buttons to test shapes settings.<br>
+            Check console for logs.<br>
+            Settings are saved to localStorage.
+        </div>
+    </div>
+    
+    <h1>Background Shapes Test Page</h1>
+    <p>Look at the background to see animated shapes.</p>
+    <p>Use the control panel on the right to test settings.</p>
+    
+    <script src="shapes-settings.js"></script>
+    
+    <script>
+        // Test functions
+        function testHideAll() {
+            const settings = window.shapesSettings.getSettings();
+            settings.enabled = false;
+            window.shapesSettings.apply();
+            console.log('✅ All shapes hidden');
+        }
+        
+        function testShowAll() {
+            const settings = window.shapesSettings.getSettings();
+            settings.enabled = true;
+            settings.circles = true;
+            settings.triangles = true;
+            settings.squares = true;
+            settings.hexagons = true;
+            settings.stars = true;
+            settings.diamonds = true;
+            settings.pentagons = true;
+            settings.octagons = true;
+            settings.plus = true;
+            settings.rings = true;
+            window.shapesSettings.apply();
+            console.log('✅ All shapes shown');
+        }
+        
+        function testOpacity50() {
+            const settings = window.shapesSettings.getSettings();
+            settings.opacity = 0.5;
+            window.shapesSettings.apply();
+            console.log('✅ Opacity set to 50%');
+        }
+        
+        function testSpeed2x() {
+            const settings = window.shapesSettings.getSettings();
+            settings.speed = 2;
+            window.shapesSettings.apply();
+            console.log('✅ Speed set to 2x');
+        }
+        
+        function testOnlyCircles() {
+            const settings = window.shapesSettings.getSettings();
+            settings.circles = true;
+            settings.triangles = false;
+            settings.squares = false;
+            settings.hexagons = false;
+            settings.stars = false;
+            settings.diamonds = false;
+            settings.pentagons = false;
+            settings.octagons = false;
+            settings.plus = false;
+            settings.rings = false;
+            window.shapesSettings.apply();
+            console.log('✅ Only circles shown');
+        }
+        
+        function testOnlyStars() {
+            const settings = window.shapesSettings.getSettings();
+            settings.circles = false;
+            settings.triangles = false;
+            settings.squares = false;
+            settings.hexagons = false;
+            settings.stars = true;
+            settings.diamonds = false;
+            settings.pentagons = false;
+            settings.octagons = false;
+            settings.plus = false;
+            settings.rings = false;
+            window.shapesSettings.apply();
+            console.log('✅ Only stars shown');
+        }
+        
+        function testReset() {
+            window.shapesSettings.reset();
+            console.log('✅ Reset to defaults');
+        }
+        
+        // Log current settings on load
+        setTimeout(() => {
+            console.log('📊 Current settings:', window.shapesSettings.getSettings());
+        }, 500);
+    </script>
+</body>
+</html>

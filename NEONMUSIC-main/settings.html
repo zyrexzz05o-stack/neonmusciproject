@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Settings - NeonWave Music</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="settings.css">
+    <style>
+        body {
+            background: #000;
+            color: #fff;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+    </style>
+</head>
+<body>
+    <!-- Background Shapes -->
+    <div class="bg-shapes">
+        <div class="circle circle-1"></div>
+        <div class="circle circle-2"></div>
+        <div class="square square-1"></div>
+        <div class="square square-2"></div>
+    </div>
+    
+    <!-- Settings Page Content -->
+    <div class="settings-container">
+        <!-- Profile Section at Top -->
+        <section class="settings-section profile-section-top">
+            <div class="profile-header-settings">
+                <div class="profile-avatar-settings">
+                    <img src="images/anime-avatar..jpeg" alt="Profile" class="profile-avatar-img-settings">
+                </div>
+                <div class="profile-info-settings">
+                    <h2 class="profile-name-settings">Your Name</h2>
+                    <p class="profile-bio-settings">Music Enthusiast</p>
+                </div>
+            </div>
+            
+            <div class="profile-stats-settings">
+                <div class="stat-item-settings">
+                    <span class="stat-icon-settings">🎵</span>
+                    <div class="stat-info-settings">
+                        <span class="stat-number-settings">128</span>
+                        <span class="stat-label-settings">Songs Played</span>
+                    </div>
+                </div>
+                <div class="stat-item-settings">
+                    <span class="stat-icon-settings">❤️</span>
+                    <div class="stat-info-settings">
+                        <span class="stat-number-settings">32</span>
+                        <span class="stat-label-settings">Liked Songs</span>
+                    </div>
+                </div>
+                <div class="stat-item-settings">
+                    <span class="stat-icon-settings">📋</span>
+                    <div class="stat-info-settings">
+                        <span class="stat-number-settings">6</span>
+                        <span class="stat-label-settings">Playlists</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="settings-header">
+            <h1>Settings</h1>
+            <p class="settings-subtitle">Customize your experience</p>
+        </div>
+
+        <!-- Profile Management Section -->
+        <section class="settings-section">
+            <div class="section-title-row">
+                <div class="section-title-info">
+                    <h2>Profile Management</h2>
+                    <p class="section-description">Manage your account settings</p>
+                </div>
+            </div>
+
+            <div class="settings-options">
+                <div class="setting-item profile-menu-item-settings" onclick="showEditProfile()">
+                    <div class="profile-menu-left">
+                        <span class="menu-icon-settings">👤</span>
+                        <span>Edit Profile</span>
+                    </div>
+                    <span class="menu-arrow-settings">›</span>
+                </div>
+
+                <div class="setting-item profile-menu-item-settings" onclick="showNotifications()">
+                    <div class="profile-menu-left">
+                        <span class="menu-icon-settings">🔔</span>
+                        <span>Notifications</span>
+                    </div>
+                    <span class="menu-arrow-settings">›</span>
+                </div>
+
+                <div class="setting-item profile-menu-item-settings" onclick="showThemeMode()">
+                    <div class="profile-menu-left">
+                        <span class="menu-icon-settings">🌙</span>
+                        <span>Dark / Light Mode</span>
+                    </div>
+                    <span class="menu-arrow-settings">›</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Mood Engine Section -->
+        <section class="settings-section mood-engine-section">
+            <div class="section-title-row">
+                <div class="section-title-info">
+                    <h2>Mood Engine</h2>
+                    <p class="section-description">AI-powered audio and visual experience</p>
+                </div>
+                <label class="toggle-switch">
+                    <input type="checkbox" id="moodEngineToggle" checked>
+                    <span class="toggle-slider"></span>
+                </label>
+            </div>
+
+            <div class="mood-engine-content" id="moodEngineContent">
+                <!-- Mood Modes Grid -->
+                <div class="mood-modes-grid">
+                    <!-- Energize Mode -->
+                    <div class="mood-mode-card" data-mode="energize">
+                        <div class="mood-mode-icon">⚡</div>
+                        <div class="mood-mode-info">
+                            <h3>Energize</h3>
+                            <p>Boost bass + warm glow</p>
+                        </div>
+                        <div class="mood-mode-indicator"></div>
+                    </div>
+
+                    <!-- Midnight Calm Mode -->
+                    <div class="mood-mode-card" data-mode="midnight">
+                        <div class="mood-mode-icon">🌙</div>
+                        <div class="mood-mode-info">
+                            <h3>Midnight Calm</h3>
+                            <p>Soft treble + deep blue</p>
+                        </div>
+                        <div class="mood-mode-indicator"></div>
+                    </div>
+
+                    <!-- Rainy Focus Mode -->
+                    <div class="mood-mode-card" data-mode="rainy">
+                        <div class="mood-mode-icon">🌧️</div>
+                        <div class="mood-mode-info">
+                            <h3>Rainy Focus</h3>
+                            <p>Low brightness + ambient</p>
+                        </div>
+                        <div class="mood-mode-indicator"></div>
+                    </div>
+
+                    <!-- Hyper Mode -->
+                    <div class="mood-mode-card" data-mode="hyper">
+                        <div class="mood-mode-icon">🚀</div>
+                        <div class="mood-mode-info">
+                            <h3>Hyper</h3>
+                            <p>Fast animations + dynamic</p>
+                        </div>
+                        <div class="mood-mode-indicator"></div>
+                    </div>
+                </div>
+
+                <!-- Current Mode Display -->
+                <div class="current-mood-display">
+                    <span class="current-mood-label">Active Mode:</span>
+                    <span class="current-mood-name" id="currentMoodName">None</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Dynamic Theme System Section -->
+        <section class="settings-section dynamic-theme-section">
+            <div class="section-title-row">
+                <div class="section-title-info">
+                    <h2>Dynamic Theme System</h2>
+                    <p class="section-description">Customize your visual experience</p>
+                </div>
+            </div>
+
+            <div class="theme-system-content">
+                <!-- Theme Mode Selector -->
+                <div class="theme-mode-selector">
+                    <div class="theme-mode-option" data-theme-mode="manual">
+                        <div class="theme-mode-icon">🎨</div>
+                        <div class="theme-mode-info">
+                            <h4>Manual</h4>
+                            <p>Choose your own theme</p>
+                        </div>
+                        <div class="theme-mode-radio"></div>
+                    </div>
+                    
+                    <div class="theme-mode-option" data-theme-mode="auto-time">
+                        <div class="theme-mode-icon">🌅</div>
+                        <div class="theme-mode-info">
+                            <h4>Auto by Time</h4>
+                            <p>Changes based on time of day</p>
+                        </div>
+                        <div class="theme-mode-radio"></div>
+                    </div>
+                    
+                    <div class="theme-mode-option" data-theme-mode="genre">
+                        <div class="theme-mode-icon">🎵</div>
+                        <div class="theme-mode-info">
+                            <h4>By Genre</h4>
+                            <p>Adapts to music genre</p>
+                        </div>
+                        <div class="theme-mode-radio"></div>
+                    </div>
+                </div>
+
+                <!-- Custom Gradient Builder -->
+                <div class="gradient-builder" id="gradientBuilder">
+                    <h4 class="gradient-builder-title">Custom Gradient Builder</h4>
+                    
+                    <div class="gradient-preview" id="gradientPreview">
+                        <div class="preview-label">Preview</div>
+                    </div>
+                    
+                    <div class="color-pickers">
+                        <div class="color-picker-group">
+                            <label>Color 1</label>
+                            <div class="color-input-wrapper">
+                                <input type="color" id="color1" value="#1a0a2e">
+                                <span class="color-hex" id="color1Hex">#1a0a2e</span>
+                            </div>
+                        </div>
+                        
+                        <div class="gradient-arrow">→</div>
+                        
+                        <div class="color-picker-group">
+                            <label>Color 2</label>
+                            <div class="color-input-wrapper">
+                                <input type="color" id="color2" value="#6b3d7a">
+                                <span class="color-hex" id="color2Hex">#6b3d7a</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="gradient-presets">
+                        <div class="preset-label">Quick Presets:</div>
+                        <div class="preset-buttons">
+                            <button class="preset-btn" data-colors="#1a0a2e,#6b3d7a">Purple Night</button>
+                            <button class="preset-btn" data-colors="#0f2027,#203a43">Ocean Deep</button>
+                            <button class="preset-btn" data-colors="#2c3e50,#4ca1af">Cool Blue</button>
+                            <button class="preset-btn" data-colors="#1a1a1a,#4a4a4a">Dark Gray</button>
+                            <button class="preset-btn" data-colors="#000000,#1a1a1a">Pure Black</button>
+                            <button class="preset-btn" data-colors="#141e30,#243b55">Midnight Blue</button>
+                            <button class="preset-btn" data-colors="#2b5876,#4e4376">Deep Purple</button>
+                            <button class="preset-btn" data-colors="#000428,#004e92">Navy Night</button>
+                            <button class="preset-btn" data-colors="#0f0c29,#302b63">Royal Purple</button>
+                            <button class="preset-btn" data-colors="#24243e,#302b63">Dark Violet</button>
+                            <button class="preset-btn" data-colors="#1f1c2c,#928dab">Mystic Gray</button>
+                            <button class="preset-btn" data-colors="#232526,#414345">Carbon</button>
+                            <button class="preset-btn" data-colors="#0c0c0c,#2d2d2d">Charcoal</button>
+                            <button class="preset-btn" data-colors="#1c1c1c,#383838">Graphite</button>
+                            <button class="preset-btn" data-colors="#16222a,#3a6073">Steel Blue</button>
+                            <button class="preset-btn" data-colors="#134e5e,#71b280">Teal Green</button>
+                            <button class="preset-btn" data-colors="#1e3c72,#2a5298">Deep Ocean</button>
+                            <button class="preset-btn" data-colors="#2c3e50,#3498db">Sky Blue</button>
+                            <button class="preset-btn" data-colors="#283048,#859398">Storm Gray</button>
+                            <button class="preset-btn" data-colors="#360033,#0b8793">Purple Teal</button>
+                            <button class="preset-btn" data-colors="#1a2a6c,#b21f1f">Red Night</button>
+                            <button class="preset-btn" data-colors="#200122,#6f0000">Dark Red</button>
+                            <button class="preset-btn" data-colors="#0f2027,#2c5364">Arctic</button>
+                            <button class="preset-btn" data-colors="#1d2671,#c33764">Pink Purple</button>
+                            <button class="preset-btn" data-colors="#2c3e50,#27ae60">Forest</button>
+                        </div>
+                    </div>
+                    
+                    <button class="apply-gradient-btn" id="applyGradientBtn">Apply Gradient</button>
+                </div>
+
+                <!-- Auto Time Settings -->
+                <div class="auto-time-settings" id="autoTimeSettings" style="display: none;">
+                    <h4>Time-Based Themes</h4>
+                    <div class="time-theme-preview">
+                        <div class="time-slot">
+                            <span class="time-icon">🌅</span>
+                            <span class="time-label">Morning (6-12)</span>
+                            <div class="time-color-preview" style="background: linear-gradient(135deg, #ffd89b 0%, #19547b 100%);"></div>
+                        </div>
+                        <div class="time-slot">
+                            <span class="time-icon">☀️</span>
+                            <span class="time-label">Afternoon (12-18)</span>
+                            <div class="time-color-preview" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);"></div>
+                        </div>
+                        <div class="time-slot">
+                            <span class="time-icon">🌆</span>
+                            <span class="time-label">Evening (18-22)</span>
+                            <div class="time-color-preview" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);"></div>
+                        </div>
+                        <div class="time-slot">
+                            <span class="time-icon">🌙</span>
+                            <span class="time-label">Night (22-6)</span>
+                            <div class="time-color-preview" style="background: linear-gradient(135deg, #0f0c29 0%, #302b63 100%);"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Genre Theme Settings -->
+                <div class="genre-theme-settings" id="genreThemeSettings" style="display: none;">
+                    <h4>Genre-Based Themes</h4>
+                    <div class="genre-theme-preview">
+                        <div class="genre-item">
+                            <span class="genre-icon">🎸</span>
+                            <span class="genre-label">Rock</span>
+                            <div class="genre-color-preview" style="background: linear-gradient(135deg, #ff0844 0%, #ffb199 100%);"></div>
+                        </div>
+                        <div class="genre-item">
+                            <span class="genre-icon">🎹</span>
+                            <span class="genre-label">Pop</span>
+                            <div class="genre-color-preview" style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);"></div>
+                        </div>
+                        <div class="genre-item">
+                            <span class="genre-icon">🎧</span>
+                            <span class="genre-label">Electronic</span>
+                            <div class="genre-color-preview" style="background: linear-gradient(135deg, #30cfd0 0%, #330867 100%);"></div>
+                        </div>
+                        <div class="genre-item">
+                            <span class="genre-icon">🎺</span>
+                            <span class="genre-label">Jazz</span>
+                            <div class="genre-color-preview" style="background: linear-gradient(135deg, #f8b500 0%, #fceabb 100%);"></div>
+                        </div>
+                        <div class="genre-item">
+                            <span class="genre-icon">🎤</span>
+                            <span class="genre-label">Hip Hop</span>
+                            <div class="genre-color-preview" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Background Shapes Settings Section -->
+        <section class="settings-section shapes-settings-section">
+            <div class="section-title-row">
+                <div class="section-title-info">
+                    <h2>Background Shapes</h2>
+                    <p class="section-description">Customize animated background elements</p>
+                </div>
+            </div>
+
+            <div class="settings-options">
+                <!-- Enable/Disable Shapes -->
+                <div class="setting-item">
+                    <div class="setting-label-group">
+                        <label>Enable Background Shapes</label>
+                        <p class="setting-description">Show or hide animated shapes</p>
+                    </div>
+                    <label class="toggle-switch">
+                        <input type="checkbox" id="shapesEnabled" checked>
+                        <span class="toggle-slider"></span>
+                    </label>
+                </div>
+
+                <!-- Opacity Slider -->
+                <div class="setting-item">
+                    <div class="setting-label-group">
+                        <label>Shapes Opacity</label>
+                        <p class="setting-description">Adjust transparency of shapes</p>
+                    </div>
+                    <div class="slider-container">
+                        <input type="range" id="shapesOpacity" min="0" max="100" value="30" class="setting-slider">
+                        <span class="slider-value" id="shapesOpacityValue">30%</span>
+                    </div>
+                </div>
+
+                <!-- Animation Speed Slider -->
+                <div class="setting-item">
+                    <div class="setting-label-group">
+                        <label>Animation Speed</label>
+                        <p class="setting-description">Control how fast shapes move</p>
+                    </div>
+                    <div class="slider-container">
+                        <input type="range" id="shapesSpeed" min="25" max="200" value="100" class="setting-slider">
+                        <span class="slider-value" id="shapesSpeedValue">1x</span>
+                    </div>
+                </div>
+
+                <!-- Shape Types -->
+                <div class="setting-item shapes-types-container">
+                    <div class="setting-label-group">
+                        <label>Shape Types</label>
+                        <p class="setting-description">Choose which shapes to display</p>
+                    </div>
+                    <div class="shapes-types-grid">
+                        <div class="shape-type-item">
+                            <label class="shape-type-label">
+                                <input type="checkbox" id="shapesCircles" checked>
+                                <span class="shape-type-icon">⚪</span>
+                                <span class="shape-type-name">Circles</span>
+                            </label>
+                        </div>
+                        <div class="shape-type-item">
+                            <label class="shape-type-label">
+                                <input type="checkbox" id="shapesTriangles" checked>
+                                <span class="shape-type-icon">🔺</span>
+                                <span class="shape-type-name">Triangles</span>
+                            </label>
+                        </div>
+                        <div class="shape-type-item">
+                            <label class="shape-type-label">
+                                <input type="checkbox" id="shapesSquares" checked>
+                                <span class="shape-type-icon">⬜</span>
+                                <span class="shape-type-name">Squares</span>
+                            </label>
+                        </div>
+                        <div class="shape-type-item">
+                            <label class="shape-type-label">
+                                <input type="checkbox" id="shapesHexagons" checked>
+                                <span class="shape-type-icon">⬡</span>
+                                <span class="shape-type-name">Hexagons</span>
+                            </label>
+                        </div>
+                        <div class="shape-type-item">
+                            <label class="shape-type-label">
+                                <input type="checkbox" id="shapesStars" checked>
+                                <span class="shape-type-icon">⭐</span>
+                                <span class="shape-type-name">Stars</span>
+                            </label>
+                        </div>
+                        <div class="shape-type-item">
+                            <label class="shape-type-label">
+                                <input type="checkbox" id="shapesDiamonds" checked>
+                                <span class="shape-type-icon">💎</span>
+                                <span class="shape-type-name">Diamonds</span>
+                            </label>
+                        </div>
+                        <div class="shape-type-item">
+                            <label class="shape-type-label">
+                                <input type="checkbox" id="shapesPentagons" checked>
+                                <span class="shape-type-icon">⬟</span>
+                                <span class="shape-type-name">Pentagons</span>
+                            </label>
+                        </div>
+                        <div class="shape-type-item">
+                            <label class="shape-type-label">
+                                <input type="checkbox" id="shapesOctagons" checked>
+                                <span class="shape-type-icon">⯃</span>
+                                <span class="shape-type-name">Octagons</span>
+                            </label>
+                        </div>
+                        <div class="shape-type-item">
+                            <label class="shape-type-label">
+                                <input type="checkbox" id="shapesPlus" checked>
+                                <span class="shape-type-icon">➕</span>
+                                <span class="shape-type-name">Plus</span>
+                            </label>
+                        </div>
+                        <div class="shape-type-item">
+                            <label class="shape-type-label">
+                                <input type="checkbox" id="shapesRings" checked>
+                                <span class="shape-type-icon">⭕</span>
+                                <span class="shape-type-name">Rings</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Reset Button -->
+                <div class="setting-item">
+                    <button class="reset-shapes-btn" id="resetShapesBtn">Reset to Defaults</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Audio Settings Section -->
+        <section class="settings-section">
+            <div class="section-title-row">
+                <div class="section-title-info">
+                    <h2>Audio Quality</h2>
+                    <p class="section-description">Playback quality settings</p>
+                </div>
+            </div>
+
+            <div class="settings-options">
+                <div class="setting-item">
+                    <label>Streaming Quality</label>
+                    <select class="setting-select" id="audioQuality">
+                        <option value="low">Low (96 kbps)</option>
+                        <option value="medium" selected>Medium (160 kbps)</option>
+                        <option value="high">High (320 kbps)</option>
+                    </select>
+                </div>
+
+                <div class="setting-item">
+                    <label>Volume Normalization</label>
+                    <label class="toggle-switch">
+                        <input type="checkbox" id="volumeNormalization" checked>
+                        <span class="toggle-slider"></span>
+                    </label>
+                </div>
+
+                <div class="setting-item">
+                    <label>Crossfade Duration</label>
+                    <input type="range" class="setting-slider" id="crossfadeDuration" min="0" max="12" value="5" step="1">
+                    <span class="slider-value" id="crossfadeValue">5s</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Lyrics Settings Section -->
+        <section class="settings-section lyrics-settings-section">
+            <div class="section-title-row">
+                <div class="section-title-info">
+                    <h2>Lyrics Settings</h2>
+                    <p class="section-description">Customize lyrics display</p>
+                </div>
+                <label class="toggle-switch">
+                    <input type="checkbox" id="showLyrics" checked>
+                    <span class="toggle-slider"></span>
+                </label>
+            </div>
+
+            <div class="lyrics-settings-content" id="lyricsSettingsContent">
+                <div class="settings-options">
+                    <div class="setting-item">
+                        <label>Font Size</label>
+                        <select class="setting-select" id="lyricsFontSize">
+                            <option value="small">Small</option>
+                            <option value="medium" selected>Medium</option>
+                            <option value="large">Large</option>
+                            <option value="xlarge">Extra Large</option>
+                        </select>
+                    </div>
+
+                    <div class="setting-item">
+                        <label>Position</label>
+                        <select class="setting-select" id="lyricsPosition">
+                            <option value="top">Top</option>
+                            <option value="center" selected>Center</option>
+                            <option value="bottom">Bottom</option>
+                        </select>
+                    </div>
+
+                    <div class="setting-item">
+                        <label>Auto-scroll Speed</label>
+                        <select class="setting-select" id="lyricsScrollSpeed">
+                            <option value="slow">Slow</option>
+                            <option value="normal" selected>Normal</option>
+                            <option value="fast">Fast</option>
+                        </select>
+                    </div>
+
+                    <div class="setting-item">
+                        <label>Background Opacity</label>
+                        <input type="range" class="setting-slider" id="lyricsOpacity" min="0" max="100" value="30" step="10">
+                        <span class="slider-value" id="lyricsOpacityValue">30%</span>
+                    </div>
+
+                    <div class="setting-item">
+                        <label>Karaoke Mode</label>
+                        <label class="toggle-switch">
+                            <input type="checkbox" id="karaokeMode">
+                            <span class="toggle-slider"></span>
+                        </label>
+                    </div>
+
+                    <div class="setting-item">
+                        <label>Text Shadow</label>
+                        <label class="toggle-switch">
+                            <input type="checkbox" id="lyricsTextShadow" checked>
+                            <span class="toggle-slider"></span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Lyrics Preview -->
+                <div class="lyrics-preview-container">
+                    <div class="lyrics-preview-label">Preview</div>
+                    <div class="lyrics-preview-box" id="lyricsPreviewBox">
+                        <div class="lyrics-preview-line">This is how your lyrics</div>
+                        <div class="lyrics-preview-line active">will look like</div>
+                        <div class="lyrics-preview-line">when playing music</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Zoom Level Settings Section -->
+        <section class="settings-section zoom-settings-section">
+            <div class="section-title-row">
+                <div class="section-title-info">
+                    <h2>Zoom Level</h2>
+                    <p class="section-description">Adjust UI scale to your preference</p>
+                </div>
+            </div>
+
+            <div class="zoom-settings-content">
+                <div class="zoom-description">
+                    <p>You can change the zoom level by pressing <kbd>Ctrl</kbd> <kbd>-</kbd> or <kbd>Ctrl</kbd> <kbd>+</kbd></p>
+                </div>
+
+                <!-- Zoom Presets -->
+                <div class="zoom-presets">
+                    <div class="zoom-preset-card" data-zoom="70">
+                        <div class="zoom-preset-icon">
+                            <div class="grid-icon compact"></div>
+                        </div>
+                        <div class="zoom-preset-label">Compact</div>
+                    </div>
+
+                    <div class="zoom-preset-card active" data-zoom="100">
+                        <div class="zoom-preset-icon">
+                            <div class="grid-icon standard"></div>
+                        </div>
+                        <div class="zoom-preset-label">Standard</div>
+                    </div>
+
+                    <div class="zoom-preset-card" data-zoom="130">
+                        <div class="zoom-preset-icon">
+                            <div class="grid-icon spacious"></div>
+                        </div>
+                        <div class="zoom-preset-label">Spacious</div>
+                    </div>
+                </div>
+
+                <!-- Zoom Slider -->
+                <div class="zoom-slider-container">
+                    <div class="zoom-slider-labels">
+                        <span class="zoom-label">70%</span>
+                        <span class="zoom-label">80%</span>
+                        <span class="zoom-label">90%</span>
+                        <span class="zoom-label current">100%</span>
+                        <span class="zoom-label">110%</span>
+                        <span class="zoom-label">120%</span>
+                        <span class="zoom-label">130%</span>
+                    </div>
+                    <input type="range" class="zoom-slider" id="zoomSlider" min="70" max="130" value="100" step="10">
+                    <div class="zoom-current-value" id="zoomCurrentValue">100%</div>
+                </div>
+
+                <!-- Reset Button -->
+                <button class="zoom-reset-btn" id="zoomResetBtn">Reset to 100%</button>
+            </div>
+        </section>
+
+        <!-- Display Settings Section -->
+        <section class="settings-section">
+            <div class="section-title-row">
+                <div class="section-title-info">
+                    <h2>Display</h2>
+                    <p class="section-description">Visual preferences</p>
+                </div>
+            </div>
+
+            <div class="settings-options">
+                <div class="setting-item">
+                    <label>Show Visualizer</label>
+                    <label class="toggle-switch">
+                        <input type="checkbox" id="showVisualizer" checked>
+                        <span class="toggle-slider"></span>
+                    </label>
+                </div>
+
+                <div class="setting-item">
+                    <label>Animation Speed</label>
+                    <select class="setting-select" id="animationSpeed">
+                        <option value="slow">Slow</option>
+                        <option value="normal" selected>Normal</option>
+                        <option value="fast">Fast</option>
+                    </select>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section class="settings-section">
+            <div class="section-title-row">
+                <div class="section-title-info">
+                    <h2>About</h2>
+                    <p class="section-description">App information</p>
+                </div>
+            </div>
+
+            <div class="settings-options">
+                <div class="setting-item about-item">
+                    <label>Version</label>
+                    <span class="about-value">1.0.0</span>
+                </div>
+
+                <div class="setting-item about-item">
+                    <label>NeonWave Music</label>
+                    <span class="about-value">Cinematic Music Player</span>
+                </div>
+
+                <button class="reset-button" id="resetSettings">Reset All Settings</button>
+            </div>
+        </section>
+    </div>
+
+    <script src="settings.js"></script>
+    <script src="dynamic-theme.js"></script>
+    <script src="lyrics-settings.js"></script>
+    <script src="zoom-settings.js"></script>
+    <script src="shapes-settings.js"></script>
+</body>
+</html>

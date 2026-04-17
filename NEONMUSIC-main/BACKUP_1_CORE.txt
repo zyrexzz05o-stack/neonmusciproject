@@ -1,0 +1,225 @@
+================================================================================
+                    BACKUP 1 - CORE FILES (3 FILES)
+================================================================================
+
+File ini berisi 3 file WAJIB untuk aplikasi berjalan:
+1. index.html - Entry point aplikasi
+2. script.js - Main JavaScript logic
+3. styles.css - Main CSS styling
+
+================================================================================
+                            FILE 1: index.html
+================================================================================
+
+LOKASI: /index.html
+UKURAN: ~860 lines
+DESKRIPSI: File HTML utama, entry point aplikasi
+
+STRUKTUR:
+- <head>: Meta tags, fonts, CSS links
+- <body>:
+  - Background shapes (animated)
+  - Logo EchoVibe
+  - Sidebar floating (navigation)
+  - Profile section
+  - Main content:
+    - Header (search, mood selector, profile)
+    - Album highlight (now playing)
+    - Page content wrapper:
+      - Trending section (Baru diputar)
+      - Frequently played albums
+      - Rising in your taste
+      - Sound journey
+  - Music player (bottom)
+  - Album modal
+  - Scripts loading
+
+DEPENDENCIES:
+- styles.css
+- floating-sidebar.css
+- settings.css
+- music-popup-notification.css
+- liked-songs.css
+- library.css
+- hot-frequencies.css
+- song-actions.css
+- All JavaScript files
+
+CARA RESTORE:
+Copy file ini ke root folder project sebagai "index.html"
+
+================================================================================
+                            FILE 2: script.js
+================================================================================
+
+LOKASI: /script.js
+UKURAN: ~2000+ lines
+DESKRIPSI: JavaScript utama, controller aplikasi
+
+FITUR UTAMA:
+1. Navigation system
+   - loadPage() function
+   - Page routing
+   - Sidebar navigation
+
+2. Music player
+   - playTrack() function
+   - Video player control
+   - Audio player control
+   - Progress bar
+   - Volume control
+   - Next/Previous track
+
+3. Playlist management
+   - playlist[] array (13 songs)
+   - currentTrackIndex
+   - Track data structure
+
+4. Lyrics system
+   - lyricsDatabase{}
+   - Synchronized lyrics
+   - Static lyrics
+   - Lyrics display
+
+5. UI interactions
+   - Profile menu
+   - Album modal
+   - Mood selector
+   - Theme switching
+
+6. Event listeners
+   - Play/Pause button
+   - Progress bar seek
+   - Volume slider
+   - Navigation clicks
+
+GLOBAL VARIABLES:
+- playlist: Array of song objects
+- currentTrackIndex: Number
+- currentTrack: String
+- lyricsDatabase: Object
+- isDarkMode: Boolean
+- backgroundMode: String
+
+MAIN FUNCTIONS:
+- playTrack(artist, song, image, video)
+- loadPage(pageName)
+- attachHomeListeners()
+- createProfilePageHTML()
+- openAlbumModal(artist, album, coverSrc)
+- setTheme(dark)
+- renderLyrics(lyricsData)
+- startLyricsSync()
+- stopLyricsSync()
+
+CARA RESTORE:
+Copy file ini ke root folder project sebagai "script.js"
+
+================================================================================
+                            FILE 3: styles.css
+================================================================================
+
+LOKASI: /styles.css
+UKURAN: ~3000+ lines
+DESKRIPSI: CSS utama, styling untuk semua komponen
+
+STRUKTUR CSS:
+1. Reset & Base
+   - * reset
+   - body styling
+   - Font families (Space Grotesk, DM Sans)
+
+2. Background & Effects
+   - .bg-glow
+   - .bg-shapes (animated shapes)
+   - Circles, triangles, squares, hexagons, etc.
+   - Animations (@keyframes)
+
+3. Layout
+   - .app-container
+   - .sidebar-floating
+   - .main-content
+   - Grid & Flexbox layouts
+
+4. Components
+   - Logo EchoVibe
+   - Navigation icons
+   - Header (search, profile)
+   - Album highlight (now playing)
+   - Video container
+   - Lyrics box
+   - Music player (bottom)
+
+5. Sections
+   - Trending grid
+   - Frequently played albums
+   - Rising in your taste
+   - Sound journey
+
+6. Modals & Overlays
+   - Profile section
+   - Album modal
+   - Mood selector
+
+7. Animations
+   - Fade in/out
+   - Slide animations
+   - Pulse effects
+   - Echo waves
+   - Visualizer bars
+
+8. Responsive
+   - Media queries
+   - Mobile adaptations
+
+DESIGN SYSTEM:
+- Colors: Black, white, grays
+- Fonts: Space Grotesk (headings), DM Sans (body)
+- Effects: Glass morphism, backdrop blur
+- Transitions: 0.3s - 0.8s cubic-bezier
+- Border radius: 8px - 20px
+
+CARA RESTORE:
+Copy file ini ke root folder project sebagai "styles.css"
+
+================================================================================
+                            CARA MENGGUNAKAN
+================================================================================
+
+RESTORE SEMUA 3 FILE:
+1. Copy index.html ke root folder
+2. Copy script.js ke root folder
+3. Copy styles.css ke root folder
+4. Buka index.html di browser
+
+MINIMAL SETUP:
+Dengan 3 file ini saja, aplikasi sudah bisa berjalan basic.
+Tapi untuk fitur lengkap, butuh file dari BACKUP 2-6.
+
+DEPENDENCIES:
+File CORE ini membutuhkan:
+- BACKUP_2_PAGES.txt (untuk navigation)
+- BACKUP_3_FEATURE_MODULES.txt (untuk fitur tambahan)
+- BACKUP_4_STYLING.txt (untuk styling tambahan)
+- BACKUP_5_UTILITIES.txt (untuk helper functions)
+- BACKUP_6_INTEGRATION.txt (untuk Spotify)
+- Folder images/ (untuk gambar)
+- Folder videos/ (untuk video musik)
+
+================================================================================
+                                CATATAN
+================================================================================
+
+File ini adalah RINGKASAN struktur.
+Untuk mendapatkan FULL CODE:
+1. Buka file asli di project
+2. Copy seluruh isi file
+3. Paste ke file baru
+
+Atau gunakan command:
+Windows: type index.html > backup_index.html
+Mac/Linux: cat index.html > backup_index.html
+
+================================================================================
+                                  END
+================================================================================

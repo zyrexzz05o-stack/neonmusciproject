@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Floating Mini Player</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="floating-mini-player.css">
+    <style>
+        body {
+            margin: 0;
+            padding: 40px;
+            background: #000;
+            color: #fff;
+            font-family: 'DM Sans', sans-serif;
+            min-height: 100vh;
+        }
+        
+        .test-container {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        h1 {
+            font-family: 'Space Grotesk', sans-serif;
+            margin-bottom: 30px;
+        }
+        
+        .test-btn {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #fff;
+            padding: 12px 24px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 14px;
+            margin: 8px;
+            transition: all 0.3s ease;
+        }
+        
+        .test-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+        
+        .info {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 20px;
+            border-radius: 12px;
+            margin-top: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        code {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-family: monospace;
+        }
+        
+        /* Hidden video player for testing */
+        #videoPlayer {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="test-container">
+        <h1>🎵 Floating Mini Player Test</h1>
+        
+        <div>
+            <button class="test-btn" onclick="testShow()">Show Mini Player</button>
+            <button class="test-btn" onclick="testHide()">Hide Mini Player</button>
+            <button class="test-btn" onclick="testToggle()">Toggle Mini Player</button>
+        </div>
+        
+        <div>
+            <button class="test-btn" onclick="testTrack1()">Load Track 1 (The Weeknd)</button>
+            <button class="test-btn" onclick="testTrack2()">Load Track 2 (James Arthur)</button>
+            <button class="test-btn" onclick="testTrack3()">Load Track 3 (Coldplay)</button>
+        </div>
+        
+        <div class="info">
+            <h3>Instructions:</h3>
+            <ul>
+                <li>Click "Show Mini Player" to display the mini player</li>
+                <li>Drag the mini player by clicking and holding the header</li>
+                <li>Press <code>M</code> key to toggle show/hide</li>
+                <li>Use control buttons to test Previous/Play/Next</li>
+                <li>Load different tracks to see info update</li>
+            </ul>
+            
+            <h3>Features:</h3>
+            <ul>
+                <li>✅ Draggable mini player</li>
+                <li>✅ Glassmorphism design</li>
+                <li>✅ Neon glow animation</li>
+                <li>✅ Music controls (Prev/Play/Next)</li>
+                <li>✅ Progress bar</li>
+                <li>✅ Keyboard shortcut (M)</li>
+            </ul>
+        </div>
+    </div>
+    
+    <!-- Hidden video player for testing -->
+    <video id="videoPlayer" loop>
+        <source id="videoSource" src="" type="video/mp4">
+    </video>
+    
+    <!-- Mock player info elements -->
+    <div style="display: none;">
+        <img id="playerAlbumCover" src="images/TIMELESS.jpeg" alt="Cover">
+        <div id="playerTrackName">Timeless</div>
+        <div id="playerArtistName">The Weeknd</div>
+    </div>
+    
+    <script src="floating-mini-player.js"></script>
+    
+    <script>
+        // Mock functions for testing
+        window.playPreviousTrack = function() {
+            console.log('⏮ Previous track');
+            alert('Previous track clicked!');
+        };
+        
+        window.playNextTrack = function() {
+            console.log('⏭ Next track');
+            alert('Next track clicked!');
+        };
+        
+        // Test functions
+        function testShow() {
+            showMiniPlayer('Timeless', 'The Weeknd', 'images/TIMELESS.jpeg');
+        }
+        
+        function testHide() {
+            hideMiniPlayer();
+        }
+        
+        function testToggle() {
+            toggleMiniPlayer();
+        }
+        
+        function testTrack1() {
+            const cover = document.getElementById('playerAlbumCover');
+            const title = document.getElementById('playerTrackName');
+            const artist = document.getElementById('playerArtistName');
+            
+            cover.src = 'images/TIMELESS.jpeg';
+            title.textContent = 'Timeless';
+            artist.textContent = 'The Weeknd';
+            
+            showMiniPlayer('Timeless', 'The Weeknd', 'images/TIMELESS.jpeg');
+        }
+        
+        function testTrack2() {
+            const cover = document.getElementById('playerAlbumCover');
+            const title = document.getElementById('playerTrackName');
+            const artist = document.getElementById('playerArtistName');
+            
+            cover.src = 'images/jamesarthur.jpeg';
+            title.textContent = 'Say You Won\'t Let Go';
+            artist.textContent = 'James Arthur';
+            
+            showMiniPlayer('Say You Won\'t Let Go', 'James Arthur', 'images/jamesarthur.jpeg');
+        }
+        
+        function testTrack3() {
+            const cover = document.getElementById('playerAlbumCover');
+            const title = document.getElementById('playerTrackName');
+            const artist = document.getElementById('playerArtistName');
+            
+            cover.src = 'images/coldplay.jpeg';
+            title.textContent = 'Fix You';
+            artist.textContent = 'Coldplay';
+            
+            showMiniPlayer('Fix You', 'Coldplay', 'images/coldplay.jpeg');
+        }
+        
+        // Auto show on load
+        setTimeout(() => {
+            testShow();
+        }, 500);
+    </script>
+</body>
+</html>

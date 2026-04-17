@@ -1,0 +1,349 @@
+================================================================================
+                    BACKUP 2 - PAGES (5 FILES)
+================================================================================
+
+File ini berisi 5 halaman HTML yang dimuat secara dinamis:
+1. liked-songs.html - Halaman "Saved Waves"
+2. library.html - Halaman "Vault"
+3. settings.html - Halaman "Settings"
+4. genre-page.html - Halaman Genre
+5. hot-frequencies.html - Halaman "Hot Frequencies"
+
+================================================================================
+                        FILE 1: liked-songs.html
+================================================================================
+
+LOKASI: /liked-songs.html
+MENU: Saved Waves (❤️)
+DESKRIPSI: Halaman lagu yang disukai user
+
+STRUKTUR:
+<body>
+  <div class="liked-songs-page">
+    <div class="page-header">
+      <h1>Lagu yang Disukai</h1>
+      <p class="page-subtitle">0 lagu dalam koleksi</p>
+    </div>
+    
+    <div class="page-controls">
+      <button id="playAllLiked">▶ Play All</button>
+      <input id="searchMinimal" placeholder="Cari lagu...">
+      <select id="sortLiked">
+        <option value="recent">Terbaru</option>
+        <option value="oldest">Terlama</option>
+        <option value="title">Judul A-Z</option>
+        <option value="artist">Artis A-Z</option>
+      </select>
+    </div>
+    
+    <div class="songs-list-modern" id="songsListModern">
+      <!-- Songs will be rendered here by liked-songs-manager.js -->
+    </div>
+  </div>
+</body>
+
+FITUR:
+- Display liked songs dari localStorage
+- Search songs (by title/artist)
+- Sort songs (4 options)
+- Play all button
+- Individual song actions (play, unlike)
+
+DEPENDENCIES:
+- liked-songs-manager.js (untuk render & logic)
+- liked-songs.css (untuk styling)
+
+CARA RESTORE:
+Copy file ini ke root folder sebagai "liked-songs.html"
+
+================================================================================
+                        FILE 2: library.html
+================================================================================
+
+LOKASI: /library.html
+MENU: Vault (🔒)
+DESKRIPSI: Halaman library/koleksi musik
+
+STRUKTUR:
+<body>
+  <div class="library-page">
+    <div class="library-header">
+      <h1>Your Library</h1>
+      <div class="library-tabs">
+        <button class="tab-btn active" data-tab="playlists">Playlists</button>
+        <button class="tab-btn" data-tab="artists">Artists</button>
+        <button class="tab-btn" data-tab="albums">Albums</button>
+      </div>
+    </div>
+    
+    <div class="library-content">
+      <!-- Tab content: Playlists -->
+      <div class="tab-content active" id="playlists">
+        <div class="playlists-grid">
+          <!-- Playlist cards -->
+        </div>
+      </div>
+      
+      <!-- Tab content: Artists -->
+      <div class="tab-content" id="artists">
+        <div class="artists-grid">
+          <!-- Artist cards -->
+        </div>
+      </div>
+      
+      <!-- Tab content: Albums -->
+      <div class="tab-content" id="albums">
+        <div class="albums-grid">
+          <!-- Album cards -->
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+
+FITUR:
+- 3 tabs: Playlists, Artists, Albums
+- Grid layout untuk cards
+- Tab switching
+- Card interactions
+
+DEPENDENCIES:
+- library-init.js (untuk inisialisasi)
+- library.css (untuk styling)
+
+CARA RESTORE:
+Copy file ini ke root folder sebagai "library.html"
+
+================================================================================
+                        FILE 3: settings.html
+================================================================================
+
+LOKASI: /settings.html
+MENU: Settings (⚙️)
+DESKRIPSI: Halaman pengaturan aplikasi
+
+STRUKTUR:
+<body>
+  <div class="settings-page">
+    <div class="settings-header">
+      <h1>Settings</h1>
+    </div>
+    
+    <div class="settings-content">
+      <!-- Appearance Settings -->
+      <div class="settings-section">
+        <h2>Appearance</h2>
+        <div class="setting-item">
+          <label>Theme</label>
+          <select id="themeSelect">
+            <option value="dark">Dark</option>
+            <option value="light">Light</option>
+            <option value="auto">Auto</option>
+          </select>
+        </div>
+      </div>
+      
+      <!-- Audio Settings -->
+      <div class="settings-section">
+        <h2>Audio</h2>
+        <div class="setting-item">
+          <label>Audio Quality</label>
+          <select id="qualitySelect">
+            <option value="high">High</option>
+            <option value="medium">Medium</option>
+            <option value="low">Low</option>
+          </select>
+        </div>
+      </div>
+      
+      <!-- Playback Settings -->
+      <div class="settings-section">
+        <h2>Playback</h2>
+        <div class="setting-item">
+          <label>Autoplay</label>
+          <input type="checkbox" id="autoplayToggle">
+        </div>
+      </div>
+      
+      <!-- More settings... -->
+    </div>
+  </div>
+</body>
+
+FITUR:
+- Theme settings
+- Audio quality
+- Playback options
+- Lyrics settings
+- Zoom settings
+- Shapes settings
+- Save to localStorage
+
+DEPENDENCIES:
+- settings.js (untuk logic)
+- settings.css (untuk styling)
+- lyrics-settings.js
+- zoom-settings.js
+- shapes-settings.js
+
+CARA RESTORE:
+Copy file ini ke root folder sebagai "settings.html"
+
+================================================================================
+                        FILE 4: genre-page.html
+================================================================================
+
+LOKASI: /genre-page.html
+MENU: (Accessed from genre filter)
+DESKRIPSI: Halaman filter berdasarkan genre
+
+STRUKTUR:
+<body>
+  <div class="genre-page">
+    <div class="genre-header">
+      <h1>Browse by Genre</h1>
+    </div>
+    
+    <div class="genre-grid">
+      <div class="genre-card" data-genre="pop">
+        <div class="genre-icon">🎵</div>
+        <h3>Pop</h3>
+      </div>
+      
+      <div class="genre-card" data-genre="rock">
+        <div class="genre-icon">🎸</div>
+        <h3>Rock</h3>
+      </div>
+      
+      <div class="genre-card" data-genre="jazz">
+        <div class="genre-icon">🎷</div>
+        <h3>Jazz</h3>
+      </div>
+      
+      <!-- More genres... -->
+    </div>
+    
+    <div class="genre-songs" id="genreSongs">
+      <!-- Songs filtered by genre -->
+    </div>
+  </div>
+</body>
+
+FITUR:
+- Genre cards grid
+- Click to filter songs
+- Display songs by genre
+- Genre icons
+
+DEPENDENCIES:
+- genre-handler.js (untuk logic)
+- styles.css (untuk styling)
+
+CARA RESTORE:
+Copy file ini ke root folder sebagai "genre-page.html"
+
+================================================================================
+                    FILE 5: hot-frequencies.html
+================================================================================
+
+LOKASI: /hot-frequencies.html
+MENU: Hot Frequencies (🔥)
+DESKRIPSI: Halaman trending/popular songs
+
+STRUKTUR:
+<body>
+  <div class="hot-frequencies-page">
+    <div class="page-header">
+      <h1>Hot Frequencies</h1>
+      <p class="page-subtitle">Trending music right now</p>
+    </div>
+    
+    <div class="trending-charts">
+      <!-- Top 10 Chart -->
+      <div class="chart-section">
+        <h2>Top 10 This Week</h2>
+        <div class="chart-list">
+          <div class="chart-item">
+            <span class="rank">1</span>
+            <img src="..." class="chart-cover">
+            <div class="chart-info">
+              <h3>Song Title</h3>
+              <p>Artist Name</p>
+            </div>
+            <button class="play-btn">▶</button>
+          </div>
+          <!-- More chart items... -->
+        </div>
+      </div>
+      
+      <!-- New Releases -->
+      <div class="releases-section">
+        <h2>New Releases</h2>
+        <div class="releases-grid">
+          <!-- Release cards -->
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+
+FITUR:
+- Top 10 chart
+- New releases grid
+- Trending indicators
+- Play buttons
+- Rank numbers
+
+DEPENDENCIES:
+- hot-frequencies.css (untuk styling)
+- script.js (untuk playTrack function)
+
+CARA RESTORE:
+Copy file ini ke root folder sebagai "hot-frequencies.html"
+
+================================================================================
+                            CARA MENGGUNAKAN
+================================================================================
+
+RESTORE SEMUA 5 FILE:
+1. Copy liked-songs.html ke root folder
+2. Copy library.html ke root folder
+3. Copy settings.html ke root folder
+4. Copy genre-page.html ke root folder
+5. Copy hot-frequencies.html ke root folder
+
+TESTING:
+1. Buka index.html
+2. Klik menu sidebar:
+   - Saved Waves → liked-songs.html
+   - Vault → library.html
+   - Settings → settings.html
+   - Hot Frequencies → hot-frequencies.html
+3. Pastikan halaman load dengan benar
+
+DEPENDENCIES:
+File PAGES ini membutuhkan:
+- BACKUP_1_CORE.txt (index.html, script.js, styles.css)
+- BACKUP_3_FEATURE_MODULES.txt (untuk logic)
+- BACKUP_4_STYLING.txt (untuk styling)
+
+================================================================================
+                                CATATAN
+================================================================================
+
+Semua halaman ini dimuat secara DINAMIS oleh script.js
+menggunakan function loadPage(pageName).
+
+Navigation mapping:
+- "Saved Waves" → liked-songs.html
+- "Vault" → library.html
+- "Settings" → settings.html
+- "Hot Frequencies" → hot-frequencies.html
+- "Pulse" → index.html (home)
+
+File ini adalah RINGKASAN struktur.
+Untuk FULL CODE, buka file asli dan copy seluruh isi.
+
+================================================================================
+                                  END
+================================================================================

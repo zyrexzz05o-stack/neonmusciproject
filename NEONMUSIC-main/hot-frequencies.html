@@ -1,0 +1,325 @@
+<!-- Hot Frequencies Page - Music Trend Dashboard -->
+<div class="hot-frequencies-page">
+    <!-- Header -->
+    <div class="hf-header">
+        <h1 class="hf-title">Hot Frequencies</h1>
+        <p class="hf-subtitle">Musik yang sedang beresonansi hari ini</p>
+    </div>
+
+    <!-- Trend Pulse Section -->
+    <section class="hf-section trend-pulse-section">
+        <h2 class="hf-section-title">Trend Pulse</h2>
+        <p class="hf-section-desc">Intensitas aktivitas musik saat ini</p>
+        
+        <div class="pulse-bars">
+            <div class="pulse-bar-item">
+                <span class="pulse-label">Low Energy</span>
+                <div class="pulse-bar">
+                    <div class="pulse-fill" data-level="30"></div>
+                </div>
+                <span class="pulse-value">30%</span>
+            </div>
+            <div class="pulse-bar-item">
+                <span class="pulse-label">Mid Energy</span>
+                <div class="pulse-bar">
+                    <div class="pulse-fill" data-level="65"></div>
+                </div>
+                <span class="pulse-value">65%</span>
+            </div>
+            <div class="pulse-bar-item">
+                <span class="pulse-label">High Energy</span>
+                <div class="pulse-bar">
+                    <div class="pulse-fill" data-level="85"></div>
+                </div>
+                <span class="pulse-value">85%</span>
+            </div>
+            <div class="pulse-bar-item">
+                <span class="pulse-label">Peak Energy</span>
+                <div class="pulse-bar">
+                    <div class="pulse-fill" data-level="95"></div>
+                </div>
+                <span class="pulse-value">95%</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Genre On Fire Section -->
+    <section class="hf-section genre-fire-section">
+        <h2 class="hf-section-title">Genre On Fire</h2>
+        <p class="hf-section-desc">Genre yang sedang trending</p>
+        
+        <div class="genre-grid">
+            <div class="genre-card" data-genre="pop" data-status="fire" onclick="openGenrePage('pop', 'trending')">
+                <div class="genre-icon">🎤</div>
+                <div class="genre-info">
+                    <div class="genre-name">Pop</div>
+                    <div class="genre-status fire">🔥 On Fire</div>
+                </div>
+                <div class="genre-meter">
+                    <div class="genre-meter-fill" style="width: 92%"></div>
+                </div>
+            </div>
+            
+            <div class="genre-card" data-genre="rock" data-status="rising" onclick="openGenrePage('rock', 'trending')">
+                <div class="genre-icon">🎸</div>
+                <div class="genre-info">
+                    <div class="genre-name">Rock</div>
+                    <div class="genre-status rising">↑ Rising</div>
+                </div>
+                <div class="genre-meter">
+                    <div class="genre-meter-fill" style="width: 78%"></div>
+                </div>
+            </div>
+            
+            <div class="genre-card" data-genre="hiphop" data-status="fire" onclick="openGenrePage('hiphop', 'trending')">
+                <div class="genre-icon">🎧</div>
+                <div class="genre-info">
+                    <div class="genre-name">Hip-Hop</div>
+                    <div class="genre-status fire">🔥 On Fire</div>
+                </div>
+                <div class="genre-meter">
+                    <div class="genre-meter-fill" style="width: 88%"></div>
+                </div>
+            </div>
+            
+            <div class="genre-card" data-genre="electronic" data-status="stable" onclick="openGenrePage('electronic', 'trending')">
+                <div class="genre-icon">🎹</div>
+                <div class="genre-info">
+                    <div class="genre-name">Electronic</div>
+                    <div class="genre-status stable">→ Stable</div>
+                </div>
+                <div class="genre-meter">
+                    <div class="genre-meter-fill" style="width: 65%"></div>
+                </div>
+            </div>
+            
+            <div class="genre-card" data-genre="indie" data-status="rising" onclick="openGenrePage('indie', 'trending')">
+                <div class="genre-icon">🎵</div>
+                <div class="genre-info">
+                    <div class="genre-name">Indie</div>
+                    <div class="genre-status rising">↑ Rising</div>
+                </div>
+                <div class="genre-meter">
+                    <div class="genre-meter-fill" style="width: 72%"></div>
+                </div>
+            </div>
+            
+            <div class="genre-card" data-genre="jazz" data-status="cooling" onclick="openGenrePage('jazz', 'trending')">
+                <div class="genre-icon">🎺</div>
+                <div class="genre-info">
+                    <div class="genre-name">Jazz</div>
+                    <div class="genre-status cooling">↓ Cooling</div>
+                </div>
+                <div class="genre-meter">
+                    <div class="genre-meter-fill" style="width: 58%"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Search Genre Section -->
+    <section class="hf-section search-genre-section">
+        <h2 class="hf-section-title">Search Genre</h2>
+        <p class="hf-section-desc">Cari musik berdasarkan genre</p>
+        
+        <div class="genre-search-container">
+            <div class="genre-search-bar">
+                <span class="search-icon">🔍</span>
+                <input type="text" id="genreSearchInput" placeholder="Ketik genre (rock, pop, jazz, electronic...)" class="genre-search-input">
+                <button class="genre-search-btn" onclick="searchGenre()">Search</button>
+            </div>
+            
+            <div class="genre-suggestions" id="genreSuggestions">
+                <div class="suggestion-label">Popular genres:</div>
+                <div class="suggestion-chips">
+                    <button class="suggestion-chip" onclick="quickSearchGenre('rock')">Rock</button>
+                    <button class="suggestion-chip" onclick="quickSearchGenre('pop')">Pop</button>
+                    <button class="suggestion-chip" onclick="quickSearchGenre('hiphop')">Hip-Hop</button>
+                    <button class="suggestion-chip" onclick="quickSearchGenre('electronic')">Electronic</button>
+                    <button class="suggestion-chip" onclick="quickSearchGenre('jazz')">Jazz</button>
+                    <button class="suggestion-chip" onclick="quickSearchGenre('indie')">Indie</button>
+                    <button class="suggestion-chip" onclick="quickSearchGenre('rnb')">R&B</button>
+                    <button class="suggestion-chip" onclick="quickSearchGenre('country')">Country</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Active Tracks Section -->
+    <section class="hf-section active-tracks-section">
+        <h2 class="hf-section-title">Active Tracks</h2>
+        <p class="hf-section-desc">Lagu yang sedang sering diputar</p>
+        
+        <div class="active-tracks-list">
+            <div class="track-card">
+                <div class="track-cover">
+                    <img src="images/TIMELESS.jpeg" alt="Timeless">
+                    <button class="track-play-btn">▶</button>
+                </div>
+                <div class="track-info">
+                    <div class="track-title">Timeless</div>
+                    <div class="track-artist">The Weeknd</div>
+                </div>
+                <div class="track-activity">
+                    <div class="activity-indicator">
+                        <span class="activity-dot"></span>
+                        <span class="activity-text">2.4K plays</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="track-card">
+                <div class="track-cover">
+                    <img src="images/jamesarthur.jpeg" alt="Say You Won't Let Go">
+                    <button class="track-play-btn">▶</button>
+                </div>
+                <div class="track-info">
+                    <div class="track-title">Say You Won't Let Go</div>
+                    <div class="track-artist">James Arthur</div>
+                </div>
+                <div class="track-activity">
+                    <div class="activity-indicator">
+                        <span class="activity-dot"></span>
+                        <span class="activity-text">1.8K plays</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="track-card">
+                <div class="track-cover">
+                    <img src="images/coldplay.jpeg" alt="Fix You">
+                    <button class="track-play-btn">▶</button>
+                </div>
+                <div class="track-info">
+                    <div class="track-title">Fix You</div>
+                    <div class="track-artist">Coldplay</div>
+                </div>
+                <div class="track-activity">
+                    <div class="activity-indicator">
+                        <span class="activity-dot"></span>
+                        <span class="activity-text">1.6K plays</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="track-card">
+                <div class="track-cover">
+                    <img src="images/onedirection.jpeg" alt="Night Changes">
+                    <button class="track-play-btn">▶</button>
+                </div>
+                <div class="track-info">
+                    <div class="track-title">Night Changes</div>
+                    <div class="track-artist">One Direction</div>
+                </div>
+                <div class="track-activity">
+                    <div class="activity-indicator">
+                        <span class="activity-dot"></span>
+                        <span class="activity-text">1.5K plays</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="track-card">
+                <div class="track-cover">
+                    <img src="images/lordhuron.jpeg" alt="The Night We Met">
+                    <button class="track-play-btn">▶</button>
+                </div>
+                <div class="track-info">
+                    <div class="track-title">The Night We Met</div>
+                    <div class="track-artist">Lord Huron</div>
+                </div>
+                <div class="track-activity">
+                    <div class="activity-indicator">
+                        <span class="activity-dot"></span>
+                        <span class="activity-text">1.3K plays</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="track-card">
+                <div class="track-cover">
+                    <img src="images/hindiaappmusic.jpeg" alt="Evaluasi">
+                    <button class="track-play-btn">▶</button>
+                </div>
+                <div class="track-info">
+                    <div class="track-title">Evaluasi</div>
+                    <div class="track-artist">Hindia</div>
+                </div>
+                <div class="track-activity">
+                    <div class="activity-indicator">
+                        <span class="activity-dot"></span>
+                        <span class="activity-text">1.2K plays</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Artists In Motion Section -->
+    <section class="hf-section artists-motion-section">
+        <h2 class="hf-section-title">Artists In Motion</h2>
+        <p class="hf-section-desc">Artis yang sedang naik</p>
+        
+        <div class="artists-grid">
+            <div class="artist-motion-card">
+                <div class="artist-avatar">
+                    <img src="images/TIMELESS.jpeg" alt="The Weeknd">
+                </div>
+                <div class="artist-name">The Weeknd</div>
+                <div class="artist-activity">
+                    <span class="activity-badge">⬆️ +45%</span>
+                </div>
+            </div>
+            
+            <div class="artist-motion-card">
+                <div class="artist-avatar">
+                    <img src="images/jamesarthur.jpeg" alt="James Arthur">
+                </div>
+                <div class="artist-name">James Arthur</div>
+                <div class="artist-activity">
+                    <span class="activity-badge">⬆️ +38%</span>
+                </div>
+            </div>
+            
+            <div class="artist-motion-card">
+                <div class="artist-avatar">
+                    <img src="images/coldplay.jpeg" alt="Coldplay">
+                </div>
+                <div class="artist-name">Coldplay</div>
+                <div class="artist-activity">
+                    <span class="activity-badge">⬆️ +32%</span>
+                </div>
+            </div>
+            
+            <div class="artist-motion-card">
+                <div class="artist-avatar">
+                    <img src="images/onedirection.jpeg" alt="One Direction">
+                </div>
+                <div class="artist-name">One Direction</div>
+                <div class="artist-activity">
+                    <span class="activity-badge">⬆️ +28%</span>
+                </div>
+            </div>
+            
+            <div class="artist-motion-card">
+                <div class="artist-avatar">
+                    <img src="images/lordhuron.jpeg" alt="Lord Huron">
+                </div>
+                <div class="artist-name">Lord Huron</div>
+                <div class="artist-activity">
+                    <span class="activity-badge">⬆️ +25%</span>
+                </div>
+            </div>
+            
+            <div class="artist-motion-card">
+                <div class="artist-avatar">
+                    <img src="images/hindiaappmusic.jpeg" alt="Hindia">
+                </div>
+                <div class="artist-name">Hindia</div>
+                <div class="artist-activity">
+                    <span class="activity-badge">⬆️ +22%</span>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>

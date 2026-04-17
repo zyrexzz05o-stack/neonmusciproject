@@ -1,0 +1,248 @@
+================================================================================
+                    CARA BACKUP FILE PENTING - NEONWAVE
+================================================================================
+
+Karena file terlalu banyak dan besar untuk digabung dalam 1 file,
+berikut adalah cara backup yang lebih efisien:
+
+================================================================================
+                        OPSI 1: MANUAL COPY (RECOMMENDED)
+================================================================================
+
+Buat folder baru "neonwave-backup" dan copy file-file ini:
+
+CORE (3 files):
+- index.html
+- script.js
+- styles.css
+
+PAGES (5 files):
+- liked-songs.html
+- library.html
+- settings.html
+- genre-page.html
+- hot-frequencies.html
+
+FEATURE MODULES (15 files):
+- liked-songs-manager.js
+- song-actions.js
+- floating-sidebar.js
+- beat-reactive.js
+- behavior-modes.js
+- dynamic-theme.js
+- black-screen-mode.js
+- music-notifications.js
+- settings.js
+- library-init.js
+- genre-handler.js
+- listening-ritual.js
+- time-adaptive.js
+- track-transition.js
+- adaptive-typography.js
+
+STYLING (8 files):
+- song-actions.css
+- liked-songs.css
+- floating-sidebar.css
+- library.css
+- settings.css
+- hot-frequencies.css
+- music-popup-notification.css
+- popup-notifications.css
+
+UTILITIES (5 files):
+- music-popup-notification.js
+- popup-notifications.js
+- lyrics-settings.js
+- zoom-settings.js
+- shapes-settings.js
+
+INTEGRATION (2 files):
+- spotify-config.js
+- spotify-integration.js
+
+ASSETS (2 folders):
+- images/ (copy seluruh folder)
+- videos/ (copy seluruh folder)
+
+================================================================================
+                    OPSI 2: COMMAND LINE (Windows)
+================================================================================
+
+Buka Command Prompt di folder project, lalu jalankan:
+
+mkdir neonwave-backup
+copy index.html neonwave-backup\
+copy script.js neonwave-backup\
+copy styles.css neonwave-backup\
+copy liked-songs.html neonwave-backup\
+copy library.html neonwave-backup\
+copy settings.html neonwave-backup\
+copy genre-page.html neonwave-backup\
+copy hot-frequencies.html neonwave-backup\
+copy liked-songs-manager.js neonwave-backup\
+copy song-actions.js neonwave-backup\
+copy floating-sidebar.js neonwave-backup\
+copy beat-reactive.js neonwave-backup\
+copy behavior-modes.js neonwave-backup\
+copy dynamic-theme.js neonwave-backup\
+copy black-screen-mode.js neonwave-backup\
+copy music-notifications.js neonwave-backup\
+copy settings.js neonwave-backup\
+copy library-init.js neonwave-backup\
+copy genre-handler.js neonwave-backup\
+copy listening-ritual.js neonwave-backup\
+copy time-adaptive.js neonwave-backup\
+copy track-transition.js neonwave-backup\
+copy adaptive-typography.js neonwave-backup\
+copy song-actions.css neonwave-backup\
+copy liked-songs.css neonwave-backup\
+copy floating-sidebar.css neonwave-backup\
+copy library.css neonwave-backup\
+copy settings.css neonwave-backup\
+copy hot-frequencies.css neonwave-backup\
+copy music-popup-notification.css neonwave-backup\
+copy popup-notifications.css neonwave-backup\
+copy music-popup-notification.js neonwave-backup\
+copy popup-notifications.js neonwave-backup\
+copy lyrics-settings.js neonwave-backup\
+copy zoom-settings.js neonwave-backup\
+copy shapes-settings.js neonwave-backup\
+copy spotify-config.js neonwave-backup\
+copy spotify-integration.js neonwave-backup\
+xcopy images neonwave-backup\images\ /E /I
+xcopy videos neonwave-backup\videos\ /E /I
+
+================================================================================
+                    OPSI 3: COMMAND LINE (Mac/Linux)
+================================================================================
+
+Buka Terminal di folder project, lalu jalankan:
+
+mkdir neonwave-backup
+cp index.html neonwave-backup/
+cp script.js neonwave-backup/
+cp styles.css neonwave-backup/
+cp liked-songs.html neonwave-backup/
+cp library.html neonwave-backup/
+cp settings.html neonwave-backup/
+cp genre-page.html neonwave-backup/
+cp hot-frequencies.html neonwave-backup/
+cp liked-songs-manager.js neonwave-backup/
+cp song-actions.js neonwave-backup/
+cp floating-sidebar.js neonwave-backup/
+cp beat-reactive.js neonwave-backup/
+cp behavior-modes.js neonwave-backup/
+cp dynamic-theme.js neonwave-backup/
+cp black-screen-mode.js neonwave-backup/
+cp music-notifications.js neonwave-backup/
+cp settings.js neonwave-backup/
+cp library-init.js neonwave-backup/
+cp genre-handler.js neonwave-backup/
+cp listening-ritual.js neonwave-backup/
+cp time-adaptive.js neonwave-backup/
+cp track-transition.js neonwave-backup/
+cp adaptive-typography.js neonwave-backup/
+cp song-actions.css neonwave-backup/
+cp liked-songs.css neonwave-backup/
+cp floating-sidebar.css neonwave-backup/
+cp library.css neonwave-backup/
+cp settings.css neonwave-backup/
+cp hot-frequencies.css neonwave-backup/
+cp music-popup-notification.css neonwave-backup/
+cp popup-notifications.css neonwave-backup/
+cp music-popup-notification.js neonwave-backup/
+cp popup-notifications.js neonwave-backup/
+cp lyrics-settings.js neonwave-backup/
+cp zoom-settings.js neonwave-backup/
+cp shapes-settings.js neonwave-backup/
+cp spotify-config.js neonwave-backup/
+cp spotify-integration.js neonwave-backup/
+cp -r images neonwave-backup/
+cp -r videos neonwave-backup/
+
+================================================================================
+                        OPSI 4: ZIP/RAR (EASIEST)
+================================================================================
+
+1. Select semua file penting (38 files + 2 folders)
+2. Right click → Send to → Compressed (zipped) folder
+3. Nama: neonwave-backup.zip
+
+ATAU gunakan WinRAR/7-Zip:
+1. Select files
+2. Right click → Add to archive
+3. Nama: neonwave-backup.rar
+
+================================================================================
+                        OPSI 5: GIT (PROFESSIONAL)
+================================================================================
+
+Jika belum ada git repository:
+
+git init
+git add index.html script.js styles.css
+git add *.html *.js *.css
+git add images/ videos/
+git commit -m "Backup NeonWave Music Player - Essential Files"
+
+Untuk backup ke GitHub:
+git remote add origin https://github.com/username/neonwave-backup.git
+git push -u origin main
+
+================================================================================
+                            VERIFIKASI BACKUP
+================================================================================
+
+Setelah backup, pastikan folder backup berisi:
+✓ 38 files (HTML, JS, CSS)
+✓ Folder images/ dengan semua gambar
+✓ Folder videos/ dengan semua video
+✓ Total size: ~500MB - 2GB (tergantung ukuran video)
+
+Test backup:
+1. Buka index.html dari folder backup
+2. Pastikan aplikasi berjalan normal
+3. Test semua fitur (play, like, navigation)
+
+================================================================================
+                        FILE YANG TIDAK PERLU DIBACKUP
+================================================================================
+
+SKIP file-file ini (tidak penting):
+- test-*.html
+- debug-*.html
+- script_backup.js
+- script_fixed.js
+- *.md (documentation)
+- Example txt file.txt
+- .vscode/ folder
+
+================================================================================
+                            RESTORE BACKUP
+================================================================================
+
+Untuk restore:
+1. Extract/copy semua file dari backup
+2. Paste ke folder baru
+3. Buka index.html di browser
+4. Done!
+
+Tidak perlu:
+- npm install
+- build process
+- server setup
+
+================================================================================
+                                CATATAN
+================================================================================
+
+1. Backup WAJIB include folder images/ dan videos/
+2. Struktur folder harus sama dengan original
+3. File path di code menggunakan relative path
+4. Bisa langsung dibuka di browser (no server needed)
+5. Untuk production, compress/minify JS & CSS
+
+================================================================================
+                                  END
+================================================================================

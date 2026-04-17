@@ -1,0 +1,565 @@
+================================================================================
+                BACKUP 3 - FEATURE MODULES (15 FILES)
+================================================================================
+
+File ini berisi 15 JavaScript modules untuk fitur-fitur spesifik:
+1. liked-songs-manager.js - Sistem like/unlike lagu
+2. song-actions.js - Menu aksi lagu premium
+3. floating-sidebar.js - Sidebar navigasi
+4. beat-reactive.js - Animasi reaktif beat
+5. behavior-modes.js - Mode behavior aplikasi
+6. dynamic-theme.js - Tema dinamis
+7. black-screen-mode.js - Mode layar hitam
+8. music-notifications.js - Notifikasi musik
+9. settings.js - Logic settings page
+10. library-init.js - Inisialisasi library
+11. genre-handler.js - Handler genre system
+12. listening-ritual.js - Ritual mendengarkan
+13. time-adaptive.js - Adaptasi waktu
+14. track-transition.js - Transisi track
+15. adaptive-typography.js - Typography adaptif
+
+================================================================================
+                    FILE 1: liked-songs-manager.js
+================================================================================
+
+LOKASI: /liked-songs-manager.js
+DESKRIPSI: Sistem lengkap untuk like/unlike lagu dengan localStorage
+
+FITUR UTAMA:
+- Like/unlike lagu
+- Save ke localStorage
+- Load dari localStorage
+- Check status like
+- Render liked songs list
+- Search & sort functionality
+- Play all liked songs
+
+FUNCTIONS:
+- initLikedSongsManager()
+- toggleLike(songData)
+- isLiked(songId)
+- getLikedSongs()
+- saveLikedSongs()
+- loadLikedSongs()
+- renderLikedSongs()
+- searchLikedSongs(query)
+- sortLikedSongs(sortBy)
+- playAllLiked()
+
+DATA STRUCTURE:
+{
+  id: "artist-song",
+  artist: "Artist Name",
+  song: "Song Title",
+  image: "path/to/image.jpg",
+  video: "path/to/video.mp4",
+  likedAt: timestamp
+}
+
+LOCALSTORAGE KEY:
+"neonwave_liked_songs"
+
+DEPENDENCIES:
+- script.js (playTrack function)
+- liked-songs.html (untuk render)
+
+CARA RESTORE:
+Copy file ini ke root folder sebagai "liked-songs-manager.js"
+
+================================================================================
+                        FILE 2: song-actions.js
+================================================================================
+
+LOKASI: /song-actions.js
+DESKRIPSI: Menu aksi premium untuk setiap lagu (9 fitur lengkap)
+
+FITUR MENU:
+1. ▶ Putar Lagu
+2. 📋 Tambahkan ke Antrian
+3. ⏭️ Putar Setelah Ini
+4. ❤️ Tambahkan ke Lagu Disukai (toggle)
+5. ➕ Tambahkan ke Playlist
+6. 💿 Tambahkan ke Album
+7. 🎤 Lihat Artis
+8. ℹ️ Lihat Detail Lagu
+9. 🔗 Bagikan Lagu
+
+FUNCTIONS:
+- initSongActions()
+- createActionButton(songData)
+- showActionMenu(button, songData)
+- closeActionMenu()
+- handlePlaySong(songData)
+- handleAddToQueue(songData)
+- handlePlayNext(songData)
+- handleToggleLike(songData)
+- handleAddToPlaylist(songData)
+- handleAddToAlbum(songData)
+- handleViewArtist(songData)
+- handleViewDetails(songData)
+- handleShareSong(songData)
+
+STYLING:
+- Glass effect menu
+- backdrop-filter: blur(40px)
+- Fixed positioning
+- Z-index: 99999
+- Smooth animations (fade + scale)
+- Auto-positioning (prevent overflow)
+- Text wrapping enabled
+
+DEPENDENCIES:
+- song-actions.css
+- liked-songs-manager.js (untuk like function)
+- script.js (untuk playTrack)
+
+CARA RESTORE:
+Copy file ini ke root folder sebagai "song-actions.js"
+
+================================================================================
+                    FILE 3: floating-sidebar.js
+================================================================================
+
+LOKASI: /floating-sidebar.js
+DESKRIPSI: Controller untuk sidebar navigasi floating
+
+FITUR:
+- Navigation menu
+- Active state management
+- Page routing
+- Smooth transitions
+
+MENU ITEMS:
+- Pulse (Home)
+- Hot Frequencies
+- Vault (Library)
+- Saved Waves (Liked Songs)
+- Settings
+
+FUNCTIONS:
+- initFloatingSidebar()
+- handleNavigation(menuItem)
+- setActiveMenu(menuName)
+- updateMenuState()
+
+DEPENDENCIES:
+- floating-sidebar.css
+- script.js (loadPage function)
+
+CARA RESTORE:
+Copy file ini ke root folder sebagai "floating-sidebar.js"
+
+================================================================================
+                    FILE 4: beat-reactive.js
+================================================================================
+
+LOKASI: /beat-reactive.js
+DESKRIPSI: Animasi visual yang reaktif terhadap beat musik
+
+FITUR:
+- Audio analysis
+- Beat detection
+- Visual effects sync
+- Shapes animation
+- Color pulsing
+
+FUNCTIONS:
+- initBeatReactive()
+- analyzeAudio()
+- detectBeat()
+- animateShapes()
+- pulseColors()
+- stopBeatReactive()
+
+DEPENDENCIES:
+- Web Audio API
+- styles.css (untuk shapes)
+
+CARA RESTORE:
+Copy file ini ke root folder sebagai "beat-reactive.js"
+
+================================================================================
+                    FILE 5: behavior-modes.js
+================================================================================
+
+LOKASI: /behavior-modes.js
+DESKRIPSI: Mode behavior untuk pengalaman user berbeda
+
+MODES:
+- Normal Mode
+- Focus Mode
+- Party Mode
+- Chill Mode
+- Workout Mode
+
+FUNCTIONS:
+- initBehaviorModes()
+- setMode(modeName)
+- applyModeSettings(mode)
+- saveModePreference()
+
+DEPENDENCIES:
+- localStorage
+- styles.css
+
+CARA RESTORE:
+Copy file ini ke root folder sebagai "behavior-modes.js"
+
+================================================================================
+                    FILE 6: dynamic-theme.js
+================================================================================
+
+LOKASI: /dynamic-theme.js
+DESKRIPSI: Sistem tema dinamis berdasarkan album cover
+
+FITUR:
+- Extract colors from album cover
+- Generate color palette
+- Apply theme colors
+- Smooth color transitions
+
+FUNCTIONS:
+- initDynamicTheme()
+- extractColors(imageUrl)
+- generatePalette(dominantColor)
+- applyTheme(colors)
+- resetTheme()
+
+DEPENDENCIES:
+- Color Thief library (optional)
+- styles.css
+
+CARA RESTORE:
+Copy file ini ke root folder sebagai "dynamic-theme.js"
+
+================================================================================
+                FILE 7: black-screen-mode.js
+================================================================================
+
+LOKASI: /black-screen-mode.js
+DESKRIPSI: Mode layar hitam untuk fokus mendengarkan
+
+FITUR:
+- Toggle black screen
+- Show minimal info
+- Hide all UI except player
+- Keyboard shortcuts
+
+FUNCTIONS:
+- initBlackScreenMode()
+- toggleBlackScreen()
+- showMinimalInfo()
+- hideUI()
+- restoreUI()
+
+DEPENDENCIES:
+- styles.css
+
+CARA RESTORE:
+Copy file ini ke root folder sebagai "black-screen-mode.js"
+
+================================================================================
+                FILE 8: music-notifications.js
+================================================================================
+
+LOKASI: /music-notifications.js
+DESKRIPSI: Sistem notifikasi untuk events musik
+
+FITUR:
+- Track change notification
+- Like notification
+- Playlist add notification
+- Error notification
+
+FUNCTIONS:
+- initMusicNotifications()
+- showNotification(type, message)
+- hideNotification()
+- notifyTrackChange(track)
+- notifyLikeAction(song)
+
+DEPENDENCIES:
+- music-popup-notification.css
+- popup-notifications.css
+
+CARA RESTORE:
+Copy file ini ke root folder sebagai "music-notifications.js"
+
+================================================================================
+                        FILE 9: settings.js
+================================================================================
+
+LOKASI: /settings.js
+DESKRIPSI: Logic untuk halaman settings
+
+FITUR:
+- Theme settings
+- Audio quality
+- Playback options
+- Lyrics settings
+- Zoom settings
+- Shapes settings
+- Save to localStorage
+
+FUNCTIONS:
+- initSettings()
+- loadSettings()
+- saveSettings()
+- applySettings()
+- resetSettings()
+
+SETTINGS KEYS:
+- theme
+- audioQuality
+- autoplay
+- crossfade
+- lyricsEnabled
+- zoomLevel
+- shapesEnabled
+
+DEPENDENCIES:
+- settings.html
+- settings.css
+- lyrics-settings.js
+- zoom-settings.js
+- shapes-settings.js
+
+CARA RESTORE:
+Copy file ini ke root folder sebagai "settings.js"
+
+================================================================================
+                    FILE 10: library-init.js
+================================================================================
+
+LOKASI: /library-init.js
+DESKRIPSI: Inisialisasi halaman library
+
+FITUR:
+- Load playlists
+- Load artists
+- Load albums
+- Tab switching
+- Grid rendering
+
+FUNCTIONS:
+- initLibrary()
+- loadPlaylists()
+- loadArtists()
+- loadAlbums()
+- switchTab(tabName)
+- renderGrid(items, type)
+
+DEPENDENCIES:
+- library.html
+- library.css
+
+CARA RESTORE:
+Copy file ini ke root folder sebagai "library-init.js"
+
+================================================================================
+                    FILE 11: genre-handler.js
+================================================================================
+
+LOKASI: /genre-handler.js
+DESKRIPSI: Handler untuk sistem genre
+
+FITUR:
+- Genre filtering
+- Genre cards
+- Filter songs by genre
+- Genre navigation
+
+FUNCTIONS:
+- initGenreHandler()
+- loadGenres()
+- filterByGenre(genreName)
+- renderGenreSongs(songs)
+
+GENRES:
+- Pop
+- Rock
+- Jazz
+- Electronic
+- Hip Hop
+- Classical
+- R&B
+- Country
+
+DEPENDENCIES:
+- genre-page.html
+- script.js (playlist data)
+
+CARA RESTORE:
+Copy file ini ke root folder sebagai "genre-handler.js"
+
+================================================================================
+                FILE 12: listening-ritual.js
+================================================================================
+
+LOKASI: /listening-ritual.js
+DESKRIPSI: Ritual khusus untuk mendengarkan musik
+
+FITUR:
+- Morning ritual
+- Evening ritual
+- Workout ritual
+- Study ritual
+- Custom rituals
+
+FUNCTIONS:
+- initListeningRitual()
+- startRitual(ritualType)
+- stopRitual()
+- applyRitualSettings(ritual)
+
+DEPENDENCIES:
+- behavior-modes.js
+- dynamic-theme.js
+
+CARA RESTORE:
+Copy file ini ke root folder sebagai "listening-ritual.js"
+
+================================================================================
+                    FILE 13: time-adaptive.js
+================================================================================
+
+LOKASI: /time-adaptive.js
+DESKRIPSI: Adaptasi fitur berdasarkan waktu
+
+FITUR:
+- Time-based theme
+- Morning/afternoon/evening modes
+- Auto-adjust brightness
+- Suggested playlists by time
+
+FUNCTIONS:
+- initTimeAdaptive()
+- getCurrentTimeMode()
+- applyTimeMode(mode)
+- suggestPlaylistByTime()
+
+TIME MODES:
+- Morning (6-12)
+- Afternoon (12-18)
+- Evening (18-22)
+- Night (22-6)
+
+DEPENDENCIES:
+- dynamic-theme.js
+
+CARA RESTORE:
+Copy file ini ke root folder sebagai "time-adaptive.js"
+
+================================================================================
+                FILE 14: track-transition.js
+================================================================================
+
+LOKASI: /track-transition.js
+DESKRIPSI: Transisi smooth antar track
+
+FITUR:
+- Crossfade between tracks
+- Fade in/out
+- Gapless playback
+- Transition effects
+
+FUNCTIONS:
+- initTrackTransition()
+- crossfade(fromTrack, toTrack)
+- fadeIn(track)
+- fadeOut(track)
+- setTransitionDuration(ms)
+
+DEPENDENCIES:
+- script.js (audio player)
+
+CARA RESTORE:
+Copy file ini ke root folder sebagai "track-transition.js"
+
+================================================================================
+            FILE 15: adaptive-typography.js
+================================================================================
+
+LOKASI: /adaptive-typography.js
+DESKRIPSI: Typography yang adaptif berdasarkan konten
+
+FITUR:
+- Auto font size
+- Text scaling
+- Responsive typography
+- Readability optimization
+
+FUNCTIONS:
+- initAdaptiveTypography()
+- adjustFontSize(element)
+- scaleText(scale)
+- optimizeReadability()
+
+DEPENDENCIES:
+- styles.css
+
+CARA RESTORE:
+Copy file ini ke root folder sebagai "adaptive-typography.js"
+
+================================================================================
+                            CARA MENGGUNAKAN
+================================================================================
+
+RESTORE SEMUA 15 FILE:
+1. Copy semua file ke root folder
+2. Pastikan sudah ada BACKUP_1_CORE.txt (index.html, script.js, styles.css)
+3. Load semua file di index.html dengan <script src="...">
+
+URUTAN LOADING (PENTING):
+1. spotify-config.js
+2. spotify-integration.js
+3. floating-sidebar.js
+4. listening-ritual.js
+5. beat-reactive.js
+6. time-adaptive.js
+7. adaptive-typography.js
+8. track-transition.js
+9. black-screen-mode.js
+10. music-popup-notification.js
+11. liked-songs-manager.js
+12. song-actions.js
+13. script.js (MAIN - harus terakhir)
+14. behavior-modes.js
+15. settings.js
+16. dynamic-theme.js
+17. lyrics-settings.js
+18. zoom-settings.js
+19. shapes-settings.js
+20. library-init.js
+21. genre-handler.js
+22. music-notifications.js
+
+DEPENDENCIES:
+File FEATURE MODULES ini membutuhkan:
+- BACKUP_1_CORE.txt (index.html, script.js, styles.css)
+- BACKUP_4_STYLING.txt (untuk styling)
+- BACKUP_5_UTILITIES.txt (untuk helper functions)
+
+================================================================================
+                                CATATAN
+================================================================================
+
+File ini adalah RINGKASAN struktur dan fungsi.
+Untuk FULL CODE, buka file asli dan copy seluruh isi.
+
+Beberapa file bisa di-comment jika tidak dipakai:
+- beat-reactive.js (jika tidak perlu animasi beat)
+- listening-ritual.js (jika tidak perlu ritual)
+- time-adaptive.js (jika tidak perlu adaptasi waktu)
+- adaptive-typography.js (jika tidak perlu typography adaptif)
+
+File WAJIB:
+- liked-songs-manager.js (untuk like system)
+- song-actions.js (untuk menu aksi)
+- floating-sidebar.js (untuk navigasi)
+- settings.js (untuk settings page)
+
+================================================================================
+                                  END
+================================================================================

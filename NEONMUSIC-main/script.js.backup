@@ -1,0 +1,1287 @@
+// Wait for DOM to be fully loaded
+document.addEventListener('DOMContentLoaded', function() {
+    // Navigation - CSS hide/show approach (music keeps playing)
+    const navItems = document.querySelectorAll('.nav-item');
+    const mainContent = document.querySelector('.main-content');
+
+    // Wrap existing content in home container
+    const homeContainer = document.createElement('div');
+    homeContainer.id = 'home-container';
+    homeContainer.className = 'page-container active';
+    while (mainContent.firstChild) {
+        homeContainer.appendChild(mainContent.firstChild);
+    }
+    mainContent.appendChild(homeContainer);
+
+    // Create iframe container
+    const iframeContainer = document.createElement('div');
+    iframeContainer.id = 'iframe-container';
+    iframeContainer.className = 'page-container';
+    mainContent.appendChild(iframeContainer);
+
+    // Page mapping
+    const pageMap = {
+        'Home': null,
+        'Library': 'library.html',
+        'Trending': 'trending.html',
+        'Playlists': 'playlists.html',
+        'Liked Songs': 'liked-songs.html',
+        'Profile': 'profile.html'
+    };
+
+    navItems.forEach(item => {
+        item.addEventListener('click', (e) => {
+            e.preventDefault();
+            
+            // Update active state
+            navItems.forEach(nav => nav.classList.remove('active'));
+            item.classList.add('active');
+            
+            const itemText = item.querySelector('span:last-child').textContent.trim();
+            const pageFile = pageMap[itemText];
+            
+            if (pageFile) {
+                // Show iframe
+                homeContainer.classList.remove('active');
+                iframeContainer.classList.add('active');
+                iframeContainer.innerHTML = `<iframe src="${pageFile}" style="width: 100%; height: calc(100vh - 160px); border: none; background: transparent;"></iframe>`;
+            } else {
+                // Show home
+                homeContainer.classList.add('active');
+                iframeContainer.classList.remove('active');
+            }
+            
+            mainContent.scrollTop = 0;
+        });
+    });
+});
+
+// Dark mode state
+let isDarkMode = true;
+
+// Listen for theme change messages from iframe
+window.addEventListener('message', (event) => {
+    if (event.data.type === 'changeTheme') {
+        setTheme(event.data.dark);
+    }
+});
+
+// Set theme function
+function setTheme(dark) {
+    isDarkMode = dark;
+    const body = document.body;
+    const sidebar = document.querySelector('.sidebar');
+    const musicPlayer = document.querySelector('.music-player');
+    const bgShapes = document.querySelector('.bg-shapes');
+    
+    if (dark) {
+        // Dark Mode
+        body.style.background = '#000';
+        body.style.color = '#fff';
+        body.classList.remove('light-mode');
+        
+        if (sidebar) {
+            sidebar.style.background = '#000';
+            sidebar.style.borderRight = '1px solid rgba(255,255,255,.1)';
+        }
+        if (musicPlayer) {
+            musicPlayer.style.background = 'rgba(0,0,0,.95)';
+            musicPlayer.style.borderTop = '1px solid rgba(255,255,255,.1)';
+        }
+        
+        // Reset shapes to white/light colors
+        if (bgShapes) {
+            const circles = bgShapes.querySelectorAll('.circle');
+            const triangles = bgShapes.querySelectorAll('.triangle');
+            const squares = bgShapes.querySelectorAll('.square');
+            const hexagons = bgShapes.querySelectorAll('.hexagon');
+            
+            circles.forEach(circle => {
+                circle.style.background = 'radial-gradient(circle, rgba(255,255,255,.25), transparent 70%)';
+                circle.style.borderColor = 'rgba(255,255,255,.6)';
+                circle.style.boxShadow = '0 0 80px rgba(255,255,255,.5), inset 0 0 50px rgba(255,255,255,.25)';
+            });
+            
+            triangles.forEach((triangle, index) => {
+                if (index === 0) triangle.style.borderBottomColor = 'rgba(255,255,255,.5)';
+                if (index === 1) triangle.style.borderBottomColor = 'rgba(255,255,255,.45)';
+                if (index === 2) triangle.style.borderBottomColor = 'rgba(255,255,255,.4)';
+                triangle.style.boxShadow = '0 0 80px rgba(255,255,255,.6)';
+            });
+            
+            squares.forEach(square => {
+                square.style.background = 'rgba(255,255,255,.15)';
+                square.style.borderColor = 'rgba(255,255,255,.6)';
+                square.style.boxShadow = '0 0 70px rgba(255,255,255,.3), inset 0 0 40px rgba(255,255,255,.15)';
+                square.style.opacity = '0.5';
+            });
+            
+            hexagons.forEach(hexagon => {
+                hexagon.style.background = 'rgba(255,255,255,.12)';
+                hexagon.style.borderColor = 'rgba(255,255,255,.5)';
+                hexagon.style.boxShadow = '0 0 65px rgba(255,255,255,.35)';
+                hexagon.style.opacity = '0.45';
+            });
+        }
+    } else {
+        // Light Mode
+        body.style.background = '#f5f5f5';
+        body.style.color = '#000';
+        body.classList.add('light-mode');
+        
+        if (sidebar) {
+            sidebar.style.background = '#fff';
+            sidebar.style.borderRight = '1px solid rgba(0,0,0,.1)';
+        }
+        if (musicPlayer) {
+            musicPlayer.style.background = 'rgba(255,255,255,.95)';
+            musicPlayer.style.borderTop = '1px solid rgba(0,0,0,.1)';
+        }
+        
+        // Change shapes to black/dark colors
+        if (bgShapes) {
+            const circles = bgShapes.querySelectorAll('.circle');
+            const triangles = bgShapes.querySelectorAll('.triangle');
+            const squares = bgShapes.querySelectorAll('.square');
+            const hexagons = bgShapes.querySelectorAll('.hexagon');
+            
+            circles.forEach(circle => {
+                circle.style.background = 'radial-gradient(circle, rgba(0,0,0,.1), transparent 70%)';
+                circle.style.borderColor = 'rgba(0,0,0,.4)';
+                circle.style.boxShadow = '0 0 60px rgba(0,0,0,.3), inset 0 0 40px rgba(0,0,0,.15)';
+            });
+            
+            triangles.forEach((triangle, index) => {
+                if (index === 0) triangle.style.borderBottomColor = 'rgba(0,0,0,.35)';
+                if (index === 1) triangle.style.borderBottomColor = 'rgba(0,0,0,.3)';
+                if (index === 2) triangle.style.borderBottomColor = 'rgba(0,0,0,.25)';
+                triangle.style.boxShadow = '0 0 60px rgba(0,0,0,.4)';
+            });
+            
+            squares.forEach(square => {
+                square.style.background = 'rgba(0,0,0,.08)';
+                square.style.borderColor = 'rgba(0,0,0,.4)';
+                square.style.boxShadow = '0 0 50px rgba(0,0,0,.18), inset 0 0 30px rgba(0,0,0,.08)';
+            });
+            
+            hexagons.forEach(hexagon => {
+                hexagon.style.background = 'rgba(0,0,0,.05)';
+                hexagon.style.borderColor = 'rgba(0,0,0,.3)';
+                hexagon.style.boxShadow = '0 0 45px rgba(0,0,0,.22)';
+            });
+        }
+    }
+}
+
+// Dark mode state
+let isDarkMode = true;
+
+// User profile data
+let userProfile = {
+    name: 'Your Name',
+    bio: 'Music Enthusiast',
+    email: 'yourname@email.com',
+    avatar: 'images/anime-avatar..jpeg'
+};
+
+// Notifications settings
+let notificationSettings = {
+    newReleases: true,
+    recommendations: true,
+    playlistUpdates: false,
+    socialActivity: true
+};
+
+// Audio quality setting
+let audioQuality = 'high'; // low, normal, high, very-high
+
+// Create Edit Profile page
+function createEditProfilePage() {
+    return `
+        <div class="settings-page">
+            <div class="settings-header">
+                <button class="back-btn" onclick="showProfilePage()">← Back</button>
+                <h2>Edit Profile</h2>
+            </div>
+            <div class="settings-content">
+                <div class="edit-profile-form">
+                    <div class="form-group">
+                        <label>Profile Picture</label>
+                        <div class="avatar-upload">
+                            <img src="${userProfile.avatar}" alt="Avatar" class="avatar-preview" id="avatarPreview">
+                            <button class="upload-btn" onclick="alert('Upload feature coming soon!')">Change Photo</button>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Name</label>
+                        <input type="text" id="profileName" value="${userProfile.name}" class="form-input">
+                    </div>
+                    <div class="form-group">
+                        <label>Bio</label>
+                        <input type="text" id="profileBio" value="${userProfile.bio}" class="form-input">
+                    </div>
+                    <div class="form-group">
+                        <label>Email</label>
+                        <input type="email" id="profileEmail" value="${userProfile.email}" class="form-input">
+                    </div>
+                    <button class="save-btn" onclick="saveProfile()">Save Changes</button>
+                </div>
+            </div>
+        </div>
+    `;
+}
+
+// Create Notifications page
+function createNotificationsPage() {
+    return `
+        <div class="settings-page">
+            <div class="settings-header">
+                <button class="back-btn" onclick="showProfilePage()">← Back</button>
+                <h2>Notifications</h2>
+            </div>
+            <div class="settings-content">
+                <div class="notification-settings">
+                    <div class="setting-item">
+                        <div class="setting-info">
+                            <span class="setting-icon">🎵</span>
+                            <div>
+                                <h4>New Releases</h4>
+                                <p>Get notified about new music from your favorite artists</p>
+                            </div>
+                        </div>
+                        <label class="toggle-switch">
+                            <input type="checkbox" ${notificationSettings.newReleases ? 'checked' : ''} onchange="toggleNotification('newReleases', this.checked)">
+                            <span class="toggle-slider"></span>
+                        </label>
+                    </div>
+                    <div class="setting-item">
+                        <div class="setting-info">
+                            <span class="setting-icon">💡</span>
+                            <div>
+                                <h4>Recommendations</h4>
+                                <p>Receive personalized music recommendations</p>
+                            </div>
+                        </div>
+                        <label class="toggle-switch">
+                            <input type="checkbox" ${notificationSettings.recommendations ? 'checked' : ''} onchange="toggleNotification('recommendations', this.checked)">
+                            <span class="toggle-slider"></span>
+                        </label>
+                    </div>
+                    <div class="setting-item">
+                        <div class="setting-info">
+                            <span class="setting-icon">📋</span>
+                            <div>
+                                <h4>Playlist Updates</h4>
+                                <p>Get notified when playlists you follow are updated</p>
+                            </div>
+                        </div>
+                        <label class="toggle-switch">
+                            <input type="checkbox" ${notificationSettings.playlistUpdates ? 'checked' : ''} onchange="toggleNotification('playlistUpdates', this.checked)">
+                            <span class="toggle-slider"></span>
+                        </label>
+                    </div>
+                    <div class="setting-item">
+                        <div class="setting-info">
+                            <span class="setting-icon">👥</span>
+                            <div>
+                                <h4>Social Activity</h4>
+                                <p>Notifications about friends and followers</p>
+                            </div>
+                        </div>
+                        <label class="toggle-switch">
+                            <input type="checkbox" ${notificationSettings.socialActivity ? 'checked' : ''} onchange="toggleNotification('socialActivity', this.checked)">
+                            <span class="toggle-slider"></span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    `;
+}
+
+// Create Audio Quality page
+function createAudioQualityPage() {
+    return `
+        <div class="settings-page">
+            <div class="settings-header">
+                <button class="back-btn" onclick="showProfilePage()">← Back</button>
+                <h2>Audio Quality</h2>
+            </div>
+            <div class="settings-content">
+                <div class="audio-quality-settings">
+                    <p class="quality-description">Higher quality audio uses more data</p>
+                    <div class="quality-options">
+                        <div class="quality-option ${audioQuality === 'low' ? 'active' : ''}" onclick="setAudioQuality('low')">
+                            <div class="quality-info">
+                                <h4>Low</h4>
+                                <p>96 kbps - Save data</p>
+                            </div>
+                            <span class="quality-check">${audioQuality === 'low' ? '✓' : ''}</span>
+                        </div>
+                        <div class="quality-option ${audioQuality === 'normal' ? 'active' : ''}" onclick="setAudioQuality('normal')">
+                            <div class="quality-info">
+                                <h4>Normal</h4>
+                                <p>160 kbps - Good quality</p>
+                            </div>
+                            <span class="quality-check">${audioQuality === 'normal' ? '✓' : ''}</span>
+                        </div>
+                        <div class="quality-option ${audioQuality === 'high' ? 'active' : ''}" onclick="setAudioQuality('high')">
+                            <div class="quality-info">
+                                <h4>High</h4>
+                                <p>320 kbps - Best quality</p>
+                            </div>
+                            <span class="quality-check">${audioQuality === 'high' ? '✓' : ''}</span>
+                        </div>
+                        <div class="quality-option ${audioQuality === 'very-high' ? 'active' : ''}" onclick="setAudioQuality('very-high')">
+                            <div class="quality-info">
+                                <h4>Very High</h4>
+                                <p>Lossless - Studio quality</p>
+                            </div>
+                            <span class="quality-check">${audioQuality === 'very-high' ? '✓' : ''}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    `;
+}
+
+// Create Dark/Light Mode page
+function createThemeModePage() {
+    return `
+        <div class="settings-page">
+            <div class="settings-header">
+                <button class="back-btn" onclick="showProfilePage()">← Back</button>
+                <h2>Appearance</h2>
+            </div>
+            <div class="settings-content">
+                <div class="theme-settings">
+                    <p class="theme-description">Choose your preferred theme</p>
+                    <div class="theme-options">
+                        <div class="theme-option ${isDarkMode ? 'active' : ''}" onclick="setTheme(true)">
+                            <div class="theme-preview dark-preview">
+                                <div class="preview-content">
+                                    <div class="preview-bar"></div>
+                                    <div class="preview-text"></div>
+                                    <div class="preview-text short"></div>
+                                </div>
+                            </div>
+                            <h4>Dark Mode</h4>
+                            <p>Easy on the eyes</p>
+                            <span class="theme-check">${isDarkMode ? '✓' : ''}</span>
+                        </div>
+                        <div class="theme-option ${!isDarkMode ? 'active' : ''}" onclick="setTheme(false)">
+                            <div class="theme-preview light-preview">
+                                <div class="preview-content">
+                                    <div class="preview-bar"></div>
+                                    <div class="preview-text"></div>
+                                    <div class="preview-text short"></div>
+                                </div>
+                            </div>
+                            <h4>Light Mode</h4>
+                            <p>Bright and clear</p>
+                            <span class="theme-check">${!isDarkMode ? '✓' : ''}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    `;
+}
+
+// Create profile page content
+function createProfilePageHTML() {
+    return `
+        <div class="profile-page">
+            <div class="profile-header">
+                <div class="profile-avatar">
+                    <img src="${userProfile.avatar}" alt="Profile" class="profile-avatar-img">
+                </div>
+                <div class="profile-info">
+                    <h2 class="profile-name">${userProfile.name}</h2>
+                    <p class="profile-bio">${userProfile.bio}</p>
+                </div>
+            </div>
+            
+            <div class="profile-stats">
+                <div class="stat-item">
+                    <span class="stat-icon">🎵</span>
+                    <div class="stat-info">
+                        <span class="stat-number">128</span>
+                        <span class="stat-label">Songs Played</span>
+                    </div>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-icon">❤️</span>
+                    <div class="stat-info">
+                        <span class="stat-number">32</span>
+                        <span class="stat-label">Liked Songs</span>
+                    </div>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-icon">📋</span>
+                    <div class="stat-info">
+                        <span class="stat-number">6</span>
+                        <span class="stat-label">Playlists</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="profile-menu">
+                <a href="#" class="profile-menu-item" onclick="event.preventDefault(); showEditProfile();">
+                    <span class="menu-icon">👤</span>
+                    <span>Edit Profile</span>
+                    <span class="menu-arrow">›</span>
+                </a>
+                <a href="#" class="profile-menu-item" onclick="event.preventDefault(); showNotifications();">
+                    <span class="menu-icon">🔔</span>
+                    <span>Notifications</span>
+                    <span class="menu-arrow">›</span>
+                </a>
+                <a href="#" class="profile-menu-item" onclick="event.preventDefault(); showAudioQuality();">
+                    <span class="menu-icon">🎧</span>
+                    <span>Audio Quality</span>
+                    <span class="menu-arrow">›</span>
+                </a>
+                <a href="#" class="profile-menu-item" onclick="event.preventDefault(); showThemeMode();">
+                    <span class="menu-icon">🌙</span>
+                    <span>Dark / Light Mode</span>
+                    <span class="menu-arrow">›</span>
+                </a>
+            </div>
+        </div>
+    `;
+}
+
+// Show profile page
+function showProfilePage() {
+    mainContent.innerHTML = createProfilePageHTML();
+    mainContent.scrollTop = 0;
+}
+
+// Show Edit Profile
+function showEditProfile() {
+    mainContent.innerHTML = createEditProfilePage();
+    mainContent.scrollTop = 0;
+}
+
+// Show Notifications
+function showNotifications() {
+    mainContent.innerHTML = createNotificationsPage();
+    mainContent.scrollTop = 0;
+}
+
+// Show Audio Quality
+function showAudioQuality() {
+    mainContent.innerHTML = createAudioQualityPage();
+    mainContent.scrollTop = 0;
+}
+
+// Show Theme Mode
+function showThemeMode() {
+    mainContent.innerHTML = createThemeModePage();
+    mainContent.scrollTop = 0;
+}
+
+// Save profile
+function saveProfile() {
+    userProfile.name = document.getElementById('profileName').value;
+    userProfile.bio = document.getElementById('profileBio').value;
+    userProfile.email = document.getElementById('profileEmail').value;
+    
+    alert('Profile saved successfully!');
+    showProfilePage();
+}
+
+// Toggle notification
+function toggleNotification(setting, value) {
+    notificationSettings[setting] = value;
+    console.log('Notification settings updated:', notificationSettings);
+}
+
+// Set audio quality
+function setAudioQuality(quality) {
+    audioQuality = quality;
+    console.log('Audio quality set to:', quality);
+    showAudioQuality();
+}
+
+// Set theme
+function setTheme(dark) {
+    isDarkMode = dark;
+    const body = document.body;
+    const sidebar = document.querySelector('.sidebar');
+    const musicPlayer = document.querySelector('.music-player');
+    const bgShapes = document.querySelector('.bg-shapes');
+    
+    if (dark) {
+        // Dark Mode
+        body.style.background = '#000';
+        body.style.color = '#fff';
+        body.classList.remove('light-mode');
+        
+        if (sidebar) {
+            sidebar.style.background = '#000';
+            sidebar.style.borderRight = '1px solid rgba(255,255,255,.1)';
+        }
+        if (musicPlayer) {
+            musicPlayer.style.background = 'rgba(0,0,0,.95)';
+            musicPlayer.style.borderTop = '1px solid rgba(255,255,255,.1)';
+        }
+        
+        // Reset shapes to white/light colors - preserve animations
+        if (bgShapes) {
+            const circles = bgShapes.querySelectorAll('.circle');
+            const triangles = bgShapes.querySelectorAll('.triangle');
+            const squares = bgShapes.querySelectorAll('.square');
+            const hexagons = bgShapes.querySelectorAll('.hexagon');
+            
+            circles.forEach(circle => {
+                circle.style.background = 'radial-gradient(circle, rgba(255,255,255,.25), transparent 70%)';
+                circle.style.borderColor = 'rgba(255,255,255,.6)';
+                circle.style.boxShadow = '0 0 80px rgba(255,255,255,.5), inset 0 0 50px rgba(255,255,255,.25)';
+            });
+            
+            triangles.forEach((triangle, index) => {
+                if (index === 0) triangle.style.borderBottomColor = 'rgba(255,255,255,.5)';
+                if (index === 1) triangle.style.borderBottomColor = 'rgba(255,255,255,.45)';
+                if (index === 2) triangle.style.borderBottomColor = 'rgba(255,255,255,.4)';
+                triangle.style.boxShadow = '0 0 80px rgba(255,255,255,.6)';
+            });
+            
+            squares.forEach(square => {
+                square.style.background = 'rgba(255,255,255,.15)';
+                square.style.borderColor = 'rgba(255,255,255,.6)';
+                square.style.boxShadow = '0 0 70px rgba(255,255,255,.3), inset 0 0 40px rgba(255,255,255,.15)';
+                square.style.opacity = '0.5';
+            });
+            
+            hexagons.forEach(hexagon => {
+                hexagon.style.background = 'rgba(255,255,255,.12)';
+                hexagon.style.borderColor = 'rgba(255,255,255,.5)';
+                hexagon.style.boxShadow = '0 0 65px rgba(255,255,255,.35)';
+                hexagon.style.opacity = '0.45';
+            });
+        }
+    } else {
+        // Light Mode
+        body.style.background = '#f5f5f5';
+        body.style.color = '#000';
+        body.classList.add('light-mode');
+        
+        if (sidebar) {
+            sidebar.style.background = '#fff';
+            sidebar.style.borderRight = '1px solid rgba(0,0,0,.1)';
+        }
+        if (musicPlayer) {
+            musicPlayer.style.background = 'rgba(255,255,255,.95)';
+            musicPlayer.style.borderTop = '1px solid rgba(0,0,0,.1)';
+        }
+        
+        // Change shapes to black/dark colors - preserve animations
+        if (bgShapes) {
+            const circles = bgShapes.querySelectorAll('.circle');
+            const triangles = bgShapes.querySelectorAll('.triangle');
+            const squares = bgShapes.querySelectorAll('.square');
+            const hexagons = bgShapes.querySelectorAll('.hexagon');
+            
+            circles.forEach(circle => {
+                circle.style.background = 'radial-gradient(circle, rgba(0,0,0,.1), transparent 70%)';
+                circle.style.borderColor = 'rgba(0,0,0,.4)';
+                circle.style.boxShadow = '0 0 60px rgba(0,0,0,.3), inset 0 0 40px rgba(0,0,0,.15)';
+            });
+            
+            triangles.forEach((triangle, index) => {
+                if (index === 0) triangle.style.borderBottomColor = 'rgba(0,0,0,.35)';
+                if (index === 1) triangle.style.borderBottomColor = 'rgba(0,0,0,.3)';
+                if (index === 2) triangle.style.borderBottomColor = 'rgba(0,0,0,.25)';
+                triangle.style.boxShadow = '0 0 60px rgba(0,0,0,.4)';
+            });
+            
+            squares.forEach(square => {
+                square.style.background = 'rgba(0,0,0,.08)';
+                square.style.borderColor = 'rgba(0,0,0,.4)';
+                square.style.boxShadow = '0 0 50px rgba(0,0,0,.18), inset 0 0 30px rgba(0,0,0,.08)';
+            });
+            
+            hexagons.forEach(hexagon => {
+                hexagon.style.background = 'rgba(0,0,0,.05)';
+                hexagon.style.borderColor = 'rgba(0,0,0,.3)';
+                hexagon.style.boxShadow = '0 0 45px rgba(0,0,0,.22)';
+            });
+        }
+    }
+    
+    showThemeMode();
+}
+
+// Music Player
+const playBtn = document.querySelector('.play-btn');
+let isPlaying = false;
+
+playBtn.addEventListener('click', () => {
+    const videoPlayer = document.getElementById('videoPlayer');
+    const videoContainer = document.getElementById('videoContainer');
+    
+    // Check if video is currently showing
+    if (videoContainer.style.display === 'block') {
+        if (videoPlayer.paused) {
+            videoPlayer.play();
+            playBtn.textContent = '⏸';
+            isPlaying = true;
+        } else {
+            videoPlayer.pause();
+            playBtn.textContent = '▶';
+            isPlaying = false;
+        }
+    } else {
+        // No video playing, just toggle button
+        isPlaying = !isPlaying;
+        playBtn.textContent = isPlaying ? '⏸' : '▶';
+    }
+});
+
+// Progress Bar
+const progressBar = document.querySelector('.progress-bar');
+const videoPlayer = document.getElementById('videoPlayer');
+
+// Update progress bar as video plays
+videoPlayer.addEventListener('timeupdate', () => {
+    if (videoPlayer.duration) {
+        const progress = (videoPlayer.currentTime / videoPlayer.duration) * 100;
+        progressBar.value = progress;
+        
+        // Update progress bar color
+        progressBar.style.background = `linear-gradient(to right, 
+            rgba(255,255,255,.9) 0%, 
+            rgba(255,255,255,.9) ${progress}%, 
+            rgba(255,255,255,.2) ${progress}%, 
+            rgba(255,255,255,.2) 100%)`;
+        
+        // Update current time display
+        const currentMinutes = Math.floor(videoPlayer.currentTime / 60);
+        const currentSeconds = Math.floor(videoPlayer.currentTime % 60);
+        const timeElements = document.querySelectorAll('.time');
+        if (timeElements[0]) {
+            timeElements[0].textContent = `${currentMinutes}:${currentSeconds.toString().padStart(2, '0')}`;
+        }
+        
+        // Update total duration display
+        const durationMinutes = Math.floor(videoPlayer.duration / 60);
+        const durationSeconds = Math.floor(videoPlayer.duration % 60);
+        if (timeElements[1]) {
+            timeElements[1].textContent = `${durationMinutes}:${durationSeconds.toString().padStart(2, '0')}`;
+        }
+    }
+});
+
+// Seek video when progress bar is changed
+progressBar.addEventListener('input', (e) => {
+    const videoContainer = document.getElementById('videoContainer');
+    if (videoContainer.style.display === 'block' && videoPlayer.duration) {
+        const seekTime = (e.target.value / 100) * videoPlayer.duration;
+        videoPlayer.currentTime = seekTime;
+        
+        // Update progress bar color immediately
+        const progress = e.target.value;
+        progressBar.style.background = `linear-gradient(to right, 
+            rgba(255,255,255,.9) 0%, 
+            rgba(255,255,255,.9) ${progress}%, 
+            rgba(255,255,255,.2) ${progress}%, 
+            rgba(255,255,255,.2) 100%)`;
+    }
+});
+
+// Like Button
+const likeBtn = document.querySelectorAll('.action-btn')[1];
+likeBtn.addEventListener('click', () => {
+    likeBtn.style.color = likeBtn.style.color === 'red' ? '' : 'red';
+});
+
+// Shuffle Button
+const shuffleBtn = document.getElementById('shuffleBtn');
+let isShuffled = false;
+shuffleBtn.addEventListener('click', () => {
+    isShuffled = !isShuffled;
+    shuffleBtn.style.color = isShuffled ? '#1db954' : '';
+    console.log('Shuffle:', isShuffled ? 'ON' : 'OFF');
+});
+
+// Previous Button
+const prevBtn = document.getElementById('prevBtn');
+prevBtn.addEventListener('click', () => {
+    const videoPlayer = document.getElementById('videoPlayer');
+    if (videoPlayer.currentTime > 3) {
+        videoPlayer.currentTime = 0; // Restart current song
+    } else {
+        console.log('Previous track');
+        // TODO: Implement previous track logic
+    }
+});
+
+// Next Button
+const nextBtn = document.getElementById('nextBtn');
+nextBtn.addEventListener('click', () => {
+    console.log('Next track');
+    // TODO: Implement next track logic
+});
+
+// Repeat Button
+const repeatBtn = document.getElementById('repeatBtn');
+let repeatMode = 0; // 0: off, 1: repeat all, 2: repeat one
+repeatBtn.addEventListener('click', () => {
+    repeatMode = (repeatMode + 1) % 3;
+    const videoPlayer = document.getElementById('videoPlayer');
+    
+    if (repeatMode === 0) {
+        repeatBtn.style.color = '';
+        repeatBtn.textContent = '🔁';
+        videoPlayer.loop = false;
+    } else if (repeatMode === 1) {
+        repeatBtn.style.color = '#1db954';
+        repeatBtn.textContent = '🔁';
+        videoPlayer.loop = false;
+    } else {
+        repeatBtn.style.color = '#1db954';
+        repeatBtn.textContent = '🔂';
+        videoPlayer.loop = true;
+    }
+    console.log('Repeat mode:', repeatMode === 0 ? 'OFF' : repeatMode === 1 ? 'ALL' : 'ONE');
+});
+
+// Volume Button
+const volumeBtn = document.getElementById('volumeBtn');
+let isMuted = false;
+volumeBtn.addEventListener('click', () => {
+    const videoPlayer = document.getElementById('videoPlayer');
+    isMuted = !isMuted;
+    videoPlayer.muted = isMuted;
+    volumeBtn.textContent = isMuted ? '🔇' : '🔊';
+});
+
+// Fullscreen Button
+const fullscreenBtn = document.getElementById('fullscreenBtn');
+fullscreenBtn.addEventListener('click', () => {
+    const videoPlayer = document.getElementById('videoPlayer');
+    if (videoPlayer.requestFullscreen) {
+        videoPlayer.requestFullscreen();
+    } else if (videoPlayer.webkitRequestFullscreen) {
+        videoPlayer.webkitRequestFullscreen();
+    } else if (videoPlayer.msRequestFullscreen) {
+        videoPlayer.msRequestFullscreen();
+    }
+});
+
+// Video Fullscreen Button (on video itself)
+const videoFullscreenBtn = document.getElementById('videoFullscreenBtn');
+const lyricsOverlay = document.getElementById('lyricsOverlay');
+
+videoFullscreenBtn.addEventListener('click', () => {
+    const videoContainer = document.getElementById('videoContainer');
+    const videoPlayer = document.getElementById('videoPlayer');
+    
+    // Show lyrics overlay
+    lyricsOverlay.style.display = 'flex';
+    
+    // Request fullscreen
+    if (videoContainer.requestFullscreen) {
+        videoContainer.requestFullscreen();
+    } else if (videoContainer.webkitRequestFullscreen) {
+        videoContainer.webkitRequestFullscreen();
+    } else if (videoContainer.msRequestFullscreen) {
+        videoContainer.msRequestFullscreen();
+    }
+});
+
+// Hide lyrics when exit fullscreen
+document.addEventListener('fullscreenchange', () => {
+    if (!document.fullscreenElement) {
+        lyricsOverlay.style.display = 'none';
+    }
+});
+
+document.addEventListener('webkitfullscreenchange', () => {
+    if (!document.webkitFullscreenElement) {
+        lyricsOverlay.style.display = 'none';
+    }
+});
+
+// Lyrics Button
+const lyricsBtn = document.getElementById('lyricsBtn');
+lyricsBtn.addEventListener('click', () => {
+    alert('Lyrics feature coming soon!');
+});
+
+// Queue Button
+const queueBtn = document.getElementById('queueBtn');
+queueBtn.addEventListener('click', () => {
+    alert('Queue feature coming soon!');
+});
+
+// Connect Button
+const connectBtn = document.getElementById('connectBtn');
+connectBtn.addEventListener('click', () => {
+    alert('Connect to device feature coming soon!');
+});
+
+// Play Track Function - Update Album Highlight
+let currentTrack = null;
+
+// Lyrics database
+const lyricsDatabase = {
+    'videos/Timeless.mp4': {
+        title: 'Timeless - The Weeknd ft. Playboi Carti',
+        lyrics: [
+            // [00:00] - Intro
+            { time: 2, text: "XO" },
+            { time: 8, text: "Ooh, yeah, ooh, yeah, no" },
+            
+            // [00:23] - Verse 1 (Playboi Carti)
+            { time: 26, text: "Ever since I was a jit, knew I was the shit (Ooh, yeah)" },
+            { time: 30, text: "Shorty keep wanna come 'round, she wanna get hit (Wanna get hit so hard)" },
+            { time: 34, text: "She think she the main because I keep her by my side" },
+            { time: 38, text: "Double-O, bust down the watch, she know that I'm timeless (Timeless)" },
+            { time: 44, text: "I put my son in some Rick" },
+            { time: 46, text: "I pull that gun off the hip" },
+            { time: 48, text: "Pockets hold twenty-two clips (Ah)" },
+            { time: 50, text: "I break her heart, Comme Garçon" },
+            { time: 52, text: "Put on a shirt, get put on a blimp" },
+            { time: 54, text: "Bitch like a stain, get ready to lick" },
+            
+            // [01:09] - Chorus
+            { time: 72, text: "It don't matter what they say, I'm timeless (Schyeah)" },
+            { time: 76, text: "Timeless, timeless, timeless, timeless (We timeless, oh)" },
+            { time: 81, text: "Ever since I was a jit, knew I was the shit" },
+            { time: 85, text: "Shorty keep wanna come 'round, she wanna get hit" },
+            
+            // [01:31] - Verse 2 (The Weeknd)
+            { time: 94, text: "City on fire when I'm comin' home" },
+            { time: 98, text: "Fill up the sky, I fill up the Dome" },
+            { time: 102, text: "They'll play it one day, it's a hell of a show" },
+            { time: 106, text: "I'm deep in the soul, I'm deep in the flow" },
+            { time: 110, text: "House like a bank, deposit this bitch, deposit that check" },
+            { time: 114, text: "Smile on my face, ain't playing shit, come and get checked" },
+            
+            // [02:41] - Chorus
+            { time: 164, text: "It don't matter what they say, I'm timeless" },
+            { time: 168, text: "Timeless, timeless, timeless, timeless" },
+            
+            // [03:04] - Bridge / Verse 3
+            { time: 187, text: "Ever since I was a kid, I been legit (Homixide, Homixide)" },
+            { time: 191, text: "If I was you, I would cut up my wrist" },
+            { time: 195, text: "XO tatted all over her body, yeah" },
+            { time: 199, text: "She just wanna roll and I don't mind it, yeah" },
+            
+            // [03:50] - Outro
+            { time: 233, text: "Timeless, timeless, timeless" },
+            { time: 237, text: "We timeless, oh" },
+            { time: 241, text: "Timeless, timeless, timeless" },
+            { time: 245, text: "We timeless, oh" }
+        ]
+    },
+    'videos/Jamesarthur.mp4': {
+        title: 'Say You Won\'t Let Go - James Arthur',
+        lyrics: `I met you in the dark
+You lit me up
+You made me feel as though
+I was enough
+
+We danced the night away
+We drank too much
+I held your hair back when
+You were throwing up
+
+Then you smiled over your shoulder
+For a minute, I was stone-cold sober
+I pulled you closer to my chest
+
+And you asked me to stay over
+I said, I already told ya
+I think that you should get some rest
+
+I knew I loved you then
+But you'd never know
+'Cause I played it cool when I was scared of letting go
+
+I know I needed you
+But I never showed
+But I wanna stay with you until we're grey and old
+
+Just say you won't let go
+Just say you won't let go`
+    },
+    'videos/Hindia.mp4': {
+        title: 'Evaluasi - Hindia',
+        lyrics: `Aku tahu kau lelah
+Dengan semua yang terjadi
+Aku tahu kau bosan
+Dengan semua yang ada
+
+Tapi percayalah
+Semua akan baik-baik saja
+Percayalah
+Semua akan baik-baik saja
+
+[Chorus]
+Evaluasi diri
+Evaluasi hati
+Evaluasi pikiran
+Evaluasi perasaan
+
+Kita butuh waktu
+Untuk menenangkan diri
+Kita butuh ruang
+Untuk bernafas lagi`
+    },
+    'videos/Justinbieber.mp4': {
+        title: 'Love Yourself - Justin Bieber',
+        lyrics: `For all the times that you rain on my parade
+And all the clubs you get in using my name
+You think you broke my heart, oh, girl, for goodness' sake
+You think I'm crying on my own, well, I ain't
+
+And I didn't wanna write a song
+'Cause I didn't want anyone thinking I still care, I don't
+But you still hit my phone up
+And, baby, I be movin' on
+And I think you should be somethin' I don't wanna hold back
+
+Maybe you should know that
+My mama don't like you and she likes everyone
+And I never like to admit that I was wrong
+And I've been so caught up in my job, didn't see what's going on
+But now I know, I'm better sleeping on my own
+
+'Cause if you like the way you look that much
+Oh, baby, you should go and love yourself
+And if you think that I'm still holdin' on to somethin'
+You should go and love yourself`
+    },
+    'videos/One Direction - Night Changes.mp4': {
+        title: 'Night Changes - One Direction',
+        lyrics: `Going out tonight, changes into something red
+Her mother doesn't like that kind of dress
+Everything she never had, she's showing off
+Driving too fast, moon is breaking through her hair
+She's heading for something that she won't forget
+Having no regrets is all that she really wants
+
+We're only getting older, baby
+And I've been thinking about it lately
+Does it ever drive you crazy
+Just how fast the night changes?
+Everything that you've ever dreamed of
+Disappearing when you wake up
+But there's nothing to be afraid of
+Even when the night changes
+It will never change me and you
+
+Chasing it tonight, doubts are running 'round her head
+He's waiting, hides behind a cigarette
+Heart is beating loud and she doesn't want it to stop
+Moving too fast, moon is lighting up her skin
+She's falling, doesn't even know it yet
+Having no regrets is all that she really wants
+
+We're only getting older, baby
+And I've been thinking about it lately
+Does it ever drive you crazy
+Just how fast the night changes?
+Everything that you've ever dreamed of
+Disappearing when you wake up
+But there's nothing to be afraid of
+Even when the night changes
+It will never change me and you
+
+Going out tonight, changes into something red
+Her mother doesn't like that kind of dress
+Reminds her of the missing piece of innocence she lost`
+    }
+};
+
+function playTrack(artist, song, imagePath, videoPath) {
+    const albumHighlight = document.getElementById('albumHighlight');
+    const title = document.getElementById('nowPlayingTitle');
+    const artistName = document.getElementById('nowPlayingArtist');
+    const albumImg = document.getElementById('nowPlayingImg');
+    const videoContainer = document.getElementById('videoContainer');
+    const videoPlayer = document.getElementById('videoPlayer');
+    const videoSource = document.getElementById('videoSource');
+    const nowPlayingImage = document.getElementById('nowPlayingImage');
+    const playBtn = document.querySelector('.play-btn');
+    const lyricsBox = document.getElementById('lyricsBox');
+    const lyricsBoxText = document.getElementById('lyricsBoxText');
+    
+    // Update music player bottom info
+    const playerAlbumCover = document.getElementById('playerAlbumCover');
+    const playerTrackName = document.getElementById('playerTrackName');
+    const playerArtistName = document.getElementById('playerArtistName');
+    
+    playerAlbumCover.src = imagePath;
+    playerAlbumCover.style.display = 'block';
+    playerTrackName.textContent = song;
+    playerArtistName.textContent = artist;
+    
+    // Check if clicking the same track
+    if (currentTrack === videoPath && videoPath !== '') {
+        // Toggle play/pause
+        if (videoPlayer.paused) {
+            videoPlayer.play();
+            playBtn.textContent = '⏸';
+        } else {
+            videoPlayer.pause();
+            playBtn.textContent = '▶';
+        }
+        return;
+    }
+    
+    // New track selected
+    currentTrack = videoPath;
+    
+    // Update lyrics
+    const lyricsTitle = document.getElementById('lyricsTitle');
+    const lyricsText = document.getElementById('lyricsText');
+    if (lyricsDatabase[videoPath]) {
+        lyricsTitle.textContent = lyricsDatabase[videoPath].title;
+        
+        // Check if lyrics is array (synchronized) or string (static)
+        if (Array.isArray(lyricsDatabase[videoPath].lyrics)) {
+            // Synchronized lyrics
+            currentLyricsData = lyricsDatabase[videoPath].lyrics;
+            renderLyrics(currentLyricsData);
+            lyricsBox.style.display = 'block';
+            
+            // Also update fullscreen overlay with plain text
+            const plainLyrics = currentLyricsData.map(line => line.text).join('\n');
+            lyricsText.textContent = plainLyrics;
+        } else {
+            // Static lyrics (old format)
+            currentLyricsData = null;
+            stopLyricsSync();
+            lyricsText.textContent = lyricsDatabase[videoPath].lyrics;
+            
+            // Show static lyrics in box
+            const lyricsBoxContent = document.getElementById('lyricsBoxContent');
+            const lyricsLines = lyricsDatabase[videoPath].lyrics.split('\n');
+            lyricsBoxContent.innerHTML = '';
+            lyricsLines.forEach(line => {
+                const lineDiv = document.createElement('div');
+                lineDiv.className = 'lyric-line';
+                lineDiv.style.fontSize = '32px';
+                lineDiv.style.color = '#fff';
+                lineDiv.style.borderLeft = 'none';
+                lineDiv.textContent = line || '\u00A0'; // Non-breaking space for empty lines
+                lyricsBoxContent.appendChild(lineDiv);
+            });
+            lyricsBox.style.display = 'block';
+        }
+    } else {
+        lyricsTitle.textContent = `${song} - ${artist}`;
+        lyricsText.textContent = 'Lyrics not available for this song.';
+        currentLyricsData = null;
+        stopLyricsSync();
+        
+        // Update lyrics box
+        const lyricsBoxContent = document.getElementById('lyricsBoxContent');
+        lyricsBoxContent.innerHTML = '<div class="lyric-line" style="font-size: 18px; color: rgba(255,255,255,.5);">Lyrics not available for this song.</div>';
+        lyricsBox.style.display = 'block';
+    }
+    
+    // Update text content
+    title.textContent = song.toUpperCase();
+    artistName.textContent = artist;
+    
+    // Update album image
+    albumImg.src = imagePath;
+    
+    // If video path is provided, show video in the small box
+    if (videoPath && videoPath !== '') {
+        videoSource.src = videoPath;
+        videoPlayer.load(); // Reload video with new source
+        videoContainer.style.display = 'block';
+        nowPlayingImage.style.display = 'none';
+        
+        // Auto play video and start lyrics sync
+        videoPlayer.play().then(() => {
+            playBtn.textContent = '⏸';
+            if (currentLyricsData) {
+                startLyricsSync();
+            }
+        }).catch(err => {
+            console.log('Auto-play prevented:', err);
+            playBtn.textContent = '▶';
+        });
+    } else {
+        // No video, just show album image
+        videoContainer.style.display = 'none';
+        nowPlayingImage.style.display = 'block';
+        lyricsBox.style.display = 'none';
+        
+        // Update play button to play icon
+        playBtn.textContent = '▶';
+    }
+    
+    // Update background image with smooth transition
+    const style = document.createElement('style');
+    style.textContent = `
+        #albumHighlight::before {
+            background-image: url('${imagePath}') !important;
+        }
+    `;
+    
+    // Remove old style if exists
+    const oldStyle = document.getElementById('dynamic-bg-style');
+    if (oldStyle) {
+        oldStyle.remove();
+    }
+    
+    style.id = 'dynamic-bg-style';
+    document.head.appendChild(style);
+    
+    // Add animation effect
+    albumHighlight.style.transform = 'scale(1.02)';
+    setTimeout(() => {
+        albumHighlight.style.transform = 'scale(1)';
+    }, 300);
+}
+
+
+// Synchronized Lyrics System
+let lyricsUpdateInterval = null;
+let currentLyricsData = null;
+
+// Function to render lyrics lines
+function renderLyrics(lyricsArray) {
+    const lyricsBoxContent = document.getElementById('lyricsBoxContent');
+    lyricsBoxContent.innerHTML = '';
+    
+    lyricsArray.forEach((line, index) => {
+        const lineDiv = document.createElement('div');
+        lineDiv.className = 'lyric-line';
+        lineDiv.dataset.time = line.time;
+        lineDiv.dataset.index = index;
+        
+        if (line.text === '') {
+            lineDiv.classList.add('empty');
+            lineDiv.innerHTML = '&nbsp;';
+        } else {
+            lineDiv.textContent = line.text;
+        }
+        
+        // Click to seek
+        lineDiv.addEventListener('click', () => {
+            const videoPlayer = document.getElementById('videoPlayer');
+            videoPlayer.currentTime = line.time;
+        });
+        
+        lyricsBoxContent.appendChild(lineDiv);
+    });
+}
+
+// Function to update active lyric line
+function updateActiveLyric(currentTime) {
+    if (!currentLyricsData) return;
+    
+    const lines = document.querySelectorAll('.lyric-line');
+    let activeIndex = -1;
+    
+    // Find the active line
+    for (let i = currentLyricsData.length - 1; i >= 0; i--) {
+        if (currentTime >= currentLyricsData[i].time) {
+            activeIndex = i;
+            break;
+        }
+    }
+    
+    // Update classes
+    lines.forEach((line, index) => {
+        line.classList.remove('active', 'passed');
+        
+        if (index === activeIndex) {
+            line.classList.add('active');
+            // Auto scroll to active line - instant scroll to prevent page scroll interference
+            const container = document.getElementById('lyricsBoxContent');
+            if (container && line) {
+                const lineTop = line.offsetTop;
+                const containerHeight = container.clientHeight;
+                const scrollTo = lineTop - (containerHeight / 2) + (line.clientHeight / 2);
+                
+                // Use instant scroll to prevent interference with page scroll
+                container.scrollTop = scrollTo;
+            }
+        } else if (index < activeIndex) {
+            line.classList.add('passed');
+        }
+    });
+}
+
+// Start lyrics sync
+function startLyricsSync() {
+    const videoPlayer = document.getElementById('videoPlayer');
+    
+    if (lyricsUpdateInterval) {
+        clearInterval(lyricsUpdateInterval);
+    }
+    
+    lyricsUpdateInterval = setInterval(() => {
+        if (!videoPlayer.paused && currentLyricsData) {
+            updateActiveLyric(videoPlayer.currentTime);
+        }
+    }, 100); // Update every 100ms for smooth sync
+}
+
+// Stop lyrics sync
+function stopLyricsSync() {
+    if (lyricsUpdateInterval) {
+        clearInterval(lyricsUpdateInterval);
+        lyricsUpdateInterval = null;
+    }
+}
+
+// Update video player event listeners for lyrics
+const videoPlayerForLyrics = document.getElementById('videoPlayer');
+videoPlayerForLyrics.addEventListener('play', () => {
+    if (currentLyricsData) {
+        startLyricsSync();
+    }
+});
+
+videoPlayerForLyrics.addEventListener('pause', () => {
+    stopLyricsSync();
+});
+
+videoPlayerForLyrics.addEventListener('seeked', () => {
+    if (currentLyricsData) {
+        updateActiveLyric(videoPlayerForLyrics.currentTime);
+    }
+});
+
+// Force restart animations on page load
+window.addEventListener('load', () => {
+    const bgShapes = document.querySelector('.bg-shapes');
+    if (bgShapes) {
+        // Force reflow to restart animations
+        bgShapes.style.display = 'none';
+        bgShapes.offsetHeight; // Trigger reflow
+        bgShapes.style.display = '';
+        
+        // Ensure all shapes are animating
+        const allShapes = bgShapes.querySelectorAll('.circle, .triangle, .square, .hexagon');
+        allShapes.forEach(shape => {
+            shape.style.animationPlayState = 'running';
+        });
+    }
+});
+
+// Also restart on visibility change (when tab becomes active)
+document.addEventListener('visibilitychange', () => {
+    if (!document.hidden) {
+        const bgShapes = document.querySelector('.bg-shapes');
+        if (bgShapes) {
+            const allShapes = bgShapes.querySelectorAll('.circle, .triangle, .square, .hexagon');
+            allShapes.forEach(shape => {
+                shape.style.animationPlayState = 'running';
+            });
+        }
+    }
+});

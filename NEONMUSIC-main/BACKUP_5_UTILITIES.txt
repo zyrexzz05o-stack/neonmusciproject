@@ -1,0 +1,422 @@
+================================================================================
+                    BACKUP 5 - UTILITIES (5 FILES)
+================================================================================
+
+File ini berisi 5 helper functions dan konfigurasi:
+1. music-popup-notification.js - Logic popup notifikasi musik
+2. popup-notifications.js - Logic popup notifications umum
+3. lyrics-settings.js - Pengaturan lyrics
+4. zoom-settings.js - Pengaturan zoom UI
+5. shapes-settings.js - Pengaturan background shapes
+
+================================================================================
+                FILE 1: music-popup-notification.js
+================================================================================
+
+LOKASI: /music-popup-notification.js
+DESKRIPSI: Logic untuk popup notifikasi musik (track change, like, dll)
+
+FITUR:
+- Show notification saat track berubah
+- Show notification saat like/unlike
+- Show notification saat add to playlist
+- Auto-dismiss setelah 3 detik
+- Close button manual
+- Slide animation dari kanan
+
+FUNCTIONS:
+- initMusicPopupNotification()
+- showMusicNotification(data)
+- hideMusicNotification()
+- createNotificationElement(data)
+- autoHideNotification(delay)
+
+DATA STRUCTURE:
+{
+  type: "track-change" | "like" | "playlist",
+  title: "Song Title",
+  message: "Artist Name",
+  icon: "path/to/image.jpg",
+  duration: 3000
+}
+
+NOTIFICATION TYPES:
+1. Track Change
+   - Icon: album cover
+   - Title: song title
+   - Message: artist name
+
+2. Like Action
+   - Icon: ❤️
+   - Title: "Ditambahkan ke Lagu Disukai"
+   - Message: song title
+
+3. Playlist Action
+   - Icon: 📋
+   - Title: "Ditambahkan ke Playlist"
+   - Message: playlist name
+
+DEPENDENCIES:
+- music-popup-notification.css
+
+CARA RESTORE:
+Copy file ini ke root folder sebagai "music-popup-notification.js"
+
+================================================================================
+                FILE 2: popup-notifications.js
+================================================================================
+
+LOKASI: /popup-notifications.js
+DESKRIPSI: Logic untuk popup notifications umum (toast messages)
+
+FITUR:
+- Show toast message
+- 4 types: success, error, info, warning
+- Auto-dismiss setelah 2-3 detik
+- Queue system untuk multiple notifications
+- Fade in/out animations
+- Position: bottom center (above player)
+
+FUNCTIONS:
+- initPopupNotifications()
+- showToast(message, type, duration)
+- hideToast(toastElement)
+- createToastElement(message, type)
+- queueToast(toast)
+- processQueue()
+
+TOAST TYPES:
+1. Success
+   - Color: green (#4caf50)
+   - Icon: ✓
+   - Use: "Lagu berhasil ditambahkan"
+
+2. Error
+   - Color: red (#f44336)
+   - Icon: ✗
+   - Use: "Gagal memutar lagu"
+
+3. Info
+   - Color: blue (#2196f3)
+   - Icon: ℹ
+   - Use: "Sedang memuat..."
+
+4. Warning
+   - Color: orange (#ff9800)
+   - Icon: ⚠
+   - Use: "Koneksi lambat"
+
+USAGE EXAMPLES:
+```javascript
+// Success toast
+showToast("Lagu berhasil ditambahkan ke playlist", "success", 2000);
+
+// Error toast
+showToast("Gagal memutar lagu", "error", 3000);
+
+// Info toast
+showToast("Sedang memuat lagu...", "info", 2000);
+
+// Warning toast
+showToast("Koneksi internet lambat", "warning", 3000);
+```
+
+DEPENDENCIES:
+- popup-notifications.css
+
+CARA RESTORE:
+Copy file ini ke root folder sebagai "popup-notifications.js"
+
+================================================================================
+                    FILE 3: lyrics-settings.js
+================================================================================
+
+LOKASI: /lyrics-settings.js
+DESKRIPSI: Pengaturan untuk tampilan lyrics
+
+FITUR:
+- Toggle lyrics on/off
+- Font size adjustment
+- Alignment (left, center, right)
+- Color scheme
+- Background opacity
+- Sync speed adjustment
+- Save to localStorage
+
+FUNCTIONS:
+- initLyricsSettings()
+- loadLyricsSettings()
+- saveLyricsSettings()
+- applyLyricsSettings(settings)
+- toggleLyrics(enabled)
+- setFontSize(size)
+- setAlignment(align)
+- setColorScheme(scheme)
+- setBackgroundOpacity(opacity)
+- setSyncSpeed(speed)
+
+SETTINGS STRUCTURE:
+{
+  enabled: true,
+  fontSize: 16,
+  alignment: "center",
+  colorScheme: "white",
+  backgroundOpacity: 0.8,
+  syncSpeed: 1.0
+}
+
+LOCALSTORAGE KEY:
+"neonwave_lyrics_settings"
+
+FONT SIZE OPTIONS:
+- Small: 14px
+- Medium: 16px (default)
+- Large: 18px
+- Extra Large: 20px
+
+ALIGNMENT OPTIONS:
+- Left
+- Center (default)
+- Right
+
+COLOR SCHEMES:
+- White (default)
+- Yellow
+- Blue
+- Green
+- Pink
+
+DEPENDENCIES:
+- settings.html
+- script.js (lyrics rendering)
+
+CARA RESTORE:
+Copy file ini ke root folder sebagai "lyrics-settings.js"
+
+================================================================================
+                    FILE 4: zoom-settings.js
+================================================================================
+
+LOKASI: /zoom-settings.js
+DESKRIPSI: Pengaturan zoom level untuk UI
+
+FITUR:
+- Zoom in/out UI
+- Preset zoom levels
+- Custom zoom level
+- Reset to default
+- Save to localStorage
+- Apply to all elements
+
+FUNCTIONS:
+- initZoomSettings()
+- loadZoomSettings()
+- saveZoomSettings()
+- applyZoom(level)
+- zoomIn()
+- zoomOut()
+- resetZoom()
+- setCustomZoom(level)
+
+ZOOM LEVELS:
+- 75% (Small)
+- 90% (Medium Small)
+- 100% (Default)
+- 110% (Medium Large)
+- 125% (Large)
+- 150% (Extra Large)
+
+SETTINGS STRUCTURE:
+{
+  level: 100,
+  customLevel: null
+}
+
+LOCALSTORAGE KEY:
+"neonwave_zoom_settings"
+
+IMPLEMENTATION:
+```javascript
+// Apply zoom to root element
+document.documentElement.style.fontSize = `${level}%`;
+
+// Or apply to body
+document.body.style.transform = `scale(${level / 100})`;
+document.body.style.transformOrigin = 'top left';
+```
+
+KEYBOARD SHORTCUTS:
+- Ctrl + Plus: Zoom in
+- Ctrl + Minus: Zoom out
+- Ctrl + 0: Reset zoom
+
+DEPENDENCIES:
+- settings.html
+
+CARA RESTORE:
+Copy file ini ke root folder sebagai "zoom-settings.js"
+
+================================================================================
+                FILE 5: shapes-settings.js
+================================================================================
+
+LOKASI: /shapes-settings.js
+DESKRIPSI: Pengaturan untuk background animated shapes
+
+FITUR:
+- Toggle shapes on/off
+- Shape density (low, medium, high)
+- Animation speed
+- Shape types selection
+- Color scheme
+- Opacity adjustment
+- Save to localStorage
+
+FUNCTIONS:
+- initShapesSettings()
+- loadShapesSettings()
+- saveShapesSettings()
+- applyShapesSettings(settings)
+- toggleShapes(enabled)
+- setDensity(density)
+- setAnimationSpeed(speed)
+- setShapeTypes(types)
+- setColorScheme(scheme)
+- setOpacity(opacity)
+
+SETTINGS STRUCTURE:
+{
+  enabled: true,
+  density: "medium",
+  animationSpeed: 1.0,
+  shapeTypes: ["circle", "triangle", "square", "hexagon"],
+  colorScheme: "white",
+  opacity: 0.1
+}
+
+LOCALSTORAGE KEY:
+"neonwave_shapes_settings"
+
+DENSITY OPTIONS:
+- Low: 5 shapes
+- Medium: 10 shapes (default)
+- High: 15 shapes
+
+ANIMATION SPEED:
+- Slow: 0.5x
+- Normal: 1.0x (default)
+- Fast: 1.5x
+- Very Fast: 2.0x
+
+SHAPE TYPES:
+- Circle
+- Triangle
+- Square
+- Hexagon
+- Pentagon
+- Star
+
+COLOR SCHEMES:
+- White (default)
+- Blue
+- Purple
+- Pink
+- Rainbow (multi-color)
+
+OPACITY RANGE:
+- Min: 0.05
+- Default: 0.1
+- Max: 0.3
+
+IMPLEMENTATION:
+```javascript
+// Toggle shapes visibility
+const shapesContainer = document.querySelector('.bg-shapes');
+shapesContainer.style.display = enabled ? 'block' : 'none';
+
+// Set animation speed
+const shapes = document.querySelectorAll('.bg-shapes > div');
+shapes.forEach(shape => {
+  const duration = parseFloat(shape.style.animationDuration);
+  shape.style.animationDuration = `${duration / speed}s`;
+});
+
+// Set opacity
+shapesContainer.style.opacity = opacity;
+```
+
+DEPENDENCIES:
+- settings.html
+- styles.css (untuk .bg-shapes)
+
+CARA RESTORE:
+Copy file ini ke root folder sebagai "shapes-settings.js"
+
+================================================================================
+                            CARA MENGGUNAKAN
+================================================================================
+
+RESTORE SEMUA 5 FILE:
+1. Copy semua file ke root folder
+2. Load di index.html dengan <script src="...">
+
+URUTAN LOADING (RECOMMENDED):
+1. music-popup-notification.js
+2. popup-notifications.js
+3. lyrics-settings.js
+4. zoom-settings.js
+5. shapes-settings.js
+
+INISIALISASI:
+Panggil init functions setelah DOM ready:
+```javascript
+document.addEventListener('DOMContentLoaded', () => {
+  initMusicPopupNotification();
+  initPopupNotifications();
+  initLyricsSettings();
+  initZoomSettings();
+  initShapesSettings();
+});
+```
+
+DEPENDENCIES:
+File UTILITIES ini membutuhkan:
+- BACKUP_1_CORE.txt (index.html, script.js, styles.css)
+- BACKUP_4_STYLING.txt (untuk CSS)
+
+LOCALSTORAGE KEYS:
+- neonwave_lyrics_settings
+- neonwave_zoom_settings
+- neonwave_shapes_settings
+
+================================================================================
+                                CATATAN
+================================================================================
+
+File ini adalah RINGKASAN struktur dan fungsi.
+Untuk FULL CODE, buka file asli dan copy seluruh isi.
+
+HELPER FUNCTIONS PATTERN:
+Semua utility files mengikuti pattern yang sama:
+1. init() - Inisialisasi
+2. load() - Load dari localStorage
+3. save() - Save ke localStorage
+4. apply() - Apply settings ke UI
+
+BEST PRACTICES:
+- Selalu save settings ke localStorage
+- Load settings saat init
+- Apply settings setelah load
+- Provide default values
+- Validate settings before apply
+
+TESTING:
+1. Test setiap function secara individual
+2. Test localStorage persistence
+3. Test default values
+4. Test edge cases (min/max values)
+5. Test cross-browser compatibility
+
+================================================================================
+                                  END
+================================================================================

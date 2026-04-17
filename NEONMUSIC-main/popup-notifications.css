@@ -1,0 +1,303 @@
+/* ========================================
+   POPUP NOTIFICATIONS (IN-APP)
+   Toast-style notifications
+   ======================================== */
+
+.popup-notification-container {
+    position: fixed;
+    top: 80px;
+    right: 20px;
+    z-index: 99999;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    pointer-events: none;
+}
+
+.popup-notification {
+    width: 360px;
+    background: rgba(20, 20, 20, 0.98);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6),
+                0 0 0 1px rgba(255, 255, 255, 0.05);
+    overflow: hidden;
+    opacity: 0;
+    transform: translateX(400px);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    pointer-events: all;
+    cursor: pointer;
+    position: relative;
+}
+
+.popup-notification.show {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.popup-notification.hide {
+    opacity: 0;
+    transform: translateX(400px) scale(0.9);
+}
+
+.popup-notification:hover {
+    background: rgba(25, 25, 25, 0.98);
+    border-color: rgba(255, 255, 255, 0.15);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.7),
+                0 0 0 1px rgba(255, 255, 255, 0.08);
+    transform: translateY(-2px);
+}
+
+/* Notification Content */
+.popup-notification-content {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 16px;
+    position: relative;
+}
+
+/* Icon/Cover */
+.popup-notification-icon {
+    width: 56px;
+    height: 56px;
+    border-radius: 8px;
+    overflow: hidden;
+    flex-shrink: 0;
+    background: rgba(255, 255, 255, 0.05);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.popup-notification-icon img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Text Content */
+.popup-notification-text {
+    flex: 1;
+    min-width: 0;
+}
+
+.popup-notification-label {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.5);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 4px;
+}
+
+.popup-notification-title {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 1);
+    margin-bottom: 2px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.popup-notification-artist {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    color: rgba(255, 255, 255, 0.6);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* Close Button */
+.popup-notification-close {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 20px;
+    line-height: 1;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.popup-notification-close:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.2);
+    color: rgba(255, 255, 255, 1);
+    transform: scale(1.1);
+}
+
+/* Progress Bar */
+.popup-notification-progress {
+    height: 3px;
+    background: rgba(255, 255, 255, 0.1);
+    position: relative;
+    overflow: hidden;
+}
+
+.popup-notification-progress::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background: linear-gradient(90deg, 
+        rgba(255, 255, 255, 0.3) 0%, 
+        rgba(255, 255, 255, 0.6) 50%, 
+        rgba(255, 255, 255, 0.3) 100%);
+    animation: progress-bar 4s linear forwards;
+}
+
+@keyframes progress-bar {
+    from {
+        transform: translateX(-100%);
+    }
+    to {
+        transform: translateX(0);
+    }
+}
+
+/* Toast Notifications (Simple) */
+.popup-toast {
+    width: 320px;
+}
+
+.popup-toast .popup-notification-content {
+    padding: 14px 16px;
+}
+
+.popup-toast-icon {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    flex-shrink: 0;
+}
+
+.popup-toast-message {
+    flex: 1;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.9);
+    line-height: 1.4;
+}
+
+/* Toast Types */
+.popup-toast-success .popup-toast-icon {
+    background: rgba(76, 175, 80, 0.2);
+    color: #4caf50;
+}
+
+.popup-toast-error .popup-toast-icon {
+    background: rgba(244, 67, 54, 0.2);
+    color: #f44336;
+}
+
+.popup-toast-warning .popup-toast-icon {
+    background: rgba(255, 152, 0, 0.2);
+    color: #ff9800;
+}
+
+.popup-toast-info .popup-toast-icon {
+    background: rgba(33, 150, 243, 0.2);
+    color: #2196f3;
+}
+
+/* Hover Effects */
+.popup-notification:hover {
+    background: rgba(25, 25, 25, 0.98);
+    border-color: rgba(255, 255, 255, 0.15);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.7),
+                0 0 0 1px rgba(255, 255, 255, 0.08);
+    transform: translateY(-2px);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .popup-notification-container {
+        top: 60px;
+        right: 12px;
+        left: 12px;
+    }
+    
+    .popup-notification,
+    .popup-toast {
+        width: auto;
+    }
+    
+    .popup-notification-icon {
+        width: 48px;
+        height: 48px;
+    }
+    
+    .popup-notification-title {
+        font-size: 14px;
+    }
+    
+    .popup-notification-artist {
+        font-size: 12px;
+    }
+}
+
+/* Dark mode enhancement */
+@media (prefers-color-scheme: dark) {
+    .popup-notification {
+        background: rgba(15, 15, 15, 0.98);
+    }
+}
+
+/* Animation variants */
+@keyframes slideInRight {
+    from {
+        opacity: 0;
+        transform: translateX(400px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes slideOutRight {
+    from {
+        opacity: 1;
+        transform: translateX(0);
+    }
+    to {
+        opacity: 0;
+        transform: translateX(400px) scale(0.9);
+    }
+}
+
+/* Glow effect on hover */
+.popup-notification:hover::before {
+    content: '';
+    position: absolute;
+    inset: -1px;
+    background: linear-gradient(135deg, 
+        rgba(255, 255, 255, 0.1) 0%, 
+        transparent 50%, 
+        rgba(255, 255, 255, 0.05) 100%);
+    border-radius: 16px;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.popup-notification:hover::before {
+    opacity: 1;
+}

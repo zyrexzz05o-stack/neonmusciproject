@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fix Shapes Settings</title>
+    <style>
+        body {
+            background: #000;
+            color: #fff;
+            font-family: Arial, sans-serif;
+            padding: 40px;
+            text-align: center;
+        }
+        
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 40px;
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        h1 {
+            margin-bottom: 20px;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 15px 30px;
+            margin: 10px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #fff;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            text-decoration: none;
+        }
+        
+        .btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+        
+        .btn.danger {
+            background: rgba(255, 0, 0, 0.2);
+            border-color: rgba(255, 0, 0, 0.4);
+        }
+        
+        .btn.danger:hover {
+            background: rgba(255, 0, 0, 0.3);
+        }
+        
+        .info {
+            margin-top: 30px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 8px;
+            text-align: left;
+        }
+        
+        .success {
+            color: #0f0;
+            margin-top: 20px;
+            font-weight: bold;
+        }
+        
+        code {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 2px 8px;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔧 Fix Shapes Settings</h1>
+        <p>Jika shapes hilang atau bermasalah, gunakan tools ini untuk memperbaiki.</p>
+        
+        <button class="btn danger" onclick="clearShapesSettings()">Clear Shapes Settings</button>
+        <button class="btn" onclick="resetToDefaults()">Reset to Defaults</button>
+        <button class="btn" onclick="viewCurrentSettings()">View Current Settings</button>
+        
+        <div id="result" class="success" style="display: none;"></div>
+        
+        <div class="info">
+            <h3>Troubleshooting:</h3>
+            <ul>
+                <li><strong>Shapes hilang setelah ubah speed:</strong><br>
+                    Klik "Clear Shapes Settings" lalu refresh page</li>
+                
+                <li><strong>Shapes tidak muncul sama sekali:</strong><br>
+                    Klik "Reset to Defaults" lalu refresh page</li>
+                
+                <li><strong>Settings tidak tersimpan:</strong><br>
+                    Check browser localStorage enabled</li>
+                
+                <li><strong>Animasi rusak:</strong><br>
+                    Clear settings dan refresh page 2x</li>
+            </ul>
+            
+            <h3>Manual Fix:</h3>
+            <p>Buka browser console (F12) dan jalankan:</p>
+            <code>localStorage.removeItem('neonwave_shapes_settings')</code>
+            <br><br>
+            <p>Lalu refresh page.</p>
+        </div>
+        
+        <div style="margin-top: 30px;">
+            <a href="index.html" class="btn">← Back to Main Page</a>
+            <a href="settings.html" class="btn">Go to Settings</a>
+        </div>
+    </div>
+    
+    <script>
+        function clearShapesSettings() {
+            localStorage.removeItem('neonwave_shapes_settings');
+            showResult('✅ Shapes settings cleared! Refresh page to see changes.');
+            console.log('🗑️ Shapes settings cleared from localStorage');
+        }
+        
+        function resetToDefaults() {
+            const defaults = {
+                enabled: true,
+                opacity: 0.3,
+                speed: 1,
+                circles: true,
+                triangles: true,
+                squares: true,
+                hexagons: true,
+                stars: true,
+                diamonds: true,
+                pentagons: true,
+                octagons: true,
+                plus: true,
+                rings: true
+            };
+            
+            localStorage.setItem('neonwave_shapes_settings', JSON.stringify(defaults));
+            showResult('✅ Reset to defaults! Refresh page to see changes.');
+            console.log('🔄 Shapes settings reset to defaults:', defaults);
+        }
+        
+        function viewCurrentSettings() {
+            const saved = localStorage.getItem('neonwave_shapes_settings');
+            
+            if (saved) {
+                const settings = JSON.parse(saved);
+                console.log('📊 Current shapes settings:', settings);
+                showResult('Settings logged to console (F12)');
+                alert('Current Settings:\n\n' + JSON.stringify(settings, null, 2));
+            } else {
+                showResult('⚠️ No saved settings found');
+                alert('No saved settings found in localStorage');
+            }
+        }
+        
+        function showResult(message) {
+            const result = document.getElementById('result');
+            result.textContent = message;
+            result.style.display = 'block';
+            
+            setTimeout(() => {
+                result.style.display = 'none';
+            }, 5000);
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,639 @@
+/* ========================================
+   NEONWAVE UNIQUE FEATURES
+   Immersive • Focused • Exclusive
+   ======================================== */
+
+/* ========================================
+   1. LYRICS FOCUS MODE
+   ======================================== */
+
+.lyrics-focus-mode {
+    position: fixed;
+    inset: 0;
+    background: #000;
+    z-index: 10000;
+    display: none;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+
+.lyrics-focus-mode.active {
+    display: flex;
+    opacity: 1;
+}
+
+.lyrics-focus-container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 60px 40px;
+    position: relative;
+}
+
+/* Lyrics Display */
+.lyrics-focus-display {
+    max-width: 800px;
+    width: 100%;
+    text-align: center;
+    overflow-y: auto;
+    max-height: 70vh;
+    padding: 40px 20px;
+    
+    /* Custom scrollbar */
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255,255,255,0.2) transparent;
+}
+
+.lyrics-focus-display::-webkit-scrollbar {
+    width: 4px;
+}
+
+.lyrics-focus-display::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.lyrics-focus-display::-webkit-scrollbar-thumb {
+    background: rgba(255,255,255,0.2);
+    border-radius: 2px;
+}
+
+.lyrics-line {
+    font-size: 48px;
+    font-weight: 300;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.3);
+    margin: 20px 0;
+    transition: all 0.4s ease;
+    cursor: pointer;
+}
+
+.lyrics-line.active {
+    font-size: 56px;
+    font-weight: 400;
+    color: #fff;
+    text-shadow: 0 0 40px rgba(255, 255, 255, 0.3);
+    transform: scale(1.05);
+}
+
+.lyrics-line.passed {
+    font-size: 36px;
+    color: rgba(255, 255, 255, 0.15);
+}
+
+.lyrics-line:hover {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+/* Song Info in Focus Mode */
+.lyrics-focus-info {
+    position: absolute;
+    top: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+}
+
+.lyrics-focus-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.8);
+    margin-bottom: 4px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.lyrics-focus-artist {
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.4);
+    letter-spacing: 0.5px;
+}
+
+/* Exit Button */
+.lyrics-focus-exit {
+    position: absolute;
+    top: 40px;
+    right: 40px;
+    width: 40px;
+    height: 40px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.lyrics-focus-exit:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: #fff;
+    transform: rotate(90deg);
+}
+
+/* ========================================
+   2. WAVE PROGRESS VISUAL
+   ======================================== */
+
+.wave-progress-container {
+    position: relative;
+    width: 100%;
+    height: 60px;
+    margin: 20px 0;
+    cursor: pointer;
+}
+
+.wave-progress-bg {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Wave SVG */
+.wave-progress-svg {
+    width: 100%;
+    height: 100%;
+}
+
+.wave-path {
+    fill: none;
+    stroke: rgba(255, 255, 255, 0.1);
+    stroke-width: 2;
+    transition: stroke 0.3s ease;
+}
+
+.wave-path-active {
+    fill: none;
+    stroke: rgba(255, 255, 255, 0.8);
+    stroke-width: 2;
+    stroke-dasharray: 1000;
+    stroke-dashoffset: 1000;
+    transition: stroke-dashoffset 0.1s linear;
+}
+
+.wave-progress-container:hover .wave-path {
+    stroke: rgba(255, 255, 255, 0.2);
+}
+
+.wave-progress-container:hover .wave-path-active {
+    stroke: #fff;
+}
+
+/* Time Labels */
+.wave-time-labels {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 8px;
+    font-size: 11px;
+    color: rgba(255, 255, 255, 0.4);
+    font-variant-numeric: tabular-nums;
+}
+
+/* ========================================
+   3. MOOD-BASED LISTENING MODES
+   ======================================== */
+
+.mood-selector {
+    display: flex;
+    gap: 12px;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 20px;
+    margin-bottom: 30px;
+}
+
+.mood-btn {
+    flex: 1;
+    padding: 15px 20px;
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-align: center;
+}
+
+.mood-btn:hover {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(255, 255, 255, 0.2);
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.mood-btn.active {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.3);
+    color: #fff;
+}
+
+.mood-icon {
+    display: block;
+    font-size: 24px;
+    margin-bottom: 8px;
+}
+
+.mood-label {
+    display: block;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* Mood Effects on Body */
+body.mood-focus {
+    filter: contrast(1.2) brightness(0.9);
+}
+
+body.mood-chill {
+    filter: contrast(0.9) brightness(1.1);
+}
+
+body.mood-night {
+    filter: contrast(1.1) brightness(0.7);
+}
+
+/* ========================================
+   4. MINIMAL DISTRACTION MODE
+   ======================================== */
+
+.minimal-mode {
+    position: fixed;
+    inset: 0;
+    background: #0a0a0a;
+    z-index: 9999;
+    display: none;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+
+.minimal-mode.active {
+    display: flex;
+    opacity: 1;
+}
+
+.minimal-container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 60px;
+}
+
+/* Album Art in Minimal Mode */
+.minimal-album {
+    width: 300px;
+    height: 300px;
+    margin-bottom: 40px;
+    position: relative;
+}
+
+.minimal-album-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 8px;
+    filter: grayscale(100%) contrast(1.1);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8);
+}
+
+/* Song Info in Minimal Mode */
+.minimal-info {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.minimal-title {
+    font-size: 32px;
+    font-weight: 600;
+    color: #fff;
+    margin-bottom: 12px;
+    letter-spacing: -0.5px;
+}
+
+.minimal-artist {
+    font-size: 18px;
+    color: rgba(255, 255, 255, 0.5);
+    letter-spacing: 0.5px;
+}
+
+/* Controls in Minimal Mode */
+.minimal-controls {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    margin-bottom: 40px;
+}
+
+.minimal-control-btn {
+    width: 60px;
+    height: 60px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.minimal-control-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.3);
+    color: #fff;
+    transform: scale(1.1);
+}
+
+.minimal-control-btn.play {
+    width: 80px;
+    height: 80px;
+    font-size: 28px;
+}
+
+/* Progress in Minimal Mode */
+.minimal-progress {
+    width: 500px;
+    max-width: 80vw;
+}
+
+.minimal-progress-bar {
+    width: 100%;
+    height: 4px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 2px;
+    position: relative;
+    cursor: pointer;
+    margin-bottom: 12px;
+}
+
+.minimal-progress-fill {
+    height: 100%;
+    background: #fff;
+    border-radius: 2px;
+    width: 0%;
+    transition: width 0.1s linear;
+}
+
+.minimal-time {
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.4);
+    font-variant-numeric: tabular-nums;
+}
+
+/* Exit Minimal Mode */
+.minimal-exit {
+    position: absolute;
+    top: 40px;
+    right: 40px;
+    width: 40px;
+    height: 40px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.minimal-exit:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: #fff;
+    transform: rotate(90deg);
+}
+
+/* ========================================
+   5. FOCUS TIMER
+   ======================================== */
+
+.focus-timer {
+    position: fixed;
+    bottom: 100px;
+    right: 40px;
+    background: rgba(0, 0, 0, 0.9);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    padding: 20px 25px;
+    z-index: 1000;
+    display: none;
+}
+
+.focus-timer.active {
+    display: block;
+}
+
+.focus-timer-display {
+    font-size: 48px;
+    font-weight: 300;
+    color: #fff;
+    text-align: center;
+    margin-bottom: 15px;
+    font-variant-numeric: tabular-nums;
+    letter-spacing: 2px;
+}
+
+.focus-timer-label {
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.5);
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.focus-timer-controls {
+    display: flex;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.focus-timer-btn {
+    flex: 1;
+    padding: 8px 16px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 11px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.focus-timer-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: #fff;
+}
+
+/* ========================================
+   6. BREATHING ANIMATION (Ambient)
+   ======================================== */
+
+.breathing-circle {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 400px;
+    height: 400px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 0;
+    animation: breathe 8s ease-in-out infinite;
+}
+
+@keyframes breathe {
+    0%, 100% { 
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 0.3;
+    }
+    50% { 
+        transform: translate(-50%, -50%) scale(1.2);
+        opacity: 0.1;
+    }
+}
+
+/* ========================================
+   7. QUICK ACTIONS MENU
+   ======================================== */
+
+.quick-actions {
+    position: fixed;
+    bottom: 100px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 12px;
+    background: rgba(0, 0, 0, 0.9);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 50px;
+    padding: 12px 20px;
+    z-index: 1000;
+}
+
+.quick-action-btn {
+    width: 40px;
+    height: 40px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.quick-action-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: #fff;
+    transform: scale(1.1);
+}
+
+.quick-action-btn.active {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: rgba(255, 255, 255, 0.3);
+    color: #fff;
+}
+
+/* Tooltip */
+.quick-action-btn::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0, 0, 0, 0.95);
+    color: #fff;
+    padding: 6px 12px;
+    border-radius: 8px;
+    font-size: 11px;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    margin-bottom: 8px;
+    transition: opacity 0.3s ease;
+}
+
+.quick-action-btn:hover::after {
+    opacity: 1;
+}
+
+/* ========================================
+   RESPONSIVE
+   ======================================== */
+
+@media (max-width: 768px) {
+    .lyrics-line {
+        font-size: 32px;
+    }
+    
+    .lyrics-line.active {
+        font-size: 40px;
+    }
+    
+    .lyrics-line.passed {
+        font-size: 24px;
+    }
+    
+    .minimal-album {
+        width: 200px;
+        height: 200px;
+    }
+    
+    .minimal-title {
+        font-size: 24px;
+    }
+    
+    .minimal-artist {
+        font-size: 16px;
+    }
+    
+    .minimal-controls {
+        gap: 20px;
+    }
+    
+    .minimal-control-btn {
+        width: 50px;
+        height: 50px;
+    }
+    
+    .minimal-control-btn.play {
+        width: 70px;
+        height: 70px;
+    }
+    
+    .focus-timer {
+        right: 20px;
+        bottom: 80px;
+    }
+    
+    .focus-timer-display {
+        font-size: 36px;
+    }
+}

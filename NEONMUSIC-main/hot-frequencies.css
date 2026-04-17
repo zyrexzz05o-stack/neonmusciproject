@@ -1,0 +1,906 @@
+/* ========================================
+   HOT FREQUENCIES PAGE
+   Music Trend Dashboard
+   ======================================== */
+
+.hot-frequencies-page {
+    padding: 0;
+    max-width: 100%;
+}
+
+/* Header */
+.hf-header {
+    text-align: center;
+    margin-bottom: 50px;
+    padding: 40px 20px 20px;
+}
+
+.hf-title {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 48px;
+    font-weight: 700;
+    color: #ffffff;
+    margin: 0 0 10px 0;
+    letter-spacing: -1px;
+}
+
+.hf-subtitle {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 16px;
+    color: rgba(255, 255, 255, 0.6);
+    margin: 0;
+}
+
+/* Section Common */
+.hf-section {
+    margin-bottom: 60px;
+}
+
+.hf-section-title {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 24px;
+    font-weight: 600;
+    color: #ffffff;
+    margin: 0 0 8px 0;
+}
+
+.hf-section-desc {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.5);
+    margin: 0 0 30px 0;
+}
+
+/* ========================================
+   TREND PULSE SECTION
+   ======================================== */
+
+.pulse-bars {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 16px;
+    padding: 30px;
+}
+
+.pulse-bar-item {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.pulse-label {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.7);
+    min-width: 120px;
+}
+
+.pulse-bar {
+    flex: 1;
+    height: 12px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 6px;
+    overflow: hidden;
+    position: relative;
+}
+
+.pulse-fill {
+    height: 100%;
+    background: linear-gradient(90deg, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.8));
+    border-radius: 6px;
+    transition: width 1s ease;
+    animation: pulse-glow 2s ease-in-out infinite;
+}
+
+@keyframes pulse-glow {
+    0%, 100% {
+        box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+    }
+    50% {
+        box-shadow: 0 0 20px rgba(255, 255, 255, 0.6);
+    }
+}
+
+.pulse-value {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    color: #ffffff;
+    min-width: 50px;
+    text-align: right;
+}
+
+/* Set width based on data-level */
+.pulse-fill[data-level="30"] { width: 30%; }
+.pulse-fill[data-level="65"] { width: 65%; }
+.pulse-fill[data-level="85"] { width: 85%; }
+.pulse-fill[data-level="95"] { width: 95%; }
+
+/* ========================================
+   GENRE ON FIRE SECTION
+   ======================================== */
+
+.genre-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+}
+
+.genre-card {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 16px;
+    padding: 24px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.genre-card:hover {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(255, 255, 255, 0.15);
+    transform: translateY(-2px);
+}
+
+.genre-icon {
+    font-size: 32px;
+    margin-bottom: 16px;
+}
+
+.genre-info {
+    margin-bottom: 16px;
+}
+
+.genre-name {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 20px;
+    font-weight: 600;
+    color: #ffffff;
+    margin-bottom: 8px;
+}
+
+.genre-status {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: 12px;
+}
+
+.genre-status.hot {
+    background: rgba(255, 100, 100, 0.15);
+    color: rgba(255, 150, 150, 1);
+}
+
+.genre-status.rising {
+    background: rgba(100, 200, 255, 0.15);
+    color: rgba(150, 220, 255, 1);
+}
+
+.genre-status.stable {
+    background: rgba(200, 200, 200, 0.15);
+    color: rgba(200, 200, 200, 1);
+}
+
+.genre-meter {
+    height: 6px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 3px;
+    overflow: hidden;
+}
+
+.genre-meter-fill {
+    height: 100%;
+    background: linear-gradient(90deg, rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.8));
+    border-radius: 3px;
+    transition: width 0.8s ease;
+}
+
+/* ========================================
+   ACTIVE TRACKS SECTION
+   ======================================== */
+
+.active-tracks-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.track-card {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 12px;
+    padding: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.track-card:hover {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(255, 255, 255, 0.15);
+}
+
+.track-cover {
+    position: relative;
+    width: 60px;
+    height: 60px;
+    border-radius: 8px;
+    overflow: hidden;
+    flex-shrink: 0;
+}
+
+.track-cover img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.track-play-btn {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.7);
+    border: none;
+    color: white;
+    font-size: 20px;
+    cursor: pointer;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.track-card:hover .track-play-btn {
+    opacity: 1;
+}
+
+.track-info {
+    flex: 1;
+}
+
+.track-title {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    color: #ffffff;
+    margin-bottom: 4px;
+}
+
+.track-artist {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.track-activity {
+    display: flex;
+    align-items: center;
+}
+
+.activity-indicator {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.activity-dot {
+    width: 8px;
+    height: 8px;
+    background: rgba(100, 255, 100, 0.8);
+    border-radius: 50%;
+    animation: activity-pulse 2s ease-in-out infinite;
+}
+
+@keyframes activity-pulse {
+    0%, 100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+    50% {
+        opacity: 0.5;
+        transform: scale(1.2);
+    }
+}
+
+.activity-text {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    color: rgba(255, 255, 255, 0.5);
+}
+
+/* ========================================
+   ARTISTS IN MOTION SECTION
+   ======================================== */
+
+.artists-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 20px;
+}
+
+.artist-motion-card {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 12px;
+    padding: 20px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.artist-motion-card:hover {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(255, 255, 255, 0.15);
+    transform: translateY(-4px);
+}
+
+.artist-avatar {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin: 0 auto 12px;
+    border: 2px solid rgba(255, 255, 255, 0.1);
+}
+
+.artist-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.artist-name {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    color: #ffffff;
+    margin-bottom: 8px;
+}
+
+.artist-activity {
+    display: flex;
+    justify-content: center;
+}
+
+.activity-badge {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px;
+    padding: 4px 10px;
+    background: rgba(100, 200, 255, 0.15);
+    color: rgba(150, 220, 255, 1);
+    border-radius: 10px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .hf-title {
+        font-size: 36px;
+    }
+    
+    .pulse-bars {
+        padding: 20px;
+    }
+    
+    .pulse-bar-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+    
+    .pulse-label {
+        min-width: auto;
+    }
+    
+    .pulse-bar {
+        width: 100%;
+    }
+    
+    .genre-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .artists-grid {
+        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    }
+}
+
+
+/* ========================================
+   SEARCH GENRE SECTION
+   ======================================== */
+
+.search-genre-section {
+    margin-bottom: 60px;
+}
+
+.genre-search-container {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 16px;
+    padding: 30px;
+}
+
+.genre-search-bar {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    padding: 12px 16px;
+    margin-bottom: 24px;
+}
+
+.genre-search-bar .search-icon {
+    font-size: 20px;
+    opacity: 0.6;
+}
+
+.genre-search-input {
+    flex: 1;
+    background: none;
+    border: none;
+    outline: none;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px;
+    color: #ffffff;
+}
+
+.genre-search-input::placeholder {
+    color: rgba(255, 255, 255, 0.4);
+}
+
+.genre-search-btn {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+    padding: 8px 20px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    color: #ffffff;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.genre-search-btn:hover {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: rgba(255, 255, 255, 0.3);
+}
+
+.genre-suggestions {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.suggestion-label {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.suggestion-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.suggestion-chip {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    padding: 8px 16px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    color: rgba(255, 255, 255, 0.8);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.suggestion-chip:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.2);
+    color: #ffffff;
+}
+
+/* Update genre status colors */
+.genre-status.fire {
+    background: rgba(255, 100, 100, 0.15);
+    color: rgba(255, 150, 150, 1);
+}
+
+.genre-status.cooling {
+    background: rgba(100, 150, 255, 0.15);
+    color: rgba(150, 180, 255, 1);
+}
+
+/* ========================================
+   GENRE PAGE
+   ======================================== */
+
+.genre-page {
+    padding: 0;
+    max-width: 100%;
+}
+
+/* Genre Header */
+.genre-header {
+    margin-bottom: 40px;
+}
+
+.genre-back-btn {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    padding: 10px 16px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.8);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-bottom: 20px;
+}
+
+.genre-back-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: #ffffff;
+}
+
+.genre-header-content {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 16px;
+    padding: 30px;
+}
+
+.genre-icon-large {
+    font-size: 64px;
+    width: 100px;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 16px;
+}
+
+.genre-header-info {
+    flex: 1;
+}
+
+.genre-title {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 42px;
+    font-weight: 700;
+    color: #ffffff;
+    margin: 0 0 12px 0;
+}
+
+.genre-meta {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.genre-status-badge {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    padding: 6px 14px;
+    background: rgba(255, 100, 100, 0.15);
+    color: rgba(255, 150, 150, 1);
+    border-radius: 12px;
+}
+
+.genre-track-count {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.6);
+}
+
+/* Genre Filters */
+.genre-filters {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 40px;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 12px;
+}
+
+.filter-label {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.filter-buttons {
+    display: flex;
+    gap: 8px;
+}
+
+.filter-btn {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    padding: 8px 16px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    color: rgba(255, 255, 255, 0.7);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.filter-btn:hover {
+    background: rgba(255, 255, 255, 0.08);
+    color: #ffffff;
+}
+
+.filter-btn.active {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: rgba(255, 255, 255, 0.3);
+    color: #ffffff;
+}
+
+.sort-indicator {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    color: rgba(255, 255, 255, 0.6);
+}
+
+/* Genre Section */
+.genre-section {
+    margin-bottom: 50px;
+}
+
+.genre-section-title {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 22px;
+    font-weight: 600;
+    color: #ffffff;
+    margin: 0 0 8px 0;
+}
+
+.genre-section-desc {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.5);
+    margin: 0 0 24px 0;
+}
+
+/* Genre Tracks List */
+.genre-tracks-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.genre-track-item {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 10px;
+    padding: 14px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.genre-track-item:hover {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(255, 255, 255, 0.15);
+}
+
+.track-rank {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.4);
+    min-width: 40px;
+    text-align: center;
+}
+
+.track-cover-small {
+    position: relative;
+    width: 50px;
+    height: 50px;
+    border-radius: 6px;
+    overflow: hidden;
+}
+
+.track-cover-small img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.track-play-mini {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.7);
+    border: none;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.genre-track-item:hover .track-play-mini {
+    opacity: 1;
+}
+
+.track-details {
+    flex: 1;
+}
+
+.track-name {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    color: #ffffff;
+    margin-bottom: 4px;
+}
+
+.track-artist-small {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.track-stats {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.track-plays {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.track-trend {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px;
+    padding: 4px 8px;
+    border-radius: 6px;
+}
+
+.track-trend.up {
+    background: rgba(100, 255, 100, 0.15);
+    color: rgba(150, 255, 150, 1);
+}
+
+.track-trend.stable {
+    background: rgba(200, 200, 200, 0.15);
+    color: rgba(200, 200, 200, 1);
+}
+
+/* Genre Artists Grid */
+.genre-artists-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 16px;
+}
+
+.genre-artist-card {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 12px;
+    padding: 16px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.genre-artist-card:hover {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(255, 255, 255, 0.15);
+    transform: translateY(-2px);
+}
+
+.artist-avatar-genre {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin: 0 auto 10px;
+    border: 2px solid rgba(255, 255, 255, 0.1);
+}
+
+.artist-avatar-genre img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.artist-name-genre {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    color: #ffffff;
+    margin-bottom: 6px;
+}
+
+.artist-trend-badge {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px;
+    padding: 4px 10px;
+    background: rgba(100, 200, 255, 0.15);
+    color: rgba(150, 220, 255, 1);
+    border-radius: 10px;
+    display: inline-block;
+}
+
+/* Sub-genre Chips */
+.subgenre-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.subgenre-chip {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    padding: 10px 18px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.8);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.subgenre-chip:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.2);
+    color: #ffffff;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .genre-header-content {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .genre-title {
+        font-size: 32px;
+    }
+    
+    .genre-filters {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .sort-indicator {
+        margin-left: 0;
+    }
+    
+    .genre-track-item {
+        flex-wrap: wrap;
+    }
+    
+    .track-rank {
+        min-width: 30px;
+    }
+}

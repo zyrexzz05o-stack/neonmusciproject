@@ -1,0 +1,342 @@
+================================================================================
+                    NEONWAVE MUSIC PLAYER - PROJECT STRUCTURE
+================================================================================
+
+FRAMEWORK: Vanilla JavaScript (No React/Vue/Next.js)
+TOTAL FILE PENTING: 38 files
+ARSITEKTUR: Single Page Application (SPA)
+
+================================================================================
+                              1. CORE FILES (3)
+================================================================================
+
+[WAJIB - Entry Point & Main Logic]
+
+1. index.html
+   - File utama aplikasi
+   - Entry point yang dibuka browser
+   - Berisi struktur HTML lengkap
+
+2. script.js
+   - JavaScript utama
+   - Logic player, navigation, playlist
+   - Controller utama aplikasi
+
+3. styles.css
+   - CSS utama
+   - Layout, design system, theme
+   - Base styling untuk semua komponen
+
+================================================================================
+                            2. PAGES (5 files)
+================================================================================
+
+[Halaman-halaman tambahan yang dimuat dinamis]
+
+4. liked-songs.html
+   - Halaman "Saved Waves" (Lagu yang Disukai)
+   - Menampilkan daftar lagu favorit user
+
+5. library.html
+   - Halaman "Vault" (Library/Koleksi)
+   - Menampilkan koleksi musik user
+
+6. settings.html
+   - Halaman "Settings" (Pengaturan)
+   - Konfigurasi aplikasi
+
+7. genre-page.html
+   - Halaman Genre
+   - Filter musik berdasarkan genre
+
+8. hot-frequencies.html
+   - Halaman "Hot Frequencies" (Trending)
+   - Musik yang sedang populer
+
+================================================================================
+                        3. FEATURE MODULES (15 files)
+================================================================================
+
+[JavaScript modules untuk fitur-fitur spesifik]
+
+9. liked-songs-manager.js
+   - Sistem like/unlike lagu
+   - Manajemen lagu favorit
+   - LocalStorage integration
+
+10. song-actions.js
+    - Menu aksi lagu (Play, Like, Share, dll)
+    - 9 fitur aksi lengkap
+    - Glass effect menu
+
+11. floating-sidebar.js
+    - Sidebar navigasi floating
+    - Navigation controller
+
+12. beat-reactive.js
+    - Animasi reaktif mengikuti beat musik
+    - Visual effects
+
+13. behavior-modes.js
+    - Mode behavior aplikasi
+    - User experience modes
+
+14. dynamic-theme.js
+    - Tema dinamis
+    - Color scheme management
+
+15. black-screen-mode.js
+    - Mode layar hitam
+    - Focus mode untuk mendengarkan
+
+16. music-notifications.js
+    - Notifikasi musik
+    - Alert system
+
+17. settings.js
+    - Logic halaman settings
+    - Konfigurasi management
+
+18. library-init.js
+    - Inisialisasi library page
+    - Library data management
+
+19. genre-handler.js
+    - Handler untuk genre system
+    - Genre filtering
+
+20. listening-ritual.js
+    - Ritual mendengarkan musik
+    - Special listening modes
+
+21. time-adaptive.js
+    - Adaptasi berdasarkan waktu
+    - Time-based features
+
+22. track-transition.js
+    - Transisi antar track
+    - Smooth track changes
+
+23. adaptive-typography.js
+    - Typography yang adaptif
+    - Font size management
+
+================================================================================
+                          4. STYLING (8 files)
+================================================================================
+
+[CSS modules untuk styling komponen spesifik]
+
+24. song-actions.css
+    - Style untuk menu aksi lagu
+    - Glass effect, animations
+
+25. liked-songs.css
+    - Style halaman liked songs
+    - List styling
+
+26. floating-sidebar.css
+    - Style sidebar floating
+    - Navigation styling
+
+27. library.css
+    - Style halaman library
+    - Grid layout
+
+28. settings.css
+    - Style halaman settings
+    - Form styling
+
+29. hot-frequencies.css
+    - Style halaman hot frequencies
+    - Trending layout
+
+30. music-popup-notification.css
+    - Style popup notifikasi musik
+    - Toast notifications
+
+31. popup-notifications.css
+    - Style popup notifications
+    - Alert styling
+
+================================================================================
+                        5. UTILITIES (5 files)
+================================================================================
+
+[Helper functions dan konfigurasi]
+
+32. music-popup-notification.js
+    - Logic popup notifikasi musik
+    - Notification system
+
+33. popup-notifications.js
+    - Logic popup notifications
+    - Alert management
+
+34. lyrics-settings.js
+    - Pengaturan lyrics
+    - Lyrics display management
+
+35. zoom-settings.js
+    - Pengaturan zoom
+    - UI scaling
+
+36. shapes-settings.js
+    - Pengaturan background shapes
+    - Visual effects settings
+
+================================================================================
+                        6. INTEGRATION (2 files)
+================================================================================
+
+[Integrasi dengan service eksternal]
+
+37. spotify-config.js
+    - Konfigurasi Spotify API
+    - API credentials
+
+38. spotify-integration.js
+    - Integrasi dengan Spotify
+    - API calls
+
+================================================================================
+                            7. ASSETS (2 folders)
+================================================================================
+
+39. images/
+    - Folder gambar album covers
+    - Artist photos
+    - UI icons
+
+40. videos/
+    - Folder video musik
+    - Music video files (.mp4)
+
+================================================================================
+                              FILE DEPENDENCIES
+================================================================================
+
+index.html MEMUAT:
+├── styles.css (main)
+├── floating-sidebar.css
+├── settings.css
+├── music-popup-notification.css
+├── liked-songs.css
+├── library.css
+├── hot-frequencies.css
+├── song-actions.css
+└── SCRIPTS:
+    ├── spotify-config.js
+    ├── spotify-integration.js
+    ├── floating-sidebar.js
+    ├── listening-ritual.js
+    ├── beat-reactive.js
+    ├── time-adaptive.js
+    ├── adaptive-typography.js
+    ├── track-transition.js
+    ├── black-screen-mode.js
+    ├── music-popup-notification.js
+    ├── liked-songs-manager.js
+    ├── song-actions.js
+    ├── script.js (MAIN)
+    ├── theme-modes-override.js
+    ├── behavior-modes.js
+    ├── settings.js
+    ├── dynamic-theme.js
+    ├── lyrics-settings.js
+    ├── zoom-settings.js
+    ├── shapes-settings.js
+    ├── library-init.js
+    ├── genre-handler.js
+    └── music-notifications.js
+
+================================================================================
+                            NAVIGATION MAPPING
+================================================================================
+
+SIDEBAR MENU → FILE:
+├── Pulse (Home)           → index.html
+├── Hot Frequencies        → hot-frequencies.html
+├── Vault (Library)        → library.html
+├── Saved Waves (Liked)    → liked-songs.html
+└── Settings               → settings.html
+
+================================================================================
+                              DATA STORAGE
+================================================================================
+
+LocalStorage Keys:
+├── neonwave_liked_songs      → Lagu yang disukai
+├── neonwave_playlists        → Playlist user
+├── neonwave_settings         → Pengaturan aplikasi
+├── neonwave_shapes_settings  → Pengaturan shapes
+└── neonwave_theme            → Tema yang dipilih
+
+================================================================================
+                            CARA MENJALANKAN
+================================================================================
+
+1. Buka index.html di browser
+2. Tidak perlu build process
+3. Tidak perlu npm install
+4. Pure client-side application
+
+ATAU dengan local server:
+- python -m http.server 8000
+- php -S localhost:8000
+- live-server
+
+================================================================================
+                              TEKNOLOGI
+================================================================================
+
+Frontend:
+- HTML5
+- CSS3 (Flexbox, Grid, Animations)
+- Vanilla JavaScript (ES6+)
+
+Features:
+- LocalStorage untuk data persistence
+- SVG untuk icons dan logo
+- CSS Animations & Transitions
+- Backdrop Filter (Glass effect)
+- Responsive Design
+
+APIs:
+- Spotify Web API (optional)
+- Web Share API
+- Clipboard API
+
+================================================================================
+                            FILE TIDAK PENTING
+================================================================================
+
+BISA DIHAPUS:
+├── test-*.html (10 files)        → Test files
+├── debug-*.html (3 files)        → Debug files
+├── script_backup.js              → Backup
+├── script_fixed.js               → Backup
+├── script.js.backup              → Backup
+├── *.md (30+ files)              → Documentation
+├── Example txt file.txt          → Example
+├── Another example txt file.txt  → Example
+└── cards-showcase.html           → Showcase
+
+================================================================================
+                              CATATAN PENTING
+================================================================================
+
+1. File CORE (3 files) adalah WAJIB
+2. File PAGES bisa dikurangi sesuai kebutuhan
+3. File FEATURE MODULES bisa di-comment jika tidak dipakai
+4. Semua file CSS bisa digabung jadi 1 file untuk production
+5. Semua file JS bisa digabung & minify untuk production
+
+================================================================================
+                                  END
+================================================================================
+
+Generated: 2024
+Project: NeonWave Music Player
+Type: Vanilla JavaScript SPA
+Files: 38 essential files

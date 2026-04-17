@@ -1,0 +1,419 @@
+================================================================================
+                BACKUP 6 - INTEGRATION (2 FILES)
+================================================================================
+
+File ini berisi 2 file untuk integrasi dengan Spotify API:
+1. spotify-config.js - Konfigurasi Spotify API credentials
+2. spotify-integration.js - Logic integrasi dengan Spotify Web API
+
+================================================================================
+                    FILE 1: spotify-config.js
+================================================================================
+
+LOKASI: /spotify-config.js
+DESKRIPSI: Konfigurasi credentials untuk Spotify Web API
+
+STRUKTUR:
+```javascript
+const SPOTIFY_CONFIG = {
+  clientId: "YOUR_CLIENT_ID",
+  clientSecret: "YOUR_CLIENT_SECRET",
+  redirectUri: "http://localhost:8000/callback",
+  scopes: [
+    "user-read-private",
+    "user-read-email",
+    "user-library-read",
+    "user-library-modify",
+    "playlist-read-private",
+    "playlist-modify-public",
+    "playlist-modify-private",
+    "user-top-read",
+    "user-read-recently-played",
+    "streaming"
+  ]
+};
+```
+
+KONFIGURASI:
+1. Client ID
+   - Didapat dari Spotify Developer Dashboard
+   - Format: 32 karakter alphanumeric
+   - Public identifier
+
+2. Client Secret
+   - Didapat dari Spotify Developer Dashboard
+   - Format: 32 karakter alphanumeric
+   - RAHASIA - jangan expose di frontend
+
+3. Redirect URI
+   - URL callback setelah authorization
+   - Harus didaftarkan di Spotify Dashboard
+   - Contoh: http://localhost:8000/callback
+
+4. Scopes (Permissions)
+   - user-read-private: Baca profil user
+   - user-read-email: Baca email user
+   - user-library-read: Baca library user
+   - user-library-modify: Modifikasi library user
+   - playlist-read-private: Baca playlist private
+   - playlist-modify-public: Edit playlist public
+   - playlist-modify-private: Edit playlist private
+   - user-top-read: Baca top tracks/artists
+   - user-read-recently-played: Baca recently played
+   - streaming: Streaming playback
+
+CARA MENDAPATKAN CREDENTIALS:
+1. Buka https://developer.spotify.com/dashboard
+2. Login dengan akun Spotify
+3. Klik "Create an App"
+4. Isi nama dan deskripsi app
+5. Copy Client ID dan Client Secret
+6. Tambahkan Redirect URI di settings
+7. Save
+
+SECURITY NOTES:
+⚠️ JANGAN commit Client Secret ke Git
+⚠️ Gunakan environment variables untuk production
+⚠️ Client Secret hanya untuk backend, bukan frontend
+
+ENVIRONMENT VARIABLES (PRODUCTION):
+```javascript
+const SPOTIFY_CONFIG = {
+  clientId: process.env.SPOTIFY_CLIENT_ID,
+  clientSecret: process.env.SPOTIFY_CLIENT_SECRET,
+  redirectUri: process.env.SPOTIFY_REDIRECT_URI,
+  scopes: [...]
+};
+```
+
+DEPENDENCIES:
+- Tidak ada (pure config)
+
+CARA RESTORE:
+1. Copy file ini ke root folder sebagai "spotify-config.js"
+2. Ganti YOUR_CLIENT_ID dengan Client ID Anda
+3. Ganti YOUR_CLIENT_SECRET dengan Client Secret Anda
+4. Sesuaikan redirectUri dengan URL Anda
+
+================================================================================
+                FILE 2: spotify-integration.js
+================================================================================
+
+LOKASI: /spotify-integration.js
+DESKRIPSI: Logic untuk integrasi dengan Spotify Web API
+
+FITUR:
+1. Authentication
+   - OAuth 2.0 flow
+   - Get access token
+   - Refresh token
+   - Check token validity
+
+2. User Data
+   - Get user profile
+   - Get user playlists
+   - Get user top tracks
+   - Get user top artists
+   - Get recently played
+
+3. Library Management
+   - Get saved tracks
+   - Save track
+   - Remove track
+   - Check if track is saved
+
+4. Playlist Management
+   - Get playlist
+   - Create playlist
+   - Add tracks to playlist
+   - Remove tracks from playlist
+   - Update playlist details
+
+5. Search
+   - Search tracks
+   - Search artists
+   - Search albums
+   - Search playlists
+
+6. Playback
+   - Get current playback
+   - Play track
+   - Pause playback
+   - Skip to next
+   - Skip to previous
+   - Seek to position
+
+FUNCTIONS:
+
+// Authentication
+- initSpotifyAuth()
+- getAuthUrl()
+- handleAuthCallback(code)
+- getAccessToken(code)
+- refreshAccessToken()
+- isTokenValid()
+- saveToken(token)
+- loadToken()
+
+// User
+- getUserProfile()
+- getUserPlaylists()
+- getUserTopTracks(timeRange)
+- getUserTopArtists(timeRange)
+- getRecentlyPlayed()
+
+// Library
+- getSavedTracks(limit, offset)
+- saveTrack(trackId)
+- removeTrack(trackId)
+- checkSavedTrack(trackId)
+
+// Playlist
+- getPlaylist(playlistId)
+- createPlaylist(name, description, isPublic)
+- addTracksToPlaylist(playlistId, trackUris)
+- removeTracksFromPlaylist(playlistId, trackUris)
+- updatePlaylistDetails(playlistId, data)
+
+// Search
+- searchTracks(query, limit)
+- searchArtists(query, limit)
+- searchAlbums(query, limit)
+- searchPlaylists(query, limit)
+
+// Playback
+- getCurrentPlayback()
+- playTrack(trackUri)
+- pausePlayback()
+- skipToNext()
+- skipToPrevious()
+- seekToPosition(positionMs)
+
+API ENDPOINTS:
+```javascript
+const SPOTIFY_API = {
+  baseUrl: "https://api.spotify.com/v1",
+  authUrl: "https://accounts.spotify.com/authorize",
+  tokenUrl: "https://accounts.spotify.com/api/token",
+  
+  endpoints: {
+    me: "/me",
+    playlists: "/me/playlists",
+    tracks: "/me/tracks",
+    topTracks: "/me/top/tracks",
+    topArtists: "/me/top/artists",
+    recentlyPlayed: "/me/player/recently-played",
+    search: "/search",
+    player: "/me/player"
+  }
+};
+```
+
+TOKEN STRUCTURE:
+```javascript
+{
+  access_token: "BQC...",
+  token_type: "Bearer",
+  expires_in: 3600,
+  refresh_token: "AQD...",
+  scope: "user-read-private user-read-email...",
+  expires_at: 1234567890
+}
+```
+
+USAGE EXAMPLES:
+
+1. Authentication Flow:
+```javascript
+// Step 1: Redirect to Spotify login
+const authUrl = getAuthUrl();
+window.location.href = authUrl;
+
+// Step 2: Handle callback
+const urlParams = new URLSearchParams(window.location.search);
+const code = urlParams.get('code');
+if (code) {
+  await handleAuthCallback(code);
+}
+```
+
+2. Get User Profile:
+```javascript
+const profile = await getUserProfile();
+console.log(profile.display_name);
+console.log(profile.email);
+```
+
+3. Search Tracks:
+```javascript
+const results = await searchTracks("Bohemian Rhapsody", 10);
+results.tracks.items.forEach(track => {
+  console.log(track.name, track.artists[0].name);
+});
+```
+
+4. Save Track to Library:
+```javascript
+await saveTrack("3n3Ppam7vgaVa1iaRUc9Lp");
+showToast("Track saved to library", "success");
+```
+
+5. Create Playlist:
+```javascript
+const playlist = await createPlaylist(
+  "My Awesome Playlist",
+  "Created with NeonWave",
+  true
+);
+console.log(playlist.id);
+```
+
+ERROR HANDLING:
+```javascript
+try {
+  const tracks = await getSavedTracks();
+  renderTracks(tracks);
+} catch (error) {
+  if (error.status === 401) {
+    // Token expired, refresh
+    await refreshAccessToken();
+    // Retry
+    const tracks = await getSavedTracks();
+    renderTracks(tracks);
+  } else {
+    showToast("Error loading tracks", "error");
+    console.error(error);
+  }
+}
+```
+
+RATE LIMITING:
+Spotify API has rate limits:
+- 429 status code = rate limited
+- Retry-After header = seconds to wait
+- Implement exponential backoff
+
+```javascript
+async function apiRequest(url, options, retries = 3) {
+  try {
+    const response = await fetch(url, options);
+    
+    if (response.status === 429) {
+      const retryAfter = response.headers.get('Retry-After');
+      await sleep(retryAfter * 1000);
+      return apiRequest(url, options, retries - 1);
+    }
+    
+    return response.json();
+  } catch (error) {
+    if (retries > 0) {
+      await sleep(1000);
+      return apiRequest(url, options, retries - 1);
+    }
+    throw error;
+  }
+}
+```
+
+LOCALSTORAGE KEYS:
+- spotify_access_token
+- spotify_refresh_token
+- spotify_token_expires_at
+
+DEPENDENCIES:
+- spotify-config.js (untuk credentials)
+- popup-notifications.js (untuk error messages)
+
+CARA RESTORE:
+Copy file ini ke root folder sebagai "spotify-integration.js"
+
+================================================================================
+                            CARA MENGGUNAKAN
+================================================================================
+
+SETUP SPOTIFY INTEGRATION:
+
+1. REGISTER APP:
+   - Buka https://developer.spotify.com/dashboard
+   - Create new app
+   - Copy Client ID & Client Secret
+   - Add Redirect URI
+
+2. CONFIGURE:
+   - Edit spotify-config.js
+   - Paste Client ID & Client Secret
+   - Set Redirect URI
+
+3. IMPLEMENT AUTH:
+   - Add login button di UI
+   - Redirect ke Spotify login
+   - Handle callback
+   - Save token
+
+4. USE API:
+   - Call API functions
+   - Handle errors
+   - Refresh token when expired
+
+TESTING:
+1. Test authentication flow
+2. Test API calls dengan valid token
+3. Test token refresh
+4. Test error handling
+5. Test rate limiting
+
+PRODUCTION CONSIDERATIONS:
+1. Use backend proxy untuk Client Secret
+2. Implement proper token refresh
+3. Handle rate limiting
+4. Cache API responses
+5. Implement retry logic
+6. Monitor API usage
+
+ALTERNATIVE (BACKEND):
+Untuk production, lebih baik gunakan backend:
+```
+Frontend → Backend API → Spotify API
+```
+
+Backend handles:
+- Client Secret (secure)
+- Token management
+- Rate limiting
+- Caching
+- Error handling
+
+================================================================================
+                                CATATAN
+================================================================================
+
+File ini adalah RINGKASAN struktur dan fungsi.
+Untuk FULL CODE, buka file asli dan copy seluruh isi.
+
+SPOTIFY API DOCUMENTATION:
+https://developer.spotify.com/documentation/web-api
+
+IMPORTANT NOTES:
+⚠️ Client Secret TIDAK boleh di frontend
+⚠️ Gunakan backend untuk production
+⚠️ Token expires setelah 1 jam
+⚠️ Implement refresh token logic
+⚠️ Handle rate limiting (429 status)
+⚠️ Cache responses untuk performance
+
+OPTIONAL FEATURES:
+Spotify integration adalah OPTIONAL.
+Aplikasi bisa berjalan tanpa Spotify dengan:
+- Local playlist data
+- Manual track management
+- No external API calls
+
+Jika tidak pakai Spotify:
+- Comment out spotify-config.js
+- Comment out spotify-integration.js
+- Remove Spotify login button
+- Use local data only
+
+================================================================================
+                                  END
+================================================================================

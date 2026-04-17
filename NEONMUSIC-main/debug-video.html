@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video Debug Test</title>
+    <style>
+        body {
+            background: #000;
+            color: #fff;
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+        
+        .test-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .video-test {
+            width: 320px;
+            height: 320px;
+            border: 2px solid #0f0;
+            margin: 20px 0;
+            position: relative;
+        }
+        
+        .video-test.active {
+            border-color: #f00;
+        }
+        
+        video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        button {
+            padding: 10px 20px;
+            margin: 5px;
+            cursor: pointer;
+        }
+        
+        .log {
+            background: #222;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            font-family: monospace;
+            font-size: 12px;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="test-container">
+        <h1>🔍 Video Display Debug Test</h1>
+        
+        <h2>Test 1: Video dengan inline style</h2>
+        <div class="video-test" id="test1" style="display: none;">
+            <video id="video1" loop>
+                <source src="videos/Jamesarthur.mp4" type="video/mp4">
+            </video>
+        </div>
+        <button onclick="showTest1()">Show Test 1 (inline style)</button>
+        
+        <h2>Test 2: Video dengan class</h2>
+        <div class="video-test" id="test2">
+            <video id="video2" loop>
+                <source src="videos/Jamesarthur.mp4" type="video/mp4">
+            </video>
+        </div>
+        <button onclick="showTest2()">Show Test 2 (class)</button>
+        
+        <h2>Test 3: Video seperti di app</h2>
+        <div class="video-test" id="test3">
+            <video id="video3" loop>
+                <source id="source3" src="" type="video/mp4">
+            </video>
+        </div>
+        <button onclick="showTest3()">Load & Play Test 3</button>
+        
+        <h2>Console Log:</h2>
+        <div class="log" id="log"></div>
+    </div>
+    
+    <script>
+        const log = document.getElementById('log');
+        
+        function addLog(message, color = '#0f0') {
+            const time = new Date().toLocaleTimeString();
+            log.innerHTML += `<div style="color: ${color}">[${time}] ${message}</div>`;
+            log.scrollTop = log.scrollHeight;
+            console.log(message);
+        }
+        
+        function showTest1() {
+            const test1 = document.getElementById('test1');
+            const video1 = document.getElementById('video1');
+            
+            addLog('🔵 Test 1: Changing inline style to block');
+            test1.style.display = 'block';
+            
+            addLog(`Display: ${test1.style.display}`);
+            addLog(`Computed display: ${window.getComputedStyle(test1).display}`);
+            
+            video1.play().then(() => {
+                addLog('✅ Video 1 playing', '#0f0');
+            }).catch(err => {
+                addLog(`❌ Video 1 error: ${err.message}`, '#f00');
+            });
+        }
+        
+        function showTest2() {
+            const test2 = document.getElementById('test2');
+            const video2 = document.getElementById('video2');
+            
+            addLog('🔵 Test 2: Adding active class');
+            test2.classList.add('active');
+            
+            addLog(`Has active class: ${test2.classList.contains('active')}`);
+            addLog(`Computed display: ${window.getComputedStyle(test2).display}`);
+            
+            video2.play().then(() => {
+                addLog('✅ Video 2 playing', '#0f0');
+            }).catch(err => {
+                addLog(`❌ Video 2 error: ${err.message}`, '#f00');
+            });
+        }
+        
+        function showTest3() {
+            const test3 = document.getElementById('test3');
+            const video3 = document.getElementById('video3');
+            const source3 = document.getElementById('source3');
+            
+            addLog('🔵 Test 3: Loading video like in app');
+            
+            source3.src = 'videos/Jamesarthur.mp4';
+            addLog(`Source set to: ${source3.src}`);
+            
+            video3.load();
+            addLog('Video loaded');
+            
+            test3.classList.add('active');
+            addLog(`Active class added: ${test3.classList.contains('active')}`);
+            
+            addLog(`Computed display: ${window.getComputedStyle(test3).display}`);
+            
+            video3.play().then(() => {
+                addLog('✅ Video 3 playing', '#0f0');
+            }).catch(err => {
+                addLog(`❌ Video 3 error: ${err.message}`, '#f00');
+            });
+        }
+        
+        // Check if video file exists
+        addLog('🔍 Checking video file...');
+        fetch('videos/Jamesarthur.mp4', { method: 'HEAD' })
+            .then(response => {
+                if (response.ok) {
+                    addLog('✅ Video file exists and is accessible', '#0f0');
+                } else {
+                    addLog(`❌ Video file not found (${response.status})`, '#f00');
+                }
+            })
+            .catch(err => {
+                addLog(`❌ Error checking video: ${err.message}`, '#f00');
+            });
+    </script>
+</body>
+</html>
